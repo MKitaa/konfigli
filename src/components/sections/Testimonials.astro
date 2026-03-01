@@ -1,0 +1,101 @@
+---
+import { site } from '@/config/site';
+---
+
+<section class="section testimonials">
+  <div class="container">
+    <div class="testimonials__content">
+      {site.testimonials.map((t) => (
+        <blockquote class="testimonial reveal">
+          <svg class="testimonial__quote-icon" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" opacity="0.15">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+          <p class="testimonial__text">{t.quote}</p>
+          <footer class="testimonial__footer">
+            <div class="testimonial__avatar">
+              <span>{t.author.charAt(0)}</span>
+            </div>
+            <div>
+              <cite class="testimonial__author">{t.author}</cite>
+              <p class="testimonial__role">{t.role}</p>
+            </div>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials__content {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .testimonial {
+    position: relative;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
+    text-align: center;
+  }
+
+  .testimonial__quote-icon {
+    position: absolute;
+    top: var(--space-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-accent);
+  }
+
+  .testimonial__text {
+    font-size: var(--text-lg);
+    line-height: 1.8;
+    color: var(--color-text);
+    font-style: italic;
+    margin-bottom: var(--space-xl);
+    margin-top: var(--space-lg);
+  }
+
+  .testimonial__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+  }
+
+  .testimonial__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .testimonial__avatar span {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--color-accent);
+  }
+
+  .testimonial__author {
+    display: block;
+    font-family: var(--font-heading);
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--text-base);
+    color: var(--color-text);
+    text-align: left;
+  }
+
+  .testimonial__role {
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+    text-align: left;
+  }
+</style>

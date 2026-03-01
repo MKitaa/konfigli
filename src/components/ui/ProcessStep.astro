@@ -1,0 +1,68 @@
+---
+interface Props {
+  step: number;
+  title: string;
+  description: string;
+}
+
+const { step, title, description } = Astro.props;
+---
+
+<div class="process-step reveal">
+  <div class="process-step__number">
+    <span>{String(step).padStart(2, '0')}</span>
+  </div>
+  <div class="process-step__content">
+    <h3 class="process-step__title">{title}</h3>
+    <p class="process-step__description">{description}</p>
+  </div>
+</div>
+
+<style>
+  .process-step {
+    display: flex;
+    gap: var(--space-xl);
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: var(--space-3xl);
+  }
+
+  .process-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process-step__number {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    z-index: 1;
+  }
+
+  .process-step__number span {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .process-step__content {
+    padding-top: 0.5rem;
+  }
+
+  .process-step__title {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-sm);
+  }
+
+  .process-step__description {
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    max-width: 480px;
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import ProcessStep from '@/components/ui/ProcessStep.astro';
+import { site } from '@/config/site';
+---
+
+<section class="section" id="proces">
+  <div class="container">
+    <SectionHeading title="Jak pracuję" subtitle="Proces" />
+    <div class="process">
+      <div class="process__line timeline-line" aria-hidden="true"></div>
+      <div class="process__steps">
+        {site.process.map((item) => (
+          <ProcessStep
+            step={item.step}
+            title={item.title}
+            description={item.description}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    position: relative;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .process__line {
+    position: absolute;
+    left: 23px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-accent),
+      var(--color-accent-secondary),
+      transparent
+    );
+    transform-origin: top;
+  }
+
+  @media (max-width: 640px) {
+    .process {
+      padding-left: 0;
+    }
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/ui/Nav.astro';
+import Hero from '@/components/sections/Hero.astro';
+import ForWhom from '@/components/sections/ForWhom.astro';
+import Services from '@/components/sections/Services.astro';
+import LiveDemo from '@/components/sections/LiveDemo.astro';
+import CaseStudies from '@/components/sections/CaseStudies.astro';
+import Testimonials from '@/components/sections/Testimonials.astro';
+import WhyMe from '@/components/sections/WhyMe.astro';
+import Process from '@/components/sections/Process.astro';
+import FAQ from '@/components/sections/FAQ.astro';
+import Contact from '@/components/sections/Contact.astro';
+import Footer from '@/components/sections/Footer.astro';
+---
+
+<BaseLayout>
+  <Nav />
+  <main>
+    <!-- Hook — kto jestem, co robię, dla kogo -->
+    <Hero />
+    <!-- Dla kogo — lista produktów, jasna nisza -->
+    <ForWhom />
+    <!-- Co oferuję — 4 usługi z korzyściami -->
+    <Services />
+    <!-- WOW — konfigurator osadzony na stronie -->
+    <LiveDemo />
+    <!-- Dowód — realne realizacje z efektami -->
+    <CaseStudies />
+    <!-- Głos klienta -->
+    <Testimonials />
+    <!-- Zaufanie — dlaczego ja a nie ktoś inny -->
+    <WhyMe />
+    <!-- Przejrzystość — jak wygląda współpraca -->
+    <Process />
+    <!-- Odpowiedzi na wątpliwości -->
+    <FAQ />
+    <!-- Konwersja — bezpłatna wycena -->
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import '@/scripts/smooth-scroll';
+  import '@/scripts/scroll-animations';
+  import '@/scripts/nav';
+</script>

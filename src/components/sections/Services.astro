@@ -1,0 +1,36 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import ServiceCard from '@/components/ui/ServiceCard.astro';
+import { site } from '@/config/site';
+---
+
+<section class="section" id="uslugi">
+  <div class="container">
+    <SectionHeading title="Czym mogę Ci pomóc" subtitle="Usługi" />
+    <div class="services-grid">
+      {site.services.map((service) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          highlights={service.highlights}
+          icon={service.icon}
+          badge={service.badge}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

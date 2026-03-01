@@ -1,0 +1,122 @@
+---
+import { site } from '@/config/site';
+import Button from '@/components/ui/Button.astro';
+---
+
+<section class="section for-whom">
+  <div class="container">
+    <div class="for-whom__layout reveal">
+      <div class="for-whom__text">
+        <span class="for-whom__label">Dla kogo</span>
+        <h2 class="for-whom__title">Produkujesz konstrukcje?<br /><span class="gradient-text">Zbuduję dla Ciebie konfigurator.</span></h2>
+        <p class="for-whom__description">
+          Specjalizuję się w konfiguratorach 3D dla firm, które produkują wyroby na wymiar. Twój klient wybiera parametry i widzi gotowy produkt zanim złoży zamówienie.
+        </p>
+        <Button href="#kontakt" variant="primary">
+          Zapytaj o swój produkt
+        </Button>
+      </div>
+      <div class="for-whom__products">
+        {site.configuratorProducts.map((product) => (
+          <div class="for-whom__product">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span>{product}</span>
+          </div>
+        ))}
+        <div class="for-whom__product for-whom__product--more">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+          </svg>
+          <span>I wiele innych — zapytaj</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .for-whom__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .for-whom__label {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .for-whom__title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .for-whom__description {
+    margin-bottom: var(--space-xl);
+    line-height: 1.7;
+    max-width: 440px;
+  }
+
+  .for-whom__products {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+
+  .for-whom__product {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+
+  .for-whom__product:hover {
+    border-color: var(--color-border-hover);
+  }
+
+  .for-whom__product svg {
+    flex-shrink: 0;
+    color: var(--color-accent);
+  }
+
+  .for-whom__product--more {
+    grid-column: 1 / -1;
+    background: transparent;
+    border-style: dashed;
+    color: var(--color-text-muted);
+    justify-content: center;
+  }
+
+  .for-whom__product--more svg {
+    color: var(--color-text-dim);
+  }
+
+  @media (max-width: 768px) {
+    .for-whom__layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .for-whom__products {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

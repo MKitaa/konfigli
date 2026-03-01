@@ -1,0 +1,82 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { site } from '@/config/site';
+---
+
+<section class="section contact" id="kontakt">
+  <div class="container contact__container">
+    <div class="contact__content reveal">
+      <span class="contact__label">Kontakt</span>
+      <h2 class="contact__title">
+        Gotowy na swoją stronę?<br />
+        <span class="gradient-text">Wycenię za darmo.</span>
+      </h2>
+      <p class="contact__description">
+        Opisz czego potrzebujesz — odpowiem w ciągu 24 godzin z bezpłatną wyceną, propozycją rozwiązania i orientacyjnym terminem realizacji.
+      </p>
+      <div class="contact__links">
+        <Button href={`mailto:${site.contact.email}?subject=Zapytanie o wycenę`} variant="primary" size="lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          Wyślij zapytanie
+        </Button>
+      </div>
+      <p class="contact__email">{site.contact.email}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+  }
+
+  .contact__container {
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .contact__label {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact__title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .contact__description {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2xl);
+    line-height: 1.7;
+  }
+
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+  }
+
+  .contact__email {
+    margin-top: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+  }
+
+  @media (max-width: 640px) {
+    .contact__links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

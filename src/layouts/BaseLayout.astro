@@ -1,0 +1,136 @@
+---
+import { site } from '@/config/site';
+import '@/styles/global.css';
+import '@/styles/animations.css';
+import '@/styles/utilities.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = site.name,
+  description = site.description,
+} = Astro.props;
+
+const pageTitle = title === site.name
+  ? `${site.name} — ${site.tagline}`
+  : `${title} | ${site.name}`;
+
+// JSON-LD: LocalBusiness
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  email: site.contact.email,
+  founder: {
+    '@type': 'Person',
+    name: site.author,
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Polska',
+  },
+  serviceType: [
+    'Konfigurator produktów 3D',
+    'Tworzenie stron internetowych',
+    'Strony dedykowane',
+    'Aplikacje webowe',
+  ],
+  knowsAbout: [
+    'Konfiguratory 3D',
+    'Wizualizacja produktów 3D',
+    'Strony internetowe dla firm produkcyjnych',
+    'Aplikacje webowe',
+    'SEO',
+    'WebGL',
+  ],
+};
+
+// JSON-LD: FAQPage (critical for AI/AEO)
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: site.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+// JSON-LD: Service offerings
+const servicesSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: site.services.map((service, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: service.title,
+      description: service.description,
+      provider: {
+        '@type': 'ProfessionalService',
+        name: site.name,
+      },
+    },
+  })),
+};
+
+// JSON-LD: WebSite for sitelinks search
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  inLanguage: 'pl-PL',
+};
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={site.seo.keywords.join(', ')} />
+    <meta name="author" content={site.author} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={site.url} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={site.url} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:site_name" content={site.name} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

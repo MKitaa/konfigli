@@ -1,0 +1,143 @@
+/* ========================================
+   Reveal animations (GSAP-driven)
+   ======================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   Card 3D hover
+   ======================================== */
+.card-3d {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.card-3d-inner {
+  transition: transform var(--duration-normal) var(--ease-out);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  .card-3d:hover .card-3d-inner {
+    transform:
+      rotateY(calc((var(--mouse-x) - 50%) * 0.1deg))
+      rotateX(calc((var(--mouse-y) - 50%) * -0.1deg));
+  }
+}
+
+/* ========================================
+   Gradient shine overlay
+   ======================================== */
+.shine-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(59, 130, 246, 0.1),
+    transparent 40%
+  );
+  transition: opacity var(--duration-normal) var(--ease-out);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@media (hover: hover) {
+  .card-3d:hover .shine-overlay {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   Shimmer placeholder
+   ======================================== */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-card) 25%,
+    var(--color-bg-card-hover) 50%,
+    var(--color-bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ========================================
+   Gradient text
+   ======================================== */
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ========================================
+   Fade in up
+   ======================================== */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   Floating
+   ======================================== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ========================================
+   Pulse glow
+   ======================================== */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* ========================================
+   Timeline line grow
+   ======================================== */
+.timeline-line {
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.timeline-line.is-growing {
+  transform: scaleY(1);
+}

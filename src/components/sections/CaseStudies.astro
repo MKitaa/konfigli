@@ -1,0 +1,171 @@
+---
+import Button from '@/components/ui/Button.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { site } from '@/config/site';
+---
+
+<section class="section" id="realizacje">
+  <div class="container">
+    <SectionHeading title="Zbudowałem to. Działa." subtitle="Realizacje" />
+    <div class="case-studies">
+      {site.caseStudies.map((study, index) => (
+        <article
+          class:list={[
+            'case-study',
+            'reveal',
+            { 'case-study--inactive': !study.active },
+            { 'case-study--reverse': index % 2 !== 0 },
+          ]}
+        >
+          <div class="case-study__image">
+            <div class="shimmer case-study__placeholder">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
+              </svg>
+            </div>
+            {!study.active && study.badge && (
+              <span class="case-study__badge">{study.badge}</span>
+            )}
+          </div>
+          <div class="case-study__content">
+            <h3 class="case-study__title">{study.title}</h3>
+            <p class="case-study__subtitle-text">{study.subtitle}</p>
+            <p class="case-study__description">{study.description}</p>
+            <h4 class="case-study__results-heading">Efekty:</h4>
+            <ul class="case-study__results">
+              {study.results.map((result) => (
+                <li class="case-study__result">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  {result}
+                </li>
+              ))}
+            </ul>
+            {study.active && (
+              <Button href={study.url} variant="secondary" size="sm">
+                Odwiedź stronę
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </Button>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .case-studies {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4xl);
+  }
+
+  .case-study {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .case-study--reverse {
+    direction: rtl;
+  }
+
+  .case-study--reverse > * {
+    direction: ltr;
+  }
+
+  .case-study--inactive {
+    opacity: 0.6;
+  }
+
+  .case-study__image {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .case-study__placeholder {
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .case-study__badge {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    padding: 0.25rem 0.75rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-accent-secondary);
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: var(--radius-sm);
+  }
+
+  .case-study__title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-xs);
+  }
+
+  .case-study__subtitle-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-lg);
+  }
+
+  .case-study__description {
+    margin-bottom: var(--space-xl);
+    line-height: 1.7;
+  }
+
+  .case-study__results-heading {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .case-study__results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .case-study__result {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
+  .case-study__result svg {
+    flex-shrink: 0;
+    color: var(--color-accent);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .case-study {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .case-study--reverse {
+      direction: ltr;
+    }
+  }
+</style>
