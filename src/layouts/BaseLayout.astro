@@ -15,7 +15,7 @@ const {
 } = Astro.props;
 
 const pageTitle = title === site.name
-  ? `${site.name} — ${site.tagline}`
+  ? `Konfiguratory 3D dla producentów garaży, hal i konstrukcji stalowych | ${site.name}`
   : `${title} | ${site.name}`;
 
 // JSON-LD: LocalBusiness
@@ -25,7 +25,9 @@ const localBusinessSchema = {
   name: site.name,
   description: site.description,
   url: site.url,
+  logo: `${site.url}/images/favicon.svg`,
   email: site.contact.email,
+  telephone: site.contact.phone,
   founder: {
     '@type': 'Person',
     name: site.author,
@@ -36,17 +38,24 @@ const localBusinessSchema = {
   },
   serviceType: [
     'Konfigurator produktów 3D',
+    'Konfigurator garaży blaszanych',
+    'Konfigurator hal stalowych',
+    'Wizualizacja 3D produktów',
     'Tworzenie stron internetowych',
-    'Strony dedykowane',
-    'Aplikacje webowe',
   ],
   knowsAbout: [
     'Konfiguratory 3D',
+    'Konfigurator garaży blaszanych',
+    'Konfigurator hal stalowych',
+    'Konfigurator wiat garażowych',
+    'Konfigurator wiat śmietnikowych',
+    'Konfigurator ogrodzeń panelowych',
+    'Konfigurator carportów',
     'Wizualizacja produktów 3D',
     'Strony internetowe dla firm produkcyjnych',
-    'Aplikacje webowe',
-    'SEO',
+    'Konstrukcje stalowe',
     'WebGL',
+    'Three.js',
   ],
 };
 
@@ -83,6 +92,33 @@ const servicesSchema = {
   })),
 };
 
+// JSON-LD: HowTo for process section
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Jak powstaje Twój konfigurator 3D',
+  description: 'Proces tworzenia konfiguratora produktów 3D od rozmowy po wdrożenie.',
+  step: site.process.map((item, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: item.title,
+    text: item.description,
+  })),
+};
+
+// JSON-LD: Review schema for testimonials
+const reviewSchema = site.testimonials.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Konfigurator 3D produktów',
+  brand: { '@type': 'Brand', name: site.name },
+  review: site.testimonials.map((t) => ({
+    '@type': 'Review',
+    reviewBody: t.quote,
+    author: { '@type': 'Organization', name: t.author },
+  })),
+} : null;
+
 // JSON-LD: WebSite for sitelinks search
 const websiteSchema = {
   '@context': 'https://schema.org',
@@ -100,6 +136,11 @@ const websiteSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap" rel="stylesheet" />
+
     <!-- SEO -->
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -115,20 +156,37 @@ const websiteSchema = {
     <meta property="og:url" content={site.url} />
     <meta property="og:locale" content={site.locale} />
     <meta property="og:site_name" content={site.name} />
+    <meta property="og:image" content={`${site.url}/images/og-image.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={site.tagline} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site.url}/images/og-image.png`} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.svg" />
+
+    <!-- Theme: prevent flash of wrong theme -->
+    <script is:inline>
+      (function(){
+        var t = localStorage.getItem('konfigli-theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+    {reviewSchema && <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />}
   </head>
   <body>
     <slot />

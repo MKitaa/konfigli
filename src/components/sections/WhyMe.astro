@@ -1,39 +1,37 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { site } from '@/config/site';
-
-const icons = ['direct', 'clock', 'transparent', 'support'] as const;
 ---
 
 <section class="section why-me" id="dlaczego">
   <div class="container">
-    <SectionHeading title="Dlaczego warto ze mną pracować" subtitle="Gwarancje" />
+    <SectionHeading title="Dlaczego producenci wybierają mnie" subtitle="Gwarancje" />
     <div class="why-me__grid">
-      {site.whyMe.map((item, i) => (
+      {site.whyMe.map((item) => (
         <div class="why-me__card reveal">
           <div class="why-me__icon">
-            {icons[i] === 'direct' && (
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            )}
-            {icons[i] === 'clock' && (
+            {item.icon === 'target' && (
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
               </svg>
             )}
-            {icons[i] === 'transparent' && (
+            {item.icon === 'trending' && (
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <polyline points="9 12 11 14 15 10" />
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                <polyline points="17 6 23 6 23 12" />
               </svg>
             )}
-            {icons[i] === 'support' && (
+            {item.icon === 'zap' && (
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-                <line x1="4" y1="22" x2="4" y2="15" />
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            )}
+            {item.icon === 'support' && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
               </svg>
             )}
           </div>
@@ -42,19 +40,54 @@ const icons = ['direct', 'clock', 'transparent', 'support'] as const;
         </div>
       ))}
     </div>
+
+    <div class="why-me__cta">
+      <a href="#kontakt" class="why-me__cta-btn">Umów bezpłatną rozmowę →</a>
+    </div>
   </div>
 </section>
 
 <style>
+  .why-me__cta {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  .why-me__cta-btn {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: color var(--duration-normal) var(--ease-out),
+                gap var(--duration-normal) var(--ease-out);
+  }
+
+  .why-me__cta-btn:hover {
+    color: var(--color-accent-secondary);
+    gap: var(--space-sm);
+  }
   .why-me__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-    gap: var(--space-xl);
+    gap: var(--space-2xl);
   }
 
   .why-me__card {
     text-align: center;
-    padding: var(--space-xl);
+    padding: var(--space-2xl) var(--space-xl);
+    border-radius: var(--radius-xl);
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out),
+                background var(--duration-normal) var(--ease-out);
+  }
+
+  .why-me__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgba(249, 115, 22, 0.1);
+    background: var(--color-bg-card);
   }
 
   .why-me__icon {
@@ -64,9 +97,16 @@ const icons = ['direct', 'clock', 'transparent', 'support'] as const;
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(249, 115, 22, 0.1);
     color: var(--color-accent);
     margin-bottom: var(--space-lg);
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  .why-me__card:hover .why-me__icon {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
   }
 
   .why-me__title {
@@ -77,5 +117,39 @@ const icons = ['direct', 'clock', 'transparent', 'support'] as const;
   .why-me__description {
     font-size: var(--text-sm);
     line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .why-me__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .why-me__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .why-me__card {
+      text-align: left;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+    }
+
+    .why-me__icon {
+      margin-bottom: 0;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .why-me__icon svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 </style>

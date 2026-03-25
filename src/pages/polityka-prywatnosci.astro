@@ -1,0 +1,196 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/ui/Nav.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { site } from '@/config/site';
+---
+
+<BaseLayout
+  title="Polityka prywatności"
+  description="Polityka prywatności serwisu konfigli.pl — informacje o przetwarzaniu danych osobowych."
+>
+  <Nav />
+  <main>
+    <section class="pp">
+      <div class="container pp__container">
+        <a href="/" class="pp__back">← Wróć na stronę główną</a>
+        <h1>Polityka prywatności</h1>
+        <p class="pp__updated">Ostatnia aktualizacja: 25 marca 2026</p>
+
+        <h2>1. Administrator danych osobowych</h2>
+        <p>Administratorem Twoich danych osobowych jest:</p>
+        <p><strong>Mateusz Kita</strong>, prowadzący działalność pod marką {site.name}<br />
+        Adres e-mail: {site.contact.email}<br />
+        Telefon: {site.contact.phone}<br />
+        Adres strony: {site.url}</p>
+
+        <h2>2. Jakie dane zbieramy i w jakim celu</h2>
+        <p>Zbieramy wyłącznie dane podane dobrowolnie przez formularze na stronie:</p>
+
+        <h3>a) Formularz szybkiego kontaktu</h3>
+        <ul>
+          <li>Numer telefonu</li>
+        </ul>
+        <p>Cel: oddzwonienie i rozmowa o potencjalnej współpracy.</p>
+
+        <h3>b) Formularz kontaktowy</h3>
+        <ul>
+          <li>Imię</li>
+          <li>Adres e-mail lub numer telefonu</li>
+          <li>Treść wiadomości (opcjonalnie)</li>
+        </ul>
+        <p>Cel: odpowiedź na zapytanie ofertowe, przygotowanie wyceny, ewentualne nawiązanie współpracy.</p>
+
+        <h2>3. Podstawa prawna przetwarzania</h2>
+        <p>Dane przetwarzamy na podstawie:</p>
+        <ul>
+          <li><strong>Art. 6 ust. 1 lit. a) RODO</strong> — zgoda wyrażona przez zaznaczenie checkboxa w formularzu</li>
+          <li><strong>Art. 6 ust. 1 lit. b) RODO</strong> — podjęcie działań przed zawarciem umowy (przygotowanie wyceny, odpowiedź na zapytanie)</li>
+          <li><strong>Art. 6 ust. 1 lit. f) RODO</strong> — prawnie uzasadniony interes administratora (obsługa korespondencji, dochodzenie roszczeń)</li>
+        </ul>
+
+        <h2>4. Okres przechowywania danych</h2>
+        <ul>
+          <li>Dane z formularzy kontaktowych — do 2 lat od ostatniego kontaktu, chyba że wcześniej poprosisz o ich usunięcie</li>
+          <li>Dane niezbędne do realizacji umowy — przez okres trwania umowy oraz do 5 lat po jej zakończeniu (okres przedawnienia roszczeń)</li>
+          <li>Dane przetwarzane na podstawie zgody — do momentu jej cofnięcia</li>
+        </ul>
+
+        <h2>5. Odbiorcy danych</h2>
+        <p>Twoje dane mogą być przekazywane następującym kategoriom odbiorców:</p>
+        <ul>
+          <li><strong>Dostawca usług e-mail</strong> — w celu przesłania wiadomości z formularza kontaktowego</li>
+          <li><strong>Dostawca hostingu</strong> — na serwerze którego przechowywane są dane strony</li>
+          <li><strong>Google Fonts</strong> — strona ładuje czcionki z serwerów Google, co wiąże się z przekazaniem adresu IP użytkownika do Google LLC</li>
+        </ul>
+        <p>Nie sprzedajemy ani nie udostępniamy danych osobowych podmiotom trzecim w celach marketingowych.</p>
+
+        <h2>6. Przekazywanie danych poza EOG</h2>
+        <p>W związku z korzystaniem z usług Google Fonts dane (adres IP) mogą być przekazywane do serwerów Google LLC w Stanach Zjednoczonych. Google stosuje standardowe klauzule umowne zatwierdzone przez Komisję Europejską jako gwarancję ochrony danych.</p>
+
+        <h2>7. Prawa użytkownika</h2>
+        <p>Na podstawie RODO przysługują Ci następujące prawa:</p>
+        <ul>
+          <li><strong>Prawo dostępu</strong> — możesz zapytać jakie dane przetwarzamy i uzyskać ich kopię</li>
+          <li><strong>Prawo do sprostowania</strong> — jeśli dane są nieprawidłowe lub niekompletne</li>
+          <li><strong>Prawo do usunięcia</strong> — tzw. „prawo do bycia zapomnianym"</li>
+          <li><strong>Prawo do ograniczenia przetwarzania</strong> — możesz zażądać ograniczenia przetwarzania w określonych sytuacjach</li>
+          <li><strong>Prawo do przenoszenia danych</strong> — możesz otrzymać dane w ustrukturyzowanym formacie</li>
+          <li><strong>Prawo do sprzeciwu</strong> — wobec przetwarzania opartego na prawnie uzasadnionym interesie</li>
+          <li><strong>Prawo do cofnięcia zgody</strong> — w dowolnym momencie, bez wpływu na zgodność z prawem przetwarzania dokonanego przed cofnięciem</li>
+        </ul>
+        <p>Aby skorzystać z tych praw, napisz na adres: <strong>{site.contact.email}</strong>. Odpowiem w ciągu 30 dni.</p>
+
+        <h2>8. Prawo do skargi</h2>
+        <p>Jeśli uważasz, że przetwarzanie Twoich danych narusza przepisy RODO, masz prawo złożyć skargę do organu nadzorczego:</p>
+        <p><strong>Prezes Urzędu Ochrony Danych Osobowych (UODO)</strong><br />
+        ul. Stawki 2, 00-193 Warszawa<br />
+        <a href="https://uodo.gov.pl" target="_blank" rel="noopener noreferrer">uodo.gov.pl</a></p>
+
+        <h2>9. Pliki cookies i local storage</h2>
+        <p>Strona korzysta z następujących mechanizmów przechowywania danych w przeglądarce:</p>
+        <ul>
+          <li><strong>Local storage</strong> — zapamiętanie wybranego motywu (jasny/ciemny) pod kluczem <code>konfigli-theme</code>. Nie zawiera danych osobowych.</li>
+        </ul>
+        <p>Nie stosujemy cookies analitycznych, reklamowych ani śledzących. Nie korzystamy z Google Analytics, Facebook Pixel ani podobnych narzędzi.</p>
+
+        <h2>10. Logi serwera</h2>
+        <p>Serwer hostingowy automatycznie zapisuje logi zawierające adres IP, datę i czas żądania, adres URL oraz typ przeglądarki. Dane te służą wyłącznie do zapewnienia bezpieczeństwa i diagnostyki technicznej. Nie łączymy ich z danymi z formularzy kontaktowych.</p>
+
+        <h2>11. Zautomatyzowane podejmowanie decyzji</h2>
+        <p>Nie stosujemy profilowania ani zautomatyzowanego podejmowania decyzji, które miałoby wpływ prawny na użytkownika.</p>
+
+        <h2>12. Dobrowolność podania danych</h2>
+        <p>Podanie danych w formularzach jest dobrowolne, ale niezbędne do udzielenia odpowiedzi na zapytanie lub przygotowania wyceny. Bez podania numeru telefonu lub adresu e-mail nie będziemy mogli się z Tobą skontaktować.</p>
+
+        <h2>13. Bezpieczeństwo</h2>
+        <ul>
+          <li>Połączenie z serwisem jest szyfrowane protokołem SSL/TLS</li>
+          <li>Dane z formularzy przesyłane są przez szyfrowane połączenie HTTPS</li>
+          <li>Formularze zawierają zabezpieczenie antyspamowe (honeypot)</li>
+          <li>Dostęp do danych ma wyłącznie administrator</li>
+        </ul>
+
+        <h2>14. Zmiany w polityce prywatności</h2>
+        <p>Zastrzegamy sobie prawo do zmiany niniejszej polityki prywatności. O istotnych zmianach poinformujemy poprzez aktualizację daty na górze dokumentu. Zalecamy okresowe sprawdzanie tej strony.</p>
+
+        <h2>15. Kontakt</h2>
+        <p>W sprawach dotyczących ochrony danych osobowych:</p>
+        <p>E-mail: <strong>{site.contact.email}</strong><br />
+        Telefon: <strong>{site.contact.phone}</strong></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pp {
+    padding: calc(var(--nav-height) + var(--space-3xl)) 0 var(--space-4xl);
+  }
+
+  .pp__container {
+    max-width: 700px;
+    margin-inline: auto;
+  }
+
+  .pp__back {
+    display: inline-block;
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+    text-decoration: none;
+    margin-bottom: var(--space-xl);
+    transition: color var(--duration-fast);
+  }
+
+  .pp__back:hover { color: var(--color-accent); }
+
+  .pp__updated {
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-2xl);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  h2 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  h3 {
+    font-size: var(--text-base);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  code {
+    font-size: var(--text-sm);
+    background: var(--color-bg-elevated);
+    padding: 0.1em 0.4em;
+    border-radius: var(--radius-sm);
+  }
+
+  p, ul {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  ul {
+    padding-left: var(--space-xl);
+  }
+
+  li {
+    margin-bottom: var(--space-xs);
+  }
+</style>
+
+<script>
+  import '@/scripts/theme';
+</script>

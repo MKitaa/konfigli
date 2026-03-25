@@ -6,7 +6,7 @@ import { site } from '@/config/site';
 
 <section class="section" id="uslugi">
   <div class="container">
-    <SectionHeading title="Czym mogę Ci pomóc" subtitle="Usługi" />
+    <SectionHeading title="Narzędzia, które odciążają Twój zespół" subtitle="Usługi" />
     <div class="services-grid">
       {site.services.map((service) => (
         <ServiceCard
@@ -15,6 +15,7 @@ import { site } from '@/config/site';
           highlights={service.highlights}
           icon={service.icon}
           badge={service.badge}
+          cta={service.cta}
         />
       ))}
     </div>
@@ -25,12 +26,13 @@ import { site } from '@/config/site';
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl);
+    gap: var(--space-2xl);
   }
 
   @media (max-width: 768px) {
     .services-grid {
       grid-template-columns: 1fr;
+      gap: var(--space-lg);
     }
   }
 </style>

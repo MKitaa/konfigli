@@ -1,0 +1,58 @@
+---
+interface Props {
+  text?: string;
+  linkText?: string;
+  href?: string;
+}
+
+const {
+  text = 'Chcesz taki konfigurator?',
+  linkText = 'Bezpłatna wycena w 24h →',
+  href = '#kontakt',
+} = Astro.props;
+---
+
+<div class="inline-cta">
+  <p class="inline-cta__text">
+    {text}
+    <a href={href} class="inline-cta__link">{linkText}</a>
+  </p>
+</div>
+
+<style>
+  .inline-cta {
+    text-align: center;
+    padding: var(--space-xl) 0;
+  }
+
+  .inline-cta__text {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .inline-cta__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    padding: 0.35rem 1rem;
+    border: 1px solid var(--color-border-hover);
+    border-radius: var(--radius-full);
+    background: var(--color-accent-light);
+    transition: all var(--duration-normal) var(--ease-out);
+    white-space: nowrap;
+  }
+
+  .inline-cta__link:hover {
+    background: rgba(249, 115, 22, 0.15);
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.12);
+    transform: translateY(-1px);
+  }
+</style>
