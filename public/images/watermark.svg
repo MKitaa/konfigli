@@ -1,0 +1,5 @@
+<svg width="135" height="22" viewBox="0 0 135 22" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="2" width="49" height="17" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(249,115,22,0.4)" stroke-width="0.8"/>
+  <text x="6" y="14.5" font-family="'Syne', sans-serif" font-size="9.5" font-weight="700" fill="rgba(255,255,255,0.45)" letter-spacing="0.02em">realizacja:</text>
+  <text x="57" y="15.5" font-family="'Syne', sans-serif" font-size="13" font-weight="800" fill="#ffffff" letter-spacing="-0.5">konfig<tspan fill="#f97316">li</tspan></text>
+</svg>

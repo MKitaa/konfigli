@@ -1,130 +1,219 @@
 import * as THREE from 'three';
 
 export function initHeroScene(canvas: HTMLCanvasElement): void {
-  // Detect WebGL
   const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
   if (!gl) throw new Error('WebGL not supported');
 
-  // Renderer
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    alpha: true,
-  });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
 
-  // Scene & Camera
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-  camera.position.set(4, 3, 6);
-  camera.lookAt(0, 0.5, 0);
+  camera.position.set(5.5, 3.5, 7);
+  camera.lookAt(0, 0.7, 0);
 
   // Lights
-  const ambientLight = new THREE.AmbientLight(0x404060, 0.6);
-  scene.add(ambientLight);
+  scene.add(new THREE.AmbientLight(0x404060, 0.5));
+  const dirLight = new THREE.DirectionalLight(0xfff5e6, 0.9);
+  dirLight.position.set(5, 8, 5);
+  scene.add(dirLight);
+  const fillLight = new THREE.DirectionalLight(0xf97316, 0.15);
+  fillLight.position.set(-3, 2, 4);
+  scene.add(fillLight);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  directionalLight.position.set(5, 8, 5);
-  scene.add(directionalLight);
-
-  // --- Procedural Garage Geometry ---
+  // --- Garage ---
   const garageGroup = new THREE.Group();
   scene.add(garageGroup);
 
-  const accentColor = new THREE.Color(0x3b82f6);
+  const accentColor = new THREE.Color(0xf97316);
   const edgeMaterial = new THREE.LineBasicMaterial({
     color: accentColor,
     transparent: true,
-    opacity: 0.6,
+    opacity: 1.0,
   });
+
+  const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
   const solidMaterial = new THREE.MeshStandardMaterial({
-    color: 0x12121a,
+    color: isLightTheme ? 0xe8ecf0 : 0x1e2333,
     transparent: true,
-    opacity: 0.3,
+    opacity: 0,
     side: THREE.DoubleSide,
   });
 
-  // Base/floor
-  const floorGeo = new THREE.BoxGeometry(3, 0.05, 2);
-  const floor = new THREE.Mesh(floorGeo, solidMaterial);
-  floor.position.y = 0;
-  garageGroup.add(floor);
-  garageGroup.add(
-    new THREE.LineSegments(new THREE.EdgesGeometry(floorGeo), edgeMaterial)
-  );
+  // --- Dimensions (wider garage) ---
+  const gW = 4.5;   // width (X)
+  const gD = 3;     // depth (Z)
+  const gH = 2.0;   // wall height
+  const hW = gW / 2;
+  const hD = gD / 2;
+  const wallT = 0.03;
 
-  // Walls (left, right, back)
-  const wallHeight = 1.8;
-  const wallThickness = 0.03;
+  // Ground grid
+  const gridSize = 7;
+  const gridDiv = 14;
+  const gridPoints: THREE.Vector3[] = [];
+  const gridStep = gridSize / gridDiv;
+  const gridHalf = gridSize / 2;
+  for (let i = 0; i <= gridDiv; i++) {
+    const p = -gridHalf + i * gridStep;
+    gridPoints.push(
+      new THREE.Vector3(p, -0.01, -gridHalf),
+      new THREE.Vector3(p, -0.01, gridHalf),
+      new THREE.Vector3(-gridHalf, -0.01, p),
+      new THREE.Vector3(gridHalf, -0.01, p),
+    );
+  }
+  const gridGeo = new THREE.BufferGeometry().setFromPoints(gridPoints);
+  const gridMaterial = new THREE.LineBasicMaterial({
+    color: accentColor,
+    transparent: true,
+    opacity: 0.06,
+  });
+  garageGroup.add(new THREE.LineSegments(gridGeo, gridMaterial));
+
+  // Helper: add mesh + edges
+  function addBox(w: number, h: number, d: number, x: number, y: number, z: number) {
+    const geo = new THREE.BoxGeometry(w, h, d);
+    const mesh = new THREE.Mesh(geo, solidMaterial);
+    mesh.position.set(x, y, z);
+    garageGroup.add(mesh);
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMaterial);
+    edges.position.set(x, y, z);
+    garageGroup.add(edges);
+  }
+
+  // Floor
+  addBox(gW, 0.05, gD, 0, 0, 0);
 
   // Left wall
-  const leftWallGeo = new THREE.BoxGeometry(wallThickness, wallHeight, 2);
-  const leftWall = new THREE.Mesh(leftWallGeo, solidMaterial);
-  leftWall.position.set(-1.5, wallHeight / 2, 0);
-  garageGroup.add(leftWall);
-  garageGroup.add(
-    new THREE.LineSegments(
-      new THREE.EdgesGeometry(leftWallGeo),
-      edgeMaterial
-    )
-  );
-  leftWall.children = [];
-  const leftEdges = new THREE.LineSegments(
-    new THREE.EdgesGeometry(leftWallGeo),
-    edgeMaterial
-  );
-  leftEdges.position.copy(leftWall.position);
-  garageGroup.add(leftEdges);
+  addBox(wallT, gH, gD, -hW, gH / 2, 0);
 
   // Right wall
-  const rightWallGeo = new THREE.BoxGeometry(wallThickness, wallHeight, 2);
-  const rightWall = new THREE.Mesh(rightWallGeo, solidMaterial);
-  rightWall.position.set(1.5, wallHeight / 2, 0);
-  garageGroup.add(rightWall);
-  const rightEdges = new THREE.LineSegments(
-    new THREE.EdgesGeometry(rightWallGeo),
-    edgeMaterial
-  );
-  rightEdges.position.copy(rightWall.position);
-  garageGroup.add(rightEdges);
+  addBox(wallT, gH, gD, hW, gH / 2, 0);
 
   // Back wall
-  const backWallGeo = new THREE.BoxGeometry(3, wallHeight, wallThickness);
-  const backWall = new THREE.Mesh(backWallGeo, solidMaterial);
-  backWall.position.set(0, wallHeight / 2, -1);
-  garageGroup.add(backWall);
-  const backEdges = new THREE.LineSegments(
-    new THREE.EdgesGeometry(backWallGeo),
-    edgeMaterial
-  );
-  backEdges.position.copy(backWall.position);
-  garageGroup.add(backEdges);
+  addBox(gW, gH, wallT, 0, gH / 2, -hD);
 
-  // Roof (gable)
+  // --- Front wall (pillars + lintel around door) ---
+  const doorWidth = 3.2;
+  const doorHeight = 1.6;
+  const doorZ = hD;
+  const pillarW = (gW - doorWidth) / 2;
+
+  // Left pillar
+  if (pillarW > 0.05) addBox(pillarW, gH, wallT, -hW + pillarW / 2, gH / 2, doorZ);
+  // Right pillar
+  if (pillarW > 0.05) addBox(pillarW, gH, wallT, hW - pillarW / 2, gH / 2, doorZ);
+  // Lintel above door
+  const lintelH = gH - doorHeight;
+  if (lintelH > 0.05) addBox(doorWidth, lintelH, wallT, 0, doorHeight + lintelH / 2, doorZ);
+
+  // --- Garage door (brama) ---
+  const dz = doorZ + 0.01;
+  const doorPts = [
+    new THREE.Vector3(-doorWidth / 2, 0.025, dz),
+    new THREE.Vector3(doorWidth / 2, 0.025, dz),
+    new THREE.Vector3(doorWidth / 2, 0.025, dz),
+    new THREE.Vector3(doorWidth / 2, doorHeight, dz),
+    new THREE.Vector3(doorWidth / 2, doorHeight, dz),
+    new THREE.Vector3(-doorWidth / 2, doorHeight, dz),
+    new THREE.Vector3(-doorWidth / 2, doorHeight, dz),
+    new THREE.Vector3(-doorWidth / 2, 0.025, dz),
+  ];
+  // Panel dividers (3 panels = 2 lines)
+  for (let i = 1; i < 3; i++) {
+    const y = 0.025 + (doorHeight - 0.025) * (i / 3);
+    doorPts.push(
+      new THREE.Vector3(-doorWidth / 2, y, dz),
+      new THREE.Vector3(doorWidth / 2, y, dz),
+    );
+  }
+  garageGroup.add(new THREE.LineSegments(
+    new THREE.BufferGeometry().setFromPoints(doorPts), edgeMaterial
+  ));
+
+  // --- Side door on right wall ---
+  const sdW = 0.7;
+  const sdH = 1.4;
+  const sdX = hW + 0.03;
+  const sdZ = -0.4;
+  const sdPts = [
+    new THREE.Vector3(sdX, 0.025, sdZ - sdW / 2),
+    new THREE.Vector3(sdX, 0.025, sdZ + sdW / 2),
+    new THREE.Vector3(sdX, 0.025, sdZ + sdW / 2),
+    new THREE.Vector3(sdX, sdH, sdZ + sdW / 2),
+    new THREE.Vector3(sdX, sdH, sdZ + sdW / 2),
+    new THREE.Vector3(sdX, sdH, sdZ - sdW / 2),
+    new THREE.Vector3(sdX, sdH, sdZ - sdW / 2),
+    new THREE.Vector3(sdX, 0.025, sdZ - sdW / 2),
+    // Handle
+    new THREE.Vector3(sdX + 0.01, 0.75, sdZ + sdW / 2 - 0.08),
+    new THREE.Vector3(sdX + 0.01, 0.75, sdZ + sdW / 2 - 0.2),
+  ];
+  garageGroup.add(new THREE.LineSegments(
+    new THREE.BufferGeometry().setFromPoints(sdPts), edgeMaterial
+  ));
+
+  // --- Window on left wall ---
+  const wS = 0.6;
+  const wX = -hW - 0.03;
+  const wZ = 0.2;
+  const wY = 1.1;
+  const winPts = [
+    new THREE.Vector3(wX, wY - wS / 2, wZ - wS / 2),
+    new THREE.Vector3(wX, wY - wS / 2, wZ + wS / 2),
+    new THREE.Vector3(wX, wY - wS / 2, wZ + wS / 2),
+    new THREE.Vector3(wX, wY + wS / 2, wZ + wS / 2),
+    new THREE.Vector3(wX, wY + wS / 2, wZ + wS / 2),
+    new THREE.Vector3(wX, wY + wS / 2, wZ - wS / 2),
+    new THREE.Vector3(wX, wY + wS / 2, wZ - wS / 2),
+    new THREE.Vector3(wX, wY - wS / 2, wZ - wS / 2),
+    // Cross
+    new THREE.Vector3(wX, wY, wZ - wS / 2),
+    new THREE.Vector3(wX, wY, wZ + wS / 2),
+    new THREE.Vector3(wX, wY - wS / 2, wZ),
+    new THREE.Vector3(wX, wY + wS / 2, wZ),
+  ];
+  garageGroup.add(new THREE.LineSegments(
+    new THREE.BufferGeometry().setFromPoints(winPts), edgeMaterial
+  ));
+
+  // --- Roof (gable with overhang) ---
+  const roofOH = 0.15;
+  const roofHalfW = hW + 0.15 + roofOH;
+  const roofPeak = 0.9;
   const roofShape = new THREE.Shape();
-  roofShape.moveTo(-1.65, 0);
-  roofShape.lineTo(0, 0.8);
-  roofShape.lineTo(1.65, 0);
-  roofShape.lineTo(-1.65, 0);
+  roofShape.moveTo(-roofHalfW, 0);
+  roofShape.lineTo(0, roofPeak);
+  roofShape.lineTo(roofHalfW, 0);
+  roofShape.lineTo(-roofHalfW, 0);
 
-  const extrudeSettings = {
-    depth: 2.2,
-    bevelEnabled: false,
-  };
-  const roofGeo = new THREE.ExtrudeGeometry(roofShape, extrudeSettings);
+  const roofDepth = gD + roofOH * 2;
+  const roofGeo = new THREE.ExtrudeGeometry(roofShape, { depth: roofDepth, bevelEnabled: false });
   const roof = new THREE.Mesh(roofGeo, solidMaterial);
-  roof.position.set(0, wallHeight, -1.1);
+  roof.position.set(0, gH, -hD - roofOH);
   garageGroup.add(roof);
-  const roofEdges = new THREE.LineSegments(
-    new THREE.EdgesGeometry(roofGeo),
-    edgeMaterial
-  );
+  const roofEdges = new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo), edgeMaterial);
   roofEdges.position.copy(roof.position);
   garageGroup.add(roofEdges);
 
-  // Center garage
-  garageGroup.position.y = -0.3;
+  // Position
+  garageGroup.position.set(1.8, -0.3, 0);
+
+  // --- Morph animation ---
+  const morphDuration = 2.5;
+  let morphProgress = 0;
+  function easeOutCubic(t: number): number { return 1 - Math.pow(1 - t, 3); }
+
+  function updateMorph(delta: number): void {
+    if (morphProgress >= 1) return;
+    morphProgress = Math.min(morphProgress + delta / morphDuration, 1);
+    const t = easeOutCubic(morphProgress);
+    solidMaterial.opacity = t * 0.25;
+    edgeMaterial.opacity = 1.0 - t * 0.3;
+    gridMaterial.opacity = 0.06 + t * 0.02;
+  }
 
   // --- Particles ---
   const isMobile = window.innerWidth < 768;
@@ -135,35 +224,23 @@ export function initHeroScene(canvas: HTMLCanvasElement): void {
 
   for (let i = 0; i < particleCount; i++) {
     const i3 = i * 3;
-    positions[i3] = (Math.random() - 0.5) * 12;
-    positions[i3 + 1] = (Math.random() - 0.5) * 8;
-    positions[i3 + 2] = (Math.random() - 0.5) * 8;
+    positions[i3] = (Math.random() - 0.5) * 14;
+    positions[i3 + 1] = (Math.random() - 0.5) * 10;
+    positions[i3 + 2] = (Math.random() - 0.5) * 10;
     velocities[i3] = (Math.random() - 0.5) * 0.003;
     velocities[i3 + 1] = (Math.random() - 0.5) * 0.003;
     velocities[i3 + 2] = (Math.random() - 0.5) * 0.003;
   }
-
-  particlesGeo.setAttribute(
-    'position',
-    new THREE.BufferAttribute(positions, 3)
-  );
-
-  const particleMaterial = new THREE.PointsMaterial({
-    color: accentColor,
-    size: 0.03,
-    transparent: true,
-    opacity: 0.5,
-    sizeAttenuation: true,
+  particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const particleMat = new THREE.PointsMaterial({
+    color: accentColor, size: 0.03, transparent: true, opacity: 0.5, sizeAttenuation: true,
   });
-
-  const particles = new THREE.Points(particlesGeo, particleMaterial);
-  scene.add(particles);
+  scene.add(new THREE.Points(particlesGeo, particleMat));
 
   // --- Mouse tracking ---
   const mouse = { x: 0, y: 0 };
-  const targetRotation = { x: 0, y: 0 };
+  const targetRot = { x: 0, y: 0 };
   const isTouch = 'ontouchstart' in window;
-
   if (!isTouch) {
     window.addEventListener('mousemove', (e) => {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -174,24 +251,16 @@ export function initHeroScene(canvas: HTMLCanvasElement): void {
   // --- Scroll fade ---
   let scrollOpacity = 1;
   const heroSection = canvas.parentElement;
-
   const scrollObserver = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        scrollOpacity = entry.intersectionRatio;
-      }
-    },
+    (entries) => { for (const e of entries) scrollOpacity = e.intersectionRatio; },
     { threshold: Array.from({ length: 20 }, (_, i) => i / 20) }
   );
-
   if (heroSection) scrollObserver.observe(heroSection);
 
   // --- Visibility pause ---
   let isVisible = true;
   const visibilityObserver = new IntersectionObserver(
-    (entries) => {
-      isVisible = entries[0].isIntersecting;
-    },
+    (entries) => { isVisible = entries[0].isIntersecting; },
     { threshold: 0.01 }
   );
   visibilityObserver.observe(canvas);
@@ -203,7 +272,6 @@ export function initHeroScene(canvas: HTMLCanvasElement): void {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
   }
-
   handleResize();
   window.addEventListener('resize', handleResize);
 
@@ -213,58 +281,47 @@ export function initHeroScene(canvas: HTMLCanvasElement): void {
 
   function animate() {
     animationId = requestAnimationFrame(animate);
-
     if (!isVisible) return;
 
+    const delta = clock.getDelta();
     const elapsed = clock.getElapsedTime();
 
-    // Auto-rotate garage
-    garageGroup.rotation.y = elapsed * 0.15;
+    updateMorph(delta);
 
-    // Mouse parallax (desktop only)
+    // Auto-rotate
+    garageGroup.rotation.y = elapsed * 0.12;
+
+    // Mouse parallax
     if (!isTouch) {
-      targetRotation.x = mouse.y * 0.15;
-      targetRotation.y = mouse.x * 0.15;
-      garageGroup.rotation.x +=
-        (targetRotation.x - garageGroup.rotation.x) * 0.05;
-      garageGroup.rotation.y +=
-        targetRotation.y * 0.3;
+      targetRot.x = mouse.y * 0.12;
+      targetRot.y = mouse.x * 0.12;
+      garageGroup.rotation.x += (targetRot.x - garageGroup.rotation.x) * 0.04;
+      garageGroup.rotation.y += targetRot.y * 0.25;
     }
 
-    // Animate particles
-    const posArray = particlesGeo.attributes.position.array as Float32Array;
+    // Particles
+    const posArr = particlesGeo.attributes.position.array as Float32Array;
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      posArray[i3] += velocities[i3];
-      posArray[i3 + 1] += velocities[i3 + 1];
-      posArray[i3 + 2] += velocities[i3 + 2];
-
-      // Wrap around
+      posArr[i3] += velocities[i3];
+      posArr[i3 + 1] += velocities[i3 + 1];
+      posArr[i3 + 2] += velocities[i3 + 2];
       for (let j = 0; j < 3; j++) {
-        if (Math.abs(posArray[i3 + j]) > 6) {
-          posArray[i3 + j] *= -0.9;
-        }
+        if (Math.abs(posArr[i3 + j]) > 7) posArr[i3 + j] *= -0.9;
       }
     }
     particlesGeo.attributes.position.needsUpdate = true;
 
-    // Scroll fade
     canvas.style.opacity = String(scrollOpacity);
-
     renderer.render(scene, camera);
   }
-
   animate();
 
-  // Cleanup on page navigation
-  document.addEventListener(
-    'astro:before-swap',
-    () => {
-      cancelAnimationFrame(animationId);
-      renderer.dispose();
-      scrollObserver.disconnect();
-      visibilityObserver.disconnect();
-    },
-    { once: true }
-  );
+  // Cleanup
+  document.addEventListener('astro:before-swap', () => {
+    cancelAnimationFrame(animationId);
+    renderer.dispose();
+    scrollObserver.disconnect();
+    visibilityObserver.disconnect();
+  }, { once: true });
 }

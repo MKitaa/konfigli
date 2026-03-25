@@ -5,8 +5,9 @@ import { site } from '@/config/site';
 <footer class="footer">
   <div class="container footer__container">
     <div class="footer__brand">
-      <a href="#" class="footer__logo">
-        <span class="gradient-text">{site.name}</span>
+      <a href="/" class="footer__logo">
+        <img src="/images/logo-dark.svg" alt={site.name} class="footer__logo-img footer__logo-img--dark" width="220" height="52" />
+        <img src="/images/logo-light.svg" alt={site.name} class="footer__logo-img footer__logo-img--light" width="220" height="52" />
       </a>
       <p class="footer__tagline">{site.tagline}</p>
     </div>
@@ -23,7 +24,7 @@ import { site } from '@/config/site';
 
     <div class="footer__bottom">
       <p class="footer__copy">
-        &copy; {new Date().getFullYear()} {site.name}. Wszelkie prawa zastrzeżone.
+        &copy; {new Date().getFullYear()} {site.name} &middot; Mateusz Kita &middot; NIP: XXXXXXXXXX
       </p>
     </div>
   </div>
@@ -31,8 +32,21 @@ import { site } from '@/config/site';
 
 <style>
   .footer {
-    border-top: 1px solid var(--color-border);
-    padding-block: var(--space-3xl) var(--space-xl);
+    border-top: none;
+    padding-block: var(--space-4xl) var(--space-2xl);
+    position: relative;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(200px, 40%);
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+    opacity: 0.3;
   }
 
   .footer__container {
@@ -44,11 +58,26 @@ import { site } from '@/config/site';
   }
 
   .footer__logo {
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    font-weight: 700;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: opacity var(--duration-normal) var(--ease-out);
   }
+
+  .footer__logo:hover {
+    opacity: 0.8;
+  }
+
+  .footer__logo-img {
+    height: 56px;
+    width: auto;
+  }
+
+  .footer__logo-img--light { display: none; }
+  .footer__logo-img--dark { display: block; }
+
+  :global([data-theme="light"]) .footer__logo-img--light { display: block; }
+  :global([data-theme="light"]) .footer__logo-img--dark { display: none; }
 
   .footer__tagline {
     font-size: var(--text-sm);
@@ -67,21 +96,63 @@ import { site } from '@/config/site';
     font-size: var(--text-sm);
     color: var(--color-text-dim);
     text-decoration: none;
-    transition: color var(--duration-fast);
+    position: relative;
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
+  .footer__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transition: width var(--duration-normal) var(--ease-out), left var(--duration-normal) var(--ease-out);
   }
 
   .footer__link:hover {
     color: var(--color-text);
   }
 
+  .footer__link:hover::after {
+    width: 100%;
+    left: 0;
+  }
+
   .footer__bottom {
     padding-top: var(--space-xl);
-    border-top: 1px solid var(--color-border);
     width: 100%;
+    position: relative;
+  }
+
+  .footer__bottom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
   }
 
   .footer__copy {
     font-size: var(--text-xs);
     color: var(--color-text-dim);
+  }
+
+  @media (max-width: 640px) {
+    .footer {
+      padding-block: var(--space-2xl) var(--space-lg);
+    }
+
+    .footer__container {
+      gap: var(--space-lg);
+    }
+
+    .footer__links {
+      gap: var(--space-md);
+    }
   }
 </style>

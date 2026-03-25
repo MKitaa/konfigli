@@ -1,33 +1,82 @@
 /* ========================================
-   Design Tokens
+   Design Tokens — Dark Theme (default)
+   Elegant dark for steel construction B2B
+   ======================================== */
+:root,
+[data-theme="dark"] {
+  --color-bg: #161616;
+  --color-bg-alt: #1a1a1a;
+  --color-bg-card: #1e1e1e;
+  --color-bg-card-hover: #282828;
+  --color-bg-elevated: #222222;
+  --color-bg-dark: #111111;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-accent-light: rgba(249, 115, 22, 0.10);
+  --color-accent-secondary: #fb923c;
+  --color-text: #f5f5f4;
+  --color-text-muted: #a8a29e;
+  --color-text-dim: #78716c;
+  --color-border: #292524;
+  --color-border-hover: rgba(249, 115, 22, 0.35);
+  --color-warning: #ef4444;
+
+  --gradient-accent: linear-gradient(135deg, #f97316, #fb923c);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.3);
+  --shadow-accent: 0 4px 20px rgba(249, 115, 22, 0.2);
+
+  --nav-bg: rgba(22, 22, 22, 0.8);
+  --nav-bg-scrolled: rgba(22, 22, 22, 0.95);
+  --nav-mobile-bg: rgba(22, 22, 22, 0.98);
+
+  color-scheme: dark;
+}
+
+/* ========================================
+   Light Theme
+   ======================================== */
+[data-theme="light"] {
+  --color-bg: #f5f5f0;
+  --color-bg-alt: #eeeee8;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #fafaf7;
+  --color-bg-elevated: #fafaf7;
+  --color-bg-dark: #1c1917;
+  --color-accent: #ea580c;
+  --color-accent-hover: #c2410c;
+  --color-accent-light: rgba(234, 88, 12, 0.07);
+  --color-accent-secondary: #f97316;
+  --color-text: #1c1917;
+  --color-text-muted: #44403c;
+  --color-text-dim: #a8a29e;
+  --color-border: #d6d3d1;
+  --color-border-hover: rgba(234, 88, 12, 0.35);
+  --color-warning: #dc2626;
+
+  --gradient-accent: linear-gradient(135deg, #ea580c, #f97316);
+
+  --shadow-sm: 0 1px 3px rgba(28, 25, 23, 0.06);
+  --shadow-md: 0 4px 12px -2px rgba(28, 25, 23, 0.08);
+  --shadow-lg: 0 12px 24px -4px rgba(28, 25, 23, 0.1);
+  --shadow-accent: 0 4px 20px rgba(234, 88, 12, 0.15);
+
+  --nav-bg: rgba(245, 245, 240, 0.85);
+  --nav-bg-scrolled: rgba(245, 245, 240, 0.95);
+  --nav-mobile-bg: rgba(245, 245, 240, 0.98);
+
+  color-scheme: light;
+}
+
+/* ========================================
+   Shared tokens (theme-independent)
    ======================================== */
 :root {
-  /* Colors — dark but not black */
-  --color-bg: #0f1117;
-  --color-bg-card: #161922;
-  --color-bg-card-hover: #1e2230;
-  --color-bg-elevated: #1a1e2c;
-  --color-accent: #3b82f6;
-  --color-accent-secondary: #8b5cf6;
-  --color-text: #f2f2f7;
-  --color-text-muted: #a8a8c0;
-  --color-text-dim: #6e6e88;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(59, 130, 246, 0.3);
-
-  /* Gradient */
-  --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-accent-secondary));
-  --gradient-text: linear-gradient(135deg, var(--color-accent), var(--color-accent-secondary));
-  --gradient-glow: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(59, 130, 246, 0.06),
-    transparent 40%
-  );
-
   /* Typography */
-  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-heading: 'Lora', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
   --text-sm: clamp(0.8125rem, 0.75rem + 0.3vw, 0.9375rem);
@@ -47,17 +96,19 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
   --space-4xl: 6rem;
-  --space-section: clamp(4rem, 3rem + 5vw, 8rem);
+  --space-section: clamp(5rem, 4rem + 5vw, 9rem);
 
   /* Layout */
   --max-width: 1200px;
-  --nav-height: 4rem;
+  --nav-height: 4.5rem;
 
   /* Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -87,12 +138,29 @@ html {
 body {
   font-family: var(--font-body);
   font-size: var(--text-base);
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--color-text-muted);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color var(--duration-slow) var(--ease-out),
+              color var(--duration-slow) var(--ease-out);
+}
+
+/* Subtle noise texture for depth */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] body::before {
+  opacity: 0.03;
 }
 
 img,
@@ -124,15 +192,15 @@ ol {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--color-text);
-  line-height: 1.15;
-  font-weight: 700;
+  line-height: 1.2;
+  font-weight: 500;
   text-wrap: balance;
 }
 
-h1 { font-size: var(--text-4xl); }
-h2 { font-size: var(--text-3xl); }
-h3 { font-size: var(--text-2xl); }
-h4 { font-size: var(--text-xl); }
+h1 { font-size: var(--text-4xl); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-3xl); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-2xl); font-weight: 600; }
+h4 { font-size: var(--text-xl); font-weight: 600; }
 
 p {
   text-wrap: pretty;
@@ -141,23 +209,6 @@ p {
 /* ========================================
    Font faces (Google Fonts subset)
    ======================================== */
-@font-face {
-  font-family: 'Space Grotesk';
-  font-style: normal;
-  font-weight: 500 700;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: 'Space Grotesk';
-  font-style: normal;
-  font-weight: 500 700;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPb94Cw.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
 @font-face {
   font-family: 'Inter';
@@ -187,11 +238,17 @@ p {
   padding-inline: var(--space-lg);
 }
 
+/* Sections above global particles canvas */
+main, nav, footer {
+  position: relative;
+  z-index: 1;
+}
+
 /* ========================================
    Selection
    ======================================== */
 ::selection {
-  background-color: rgba(59, 130, 246, 0.3);
+  background-color: rgba(249, 115, 22, 0.15);
   color: var(--color-text);
 }
 
@@ -207,7 +264,7 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-bg-card-hover);
+  background: var(--color-border);
   border-radius: 4px;
 }
 
@@ -227,6 +284,13 @@ p {
 /* ========================================
    Reduced motion
    ======================================== */
+/* Mobile floating CTA spacing */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 56px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

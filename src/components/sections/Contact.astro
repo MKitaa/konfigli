@@ -1,5 +1,4 @@
 ---
-import Button from '@/components/ui/Button.astro';
 import { site } from '@/config/site';
 ---
 
@@ -8,22 +7,107 @@ import { site } from '@/config/site';
     <div class="contact__content reveal">
       <span class="contact__label">Kontakt</span>
       <h2 class="contact__title">
-        Gotowy na swoją stronę?<br />
-        <span class="gradient-text">Wycenię za darmo.</span>
+        Porozmawiajmy<br />
+        <span class="gradient-text">o Twoim produkcie</span>
       </h2>
       <p class="contact__description">
-        Opisz czego potrzebujesz — odpowiem w ciągu 24 godzin z bezpłatną wyceną, propozycją rozwiązania i orientacyjnym terminem realizacji.
+        Opisz co sprzedajesz — w 24h odpowiem z bezpłatną wyceną i terminem realizacji.
       </p>
-      <div class="contact__links">
-        <Button href={`mailto:${site.contact.email}?subject=Zapytanie o wycenę`} variant="primary" size="lg">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="4" width="20" height="16" rx="2" />
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-          </svg>
-          Wyślij zapytanie
-        </Button>
+
+      <!-- Quick contact — primary -->
+      <div class="quick-contact">
+        <p class="quick-contact__heading">Zostaw numer — oddzwonię w 24h</p>
+        <form class="quick-contact__form" id="quick-contact-form" data-api={site.contact.apiUrl}>
+          <div class="quick-contact__row">
+            <input
+              class="quick-contact__input"
+              type="tel"
+              name="phone"
+              id="quick-phone"
+              required
+              placeholder="+48 500 000 000"
+              autocomplete="tel"
+            />
+            <button type="submit" class="quick-contact__submit" id="quick-submit">
+              Oddzwonię
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+          <label class="quick-contact__consent">
+            <input type="checkbox" name="gdprConsent" required />
+            <span>Wyrażam zgodę na przetwarzanie numeru telefonu w celu kontaktu zwrotnego. Dane będą przetwarzane zgodnie z <a href="/polityka-prywatnosci" target="_blank">polityką prywatności</a>.</span>
+          </label>
+          <div class="form__honeypot" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="quick-contact__status" id="quick-status" role="alert"></div>
+        </form>
       </div>
-      <p class="contact__email">{site.contact.email}</p>
+
+      <p class="contact__microcopy">Odpowiadam w ciągu 24h &middot; Wycena gratis &middot; Bez zobowiązań</p>
+
+      <!-- Expandable full form -->
+      <button class="contact__expand" id="contact-expand" type="button">
+        Wolę opisać projekt pisemnie
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      <div class="contact__form-wrap" id="contact-form-wrap" hidden>
+        <form class="contact__form" id="contact-form" data-api={site.contact.apiUrl}>
+          <div class="form__row">
+            <div class="form__group">
+              <label class="form__label" for="contact-name">Imię <span class="form__required">*</span></label>
+              <input class="form__input" type="text" id="contact-name" name="name" required placeholder="Jan" autocomplete="given-name" />
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="contact-contact">Telefon lub email <span class="form__required">*</span></label>
+              <input class="form__input" type="text" id="contact-contact" name="contact" required placeholder="+48 500 000 000 lub jan@firma.pl" />
+            </div>
+          </div>
+          <div class="form__group">
+            <label class="form__label" for="contact-message">Wiadomość</label>
+            <textarea class="form__input form__textarea" id="contact-message" name="message" rows="3" placeholder="Opisz krótko czego potrzebujesz..."></textarea>
+          </div>
+          <div class="form__honeypot" aria-hidden="true">
+            <input type="text" name="website" id="contact-website" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="form__group form__consent">
+            <label class="form__consent-label">
+              <input type="checkbox" name="gdprConsent" id="contact-gdpr" required />
+              <span>Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie i przygotowania wyceny. Dane będą przetwarzane zgodnie z <a href="/polityka-prywatnosci" target="_blank">polityką prywatności</a>. Zgodę mogę cofnąć w dowolnym momencie.</span>
+            </label>
+          </div>
+          <button type="submit" class="form__submit" id="contact-submit">
+            <span class="form__submit-text">Wyślij zapytanie</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+            </svg>
+          </button>
+          <div class="form__status" id="form-status" role="alert"></div>
+        </form>
+      </div>
+
+      <div class="contact__alt">
+        <div class="contact__alt-links">
+          <a class="contact__alt-link" href={`tel:${site.contact.phone.replace(/\s/g, '')}`}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            {site.contact.phone}
+          </a>
+          <a class="contact__alt-link" href={`mailto:${site.contact.email}`}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            {site.contact.email}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -33,19 +117,28 @@ import { site } from '@/config/site';
     position: relative;
   }
 
+  .contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(249, 115, 22, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .contact__container {
     text-align: center;
     max-width: 700px;
+    margin-inline: auto;
   }
 
   .contact__label {
     display: inline-block;
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: var(--text-sm);
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.02em;
     margin-bottom: var(--space-sm);
   }
 
@@ -60,23 +153,719 @@ import { site } from '@/config/site';
     line-height: 1.7;
   }
 
-  .contact__links {
+  /* ---- Form ---- */
+  .contact__form {
+    text-align: left;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-md);
+    flex-direction: column;
+    gap: var(--space-xl);
   }
 
-  .contact__email {
-    margin-top: var(--space-md);
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .form__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .form__label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .form__required {
+    color: var(--color-accent);
+  }
+
+  .form__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+    outline: none;
+  }
+
+  .form__input::placeholder {
+    color: var(--color-text-dim);
+  }
+
+  .form__input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+  }
+
+  .form__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-color: var(--color-bg-card);
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  .form__select option {
+    background: var(--color-bg-card);
+    color: var(--color-text);
+  }
+
+  .form__textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: var(--font-body);
+  }
+
+  .form__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    align-self: flex-start;
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: white;
+    background: var(--gradient-accent);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  .form__submit:hover {
+    box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);
+    transform: translateY(-1px) scale(1.01);
+  }
+
+  .form__submit:active {
+    transform: translateY(0);
+  }
+
+  /* ---- Microcopy ---- */
+  .contact__microcopy {
+    margin-top: var(--space-lg);
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+    text-align: center;
+  }
+
+  /* ---- Alternative contact ---- */
+  .contact__alt {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .contact__alt-label {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-md);
+  }
+
+  .contact__alt-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .contact__alt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
+  .contact__alt-link:hover {
+    color: var(--color-accent);
+  }
+
+  .contact__alt-link svg {
+    flex-shrink: 0;
+  }
+
+  /* ---- Honeypot ---- */
+  .form__honeypot {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  /* ---- GDPR consent ---- */
+  .form__consent {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .form__consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .form__consent-label input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--color-accent);
+    cursor: pointer;
+  }
+
+  .form__consent-label a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .form__consent-label a:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- Status message ---- */
+  .form__status {
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    min-height: 1.5em;
+  }
+
+  .form__status--success {
+    color: #4ade80;
+  }
+
+  .form__status--error {
+    color: #ef4444;
+  }
+
+  /* ---- Submit states ---- */
+  .form__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .form__submit:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .form__input:focus-visible {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+  }
+
+  /* ---- Expand button ---- */
+  .contact__expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md) var(--space-xl);
+    margin-top: var(--space-lg);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+    border: 1px solid var(--color-border-hover);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  .contact__expand:hover {
+    background: rgba(249, 115, 22, 0.15);
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.12);
+  }
+
+  .contact__expand svg {
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .contact__expand.is-open svg {
+    transform: rotate(180deg);
+  }
+
+  .contact__form-wrap {
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease-out), opacity 0.3s var(--ease-out);
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .contact__form-wrap.is-open {
+    max-height: 600px;
+    opacity: 1;
+    margin-top: var(--space-lg);
+  }
+
+  /* ---- Quick contact ---- */
+  .quick-contact {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-2xl);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .quick-contact__heading {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-lg);
+  }
+
+  .quick-contact__row {
+    display: flex;
+    gap: var(--space-sm);
+    max-width: 440px;
+    margin-inline: auto;
+    margin-bottom: var(--space-md);
+  }
+
+  .quick-contact__input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    outline: none;
+    transition: border-color var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  .quick-contact__input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+  }
+
+  .quick-contact__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: white;
+    background: var(--gradient-accent);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  .quick-contact__submit:hover {
+    box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .quick-contact__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .quick-contact__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--color-text-dim);
+    max-width: 440px;
+    margin-inline: auto;
+    text-align: left;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+
+  .quick-contact__consent input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--color-accent);
+  }
+
+  .quick-contact__consent a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .quick-contact__consent a:hover {
+    text-decoration: underline;
+  }
+
+  .quick-contact__divider {
+    margin-top: var(--space-2xl);
+    position: relative;
+    text-align: center;
+  }
+
+  .quick-contact__divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .quick-contact__divider span {
+    position: relative;
+    background: var(--color-bg-card);
+    padding-inline: var(--space-lg);
     font-size: var(--text-sm);
     color: var(--color-text-dim);
   }
 
+  .quick-contact__status {
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    margin-top: var(--space-sm);
+    min-height: 1.5em;
+  }
+
+  /* ---- Responsive ---- */
   @media (max-width: 640px) {
-    .contact__links {
+    .form__row {
+      grid-template-columns: 1fr;
+    }
+
+    .form__submit {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .contact__alt-links {
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
+    }
+
+    .quick-contact__row {
+      flex-direction: column;
+    }
+
+    .quick-contact {
+      padding: var(--space-xl);
     }
   }
 </style>
+
+<script>
+  // Expand full form toggle
+  const expandBtn = document.getElementById('contact-expand');
+  const formWrap = document.getElementById('contact-form-wrap');
+  if (expandBtn && formWrap) {
+    expandBtn.addEventListener('click', () => {
+      const isOpen = formWrap.classList.toggle('is-open');
+      expandBtn.classList.toggle('is-open');
+      formWrap.hidden = false;
+    });
+  }
+
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const apiUrl = form.dataset.api;
+      const status = document.getElementById('form-status')!;
+      const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement;
+      const submitText = submitBtn.querySelector('.form__submit-text')!;
+
+      // Collect form data
+      const name = (form.querySelector('#contact-name') as HTMLInputElement).value.trim();
+      const contact = (form.querySelector('#contact-contact') as HTMLInputElement).value.trim();
+      const message = (form.querySelector('#contact-message') as HTMLTextAreaElement).value.trim();
+      const website = (form.querySelector('#contact-website') as HTMLInputElement).value;
+      const gdprConsent = (form.querySelector('#contact-gdpr') as HTMLInputElement).checked;
+
+      const isEmail = contact.includes('@');
+
+      const now = new Date().toLocaleString('pl-PL', { dateStyle: 'long', timeStyle: 'short' });
+
+      const html = `
+<!DOCTYPE html>
+<html lang="pl">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#f5f5f4;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f4;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#1c1917;padding:24px 32px;text-align:center;">
+            <h1 style="margin:0;font-size:22px;color:#f97316;font-weight:700;letter-spacing:-0.5px;">Konfigli</h1>
+            <p style="margin:4px 0 0;font-size:12px;color:#a8a29e;">Konfiguratory 3D dla producentów</p>
+          </td>
+        </tr>
+
+        <!-- Badge -->
+        <tr>
+          <td style="padding:24px 32px 0;">
+            <table cellpadding="0" cellspacing="0"><tr>
+              <td style="background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;padding:6px 16px;font-size:13px;font-weight:600;color:#ea580c;">
+                Nowe zapytanie ofertowe
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+
+        <!-- Content -->
+        <tr>
+          <td style="padding:20px 32px 8px;">
+            <p style="margin:0 0 16px;font-size:14px;color:#78716c;">Otrzymano: ${now}</p>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e7e5e4;border-radius:8px;overflow:hidden;">
+              <tr>
+                <td style="padding:14px 20px;background:#fafaf9;border-bottom:1px solid #e7e5e4;font-size:13px;color:#78716c;font-weight:600;width:120px;">Imię</td>
+                <td style="padding:14px 20px;border-bottom:1px solid #e7e5e4;font-size:15px;color:#1c1917;font-weight:600;">${name}</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 20px;background:#fafaf9;${message ? 'border-bottom:1px solid #e7e5e4;' : ''}font-size:13px;color:#78716c;font-weight:600;">Kontakt</td>
+                <td style="padding:14px 20px;${message ? 'border-bottom:1px solid #e7e5e4;' : ''}font-size:15px;color:#1c1917;">
+                  ${isEmail ? '<a href="mailto:' + contact + '" style="color:#ea580c;text-decoration:none;">' + contact + '</a>' : '<a href="tel:' + contact.replace(/\\s/g, '') + '" style="color:#ea580c;text-decoration:none;">' + contact + '</a>'}
+                </td>
+              </tr>
+              ${message ? '<tr><td style="padding:14px 20px;background:#fafaf9;font-size:13px;color:#78716c;font-weight:600;vertical-align:top;">Wiadomość</td><td style="padding:14px 20px;font-size:14px;color:#1c1917;line-height:1.6;">' + message.replace(/\\n/g, '<br>') + '</td></tr>' : ''}
+            </table>
+          </td>
+        </tr>
+
+        <!-- Action -->
+        <tr>
+          <td style="padding:24px 32px;" align="center">
+            <a href="${isEmail ? 'mailto:' + contact : 'tel:' + contact.replace(/\\s/g, '')}" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#f97316,#fb923c);color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;border-radius:50px;">
+              ${isEmail ? 'Odpowiedz na email' : 'Zadzwoń'}
+            </a>
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #e7e5e4;margin:0;"></td></tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:20px 32px 24px;text-align:center;">
+            <p style="margin:0 0 4px;font-size:13px;font-weight:600;color:#1c1917;">Mateusz Kita</p>
+            <p style="margin:0 0 2px;font-size:12px;color:#a8a29e;">Konfigli — konfiguratory 3D i strony dla producentów</p>
+            <p style="margin:0;font-size:12px;color:#a8a29e;">
+              <a href="tel:+48512020894" style="color:#a8a29e;text-decoration:none;">+48 512 020 894</a> ·
+              <a href="mailto:biuro@konfigli.pl" style="color:#a8a29e;text-decoration:none;">biuro@konfigli.pl</a> ·
+              <a href="https://konfigli.pl" style="color:#ea580c;text-decoration:none;">konfigli.pl</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`.trim();
+
+      // Disable button
+      submitBtn.disabled = true;
+      submitText.textContent = 'Wysyłanie...';
+      status.textContent = '';
+      status.className = 'form__status';
+
+      try {
+        const res = await fetch(`${apiUrl}/api/send-email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: `[Konfigli] Zapytanie od ${name}`,
+            html,
+            replyTo: isEmail ? contact : '',
+            gdprConsent,
+            website, // honeypot
+          }),
+        });
+
+        if (res.ok) {
+          status.textContent = 'Zapytanie wysłane! Odpowiem w ciągu 24 godzin.';
+          status.className = 'form__status form__status--success';
+          form.reset();
+        } else {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || 'Błąd serwera');
+        }
+      } catch (err) {
+        status.textContent = 'Nie udało się wysłać. Spróbuj ponownie lub napisz na biuro@konfigli.pl';
+        status.className = 'form__status form__status--error';
+      } finally {
+        submitBtn.disabled = false;
+        submitText.textContent = 'Wyślij zapytanie';
+      }
+    });
+  }
+
+  // Quick contact form
+  const quickForm = document.getElementById('quick-contact-form') as HTMLFormElement | null;
+  if (quickForm) {
+    quickForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const apiUrl = quickForm.dataset.api;
+      const phone = (quickForm.querySelector('#quick-phone') as HTMLInputElement).value.trim();
+      const website = (quickForm.querySelector('input[name="website"]') as HTMLInputElement).value;
+      const gdprConsent = (quickForm.querySelector('input[name="gdprConsent"]') as HTMLInputElement).checked;
+      const status = document.getElementById('quick-status')!;
+      const submitBtn = document.getElementById('quick-submit') as HTMLButtonElement;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wysyłanie...';
+      status.textContent = '';
+
+      const now = new Date().toLocaleString('pl-PL', { dateStyle: 'long', timeStyle: 'short' });
+
+      const html = `
+<!DOCTYPE html>
+<html lang="pl">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#f5f5f4;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f4;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#1c1917;padding:24px 32px;text-align:center;">
+            <h1 style="margin:0;font-size:22px;color:#f97316;font-weight:700;letter-spacing:-0.5px;">Konfigli</h1>
+            <p style="margin:4px 0 0;font-size:12px;color:#a8a29e;">Konfiguratory 3D dla producentów</p>
+          </td>
+        </tr>
+
+        <!-- Badge -->
+        <tr>
+          <td style="padding:24px 32px 0;">
+            <table cellpadding="0" cellspacing="0"><tr>
+              <td style="background:#fef3c7;border:1px solid #fde68a;border-radius:20px;padding:6px 16px;font-size:13px;font-weight:600;color:#b45309;">
+                Szybki kontakt — prośba o telefon
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+
+        <!-- Content -->
+        <tr>
+          <td style="padding:20px 32px 8px;">
+            <p style="margin:0 0 16px;font-size:14px;color:#78716c;">Otrzymano: ${now}</p>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e7e5e4;border-radius:8px;overflow:hidden;">
+              <tr>
+                <td style="padding:14px 20px;background:#fafaf9;font-size:13px;color:#78716c;font-weight:600;width:120px;">Telefon</td>
+                <td style="padding:14px 20px;font-size:18px;color:#1c1917;font-weight:700;">
+                  <a href="tel:${phone.replace(/\\s/g, '')}" style="color:#ea580c;text-decoration:none;">${phone}</a>
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin:16px 0 0;padding:16px;background:#fff7ed;border-radius:8px;font-size:14px;color:#9a3412;line-height:1.5;text-align:center;">
+              Klient prosi o oddzwonienie w ciągu <strong>24 godzin</strong>.
+            </p>
+          </td>
+        </tr>
+
+        <!-- Action -->
+        <tr>
+          <td style="padding:24px 32px;" align="center">
+            <a href="tel:${phone.replace(/\\s/g, '')}" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#f97316,#fb923c);color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;border-radius:50px;">
+              Zadzwoń teraz
+            </a>
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #e7e5e4;margin:0;"></td></tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:20px 32px 24px;text-align:center;">
+            <p style="margin:0 0 4px;font-size:13px;font-weight:600;color:#1c1917;">Mateusz Kita</p>
+            <p style="margin:0 0 2px;font-size:12px;color:#a8a29e;">Konfigli — konfiguratory 3D i strony dla producentów</p>
+            <p style="margin:0;font-size:12px;color:#a8a29e;">
+              <a href="tel:+48512020894" style="color:#a8a29e;text-decoration:none;">+48 512 020 894</a> ·
+              <a href="mailto:biuro@konfigli.pl" style="color:#a8a29e;text-decoration:none;">biuro@konfigli.pl</a> ·
+              <a href="https://konfigli.pl" style="color:#ea580c;text-decoration:none;">konfigli.pl</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`.trim();
+
+      try {
+        const res = await fetch(`${apiUrl}/api/send-email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: `[Konfigli] Szybki kontakt — ${phone}`,
+            html,
+            replyTo: '',
+            gdprConsent,
+            website,
+          }),
+        });
+        if (res.ok) {
+          status.textContent = 'Dziękuję! Oddzwonię w ciągu 24 godzin.';
+          status.style.color = '#4ade80';
+          quickForm.reset();
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        status.textContent = 'Nie udało się wysłać. Zadzwoń: +48 512 020 894';
+        status.style.color = '#ef4444';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Oddzwonię';
+      }
+    });
+  }
+</script>

@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
+Disallow: /.astro/
 
-Sitemap: https://mkode.pl/sitemap-index.xml
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+Sitemap: https://konfigli.pl/sitemap-index.xml

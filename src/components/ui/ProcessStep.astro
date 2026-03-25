@@ -24,7 +24,7 @@ const { step, title, description } = Astro.props;
     gap: var(--space-xl);
     align-items: flex-start;
     position: relative;
-    padding-bottom: var(--space-3xl);
+    padding-bottom: var(--space-4xl);
   }
 
   .process-step:last-child {
@@ -39,13 +39,20 @@ const { step, title, description } = Astro.props;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
     z-index: 1;
+    transition: box-shadow 0.6s var(--ease-out),
+                background 0.6s var(--ease-out);
+  }
+
+  .process-step.is-visible .process-step__number {
+    box-shadow: 0 0 16px rgba(249, 115, 22, 0.2);
+    background: rgba(249, 115, 22, 0.15);
   }
 
   .process-step__number span {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--text-sm);
     font-weight: 700;
     color: var(--color-accent);
@@ -64,5 +71,17 @@ const { step, title, description } = Astro.props;
     font-size: var(--text-sm);
     line-height: 1.7;
     max-width: 480px;
+  }
+
+  @media (max-width: 640px) {
+    .process-step {
+      gap: var(--space-lg);
+      padding-bottom: var(--space-2xl);
+    }
+
+    .process-step__number {
+      width: 40px;
+      height: 40px;
+    }
   }
 </style>

@@ -6,7 +6,7 @@ import { site } from '@/config/site';
 
 <section class="section" id="proces">
   <div class="container">
-    <SectionHeading title="Jak pracuję" subtitle="Proces" />
+    <SectionHeading title="Od rozmowy do działającego konfiguratora" subtitle="Jak pracuję" />
     <div class="process">
       <div class="process__line timeline-line" aria-hidden="true"></div>
       <div class="process__steps">
@@ -19,10 +19,42 @@ import { site } from '@/config/site';
         ))}
       </div>
     </div>
+
+    <div class="process__cta">
+      <p>Gotowy na pierwszy krok?</p>
+      <a href="#kontakt" class="process__cta-btn">Porozmawiajmy o Twoim produkcie →</a>
+    </div>
   </div>
 </section>
 
 <style>
+  .process__cta {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  .process__cta p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .process__cta-btn {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: color var(--duration-normal) var(--ease-out),
+                gap var(--duration-normal) var(--ease-out);
+  }
+
+  .process__cta-btn:hover {
+    color: var(--color-accent-secondary);
+    gap: var(--space-sm);
+  }
   .process {
     position: relative;
     max-width: 600px;
@@ -47,6 +79,10 @@ import { site } from '@/config/site';
   @media (max-width: 640px) {
     .process {
       padding-left: 0;
+    }
+
+    .process__line {
+      left: 19px;
     }
   }
 </style>

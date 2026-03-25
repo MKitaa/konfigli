@@ -1,15 +1,14 @@
 ---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { site } from '@/config/site';
 ---
 
 <section class="section testimonials">
   <div class="container">
-    <div class="testimonials__content">
+    <SectionHeading title="Producenci, z którymi pracuję" subtitle="Opinie" />
+    <div class="testimonials__grid">
       {site.testimonials.map((t) => (
-        <blockquote class="testimonial reveal">
-          <svg class="testimonial__quote-icon" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" opacity="0.15">
-            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-          </svg>
+        <blockquote class="testimonial reveal--scale">
           <p class="testimonial__text">{t.quote}</p>
           <footer class="testimonial__footer">
             <div class="testimonial__avatar">
@@ -27,42 +26,56 @@ import { site } from '@/config/site';
 </section>
 
 <style>
-  .testimonials__content {
-    max-width: 720px;
+  .testimonials {
+    background: linear-gradient(to bottom, var(--color-bg), rgba(249, 115, 22, 0.015), var(--color-bg));
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl);
+    max-width: 900px;
     margin-inline: auto;
   }
 
   .testimonial {
     position: relative;
-    background: var(--color-bg-card);
+    background: linear-gradient(135deg, var(--color-bg-card), var(--color-bg-elevated));
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
-    text-align: center;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
   }
 
-  .testimonial__quote-icon {
+  .testimonial::before {
+    content: '\201C';
     position: absolute;
-    top: var(--space-xl);
-    left: 50%;
-    transform: translateX(-50%);
+    top: var(--space-md);
+    left: var(--space-xl);
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    line-height: 1;
     color: var(--color-accent);
+    opacity: 0.15;
+    pointer-events: none;
   }
 
   .testimonial__text {
-    font-size: var(--text-lg);
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
     line-height: 1.8;
-    color: var(--color-text);
+    color: var(--color-text-muted);
     font-style: italic;
-    margin-bottom: var(--space-xl);
-    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
   }
 
   .testimonial__footer {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
 
   .testimonial__avatar {
@@ -72,30 +85,37 @@ import { site } from '@/config/site';
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    flex-shrink: 0;
   }
 
   .testimonial__avatar span {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-weight: 700;
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     color: var(--color-accent);
   }
 
   .testimonial__author {
     display: block;
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-style: normal;
     font-weight: 600;
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     color: var(--color-text);
-    text-align: left;
   }
 
   .testimonial__role {
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     color: var(--color-text-dim);
-    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin-inline: auto;
+    }
   }
 </style>

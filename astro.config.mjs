@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://mkode.pl',
+  site: 'https://konfigli.pl',
   integrations: [sitemap()],
   vite: {
     ssr: {

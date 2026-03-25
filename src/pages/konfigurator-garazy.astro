@@ -1,0 +1,184 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/ui/Nav.astro';
+import Footer from '@/components/sections/Footer.astro';
+import FloatingCTA from '@/components/ui/FloatingCTA.astro';
+import { site } from '@/config/site';
+import '@/styles/landing-page.css';
+---
+
+<BaseLayout
+  title="Konfigurator garaży blaszanych 3D — interaktywna wizualizacja na Twoją stronę"
+  description="Konfigurator garaży blaszanych z podglądem 3D w przeglądarce. Klient sam wybiera wymiary, kolor ścian, typ dachu i rodzaj bramy — i wysyła gotowe zapytanie ofertowe. Sprawdź demo."
+>
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="lp-hero">
+      <div class="container">
+        <a href="/" class="lp-back">← Wróć na stronę główną</a>
+        <span class="lp-badge">Konfigurator 3D</span>
+        <h1 class="lp-hero__title">
+          Konfigurator garaży blaszanych<br />
+          <span class="gradient-text">z podglądem 3D na żywo</span>
+        </h1>
+        <p class="lp-hero__subtitle">
+          Twój klient wchodzi na stronę, sam dobiera wymiary, kolor i typ dachu — i widzi gotowy garaż w 3D.
+          Zamiast odbierać telefony, dostajesz kompletne zapytania ofertowe z pełną specyfikacją.
+        </p>
+        <div class="lp-hero__cta">
+          <a href="#demo" class="lp-btn lp-btn--primary">Zobacz demo konfiguratora</a>
+          <a href="#kontakt" class="lp-btn lp-btn--secondary">Bezpłatna wycena w 24h</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="lp-section">
+      <div class="container">
+        <h2 class="lp-section__title">Znasz to z codziennej pracy?</h2>
+        <div class="lp-problems">
+          <div class="lp-problem">
+            <span class="lp-problem__icon">📞</span>
+            <h3>„Jaki macie kolor?"</h3>
+            <p>Klienci dzwonią z tymi samymi pytaniami. Zamiast produkować — odbierasz telefon i tłumaczysz kolory z palety RAL.</p>
+          </div>
+          <div class="lp-problem">
+            <span class="lp-problem__icon">📄</span>
+            <h3>„Wyślijcie cennik"</h3>
+            <p>Wysyłasz PDF z wariantami. Klient gubi się w tabelkach i albo dzwoni z pytaniami, albo rezygnuje.</p>
+          </div>
+          <div class="lp-problem">
+            <span class="lp-problem__icon">🌙</span>
+            <h3>„Wieczorem oglądam, rano kupuję"</h3>
+            <p>Klient przegląda ofertę o 21:00, ale nie może sam sprawdzić konfiguracji. Rano trafia do konkurencji.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="lp-section lp-section--alt">
+      <div class="container">
+        <h2 class="lp-section__title">Jak konfigurator garaży rozwiązuje te problemy?</h2>
+        <div class="lp-features">
+          <div class="lp-feature">
+            <h3>6 typów dachu do wyboru</h3>
+            <p>Dwuspadowy prawo-lewo, dwuspadowy przód-tył, jednospadowy w 4 kierunkach. Klient widzi każdy wariant na modelu 3D.</p>
+          </div>
+          <div class="lp-feature">
+            <h3>15 kolorów ścian + 12 kolorów dachu</h3>
+            <p>Pełna paleta RAL, kolory drewnopodobne (dąb jasny, ciemny, orzech). Kolor zmienia się na modelu w czasie rzeczywistym.</p>
+          </div>
+          <div class="lp-feature">
+            <h3>3 typy bram garażowych</h3>
+            <p>Uchylna, dwuskrzydłowa i segmentowa. Regulacja szerokości od 2,8 do 6 metrów. Klient dobiera bramę do swojego auta.</p>
+          </div>
+          <div class="lp-feature">
+            <h3>Wymiary od 2 do 12 metrów</h3>
+            <p>Szerokość, głębokość, wysokość — suwaki z krokiem co 0,5 m. Etykiety wymiarów widoczne bezpośrednio na modelu 3D.</p>
+          </div>
+          <div class="lp-feature">
+            <h3>Okna, drzwi, wiata, rynny</h3>
+            <p>Drzwi serwisowe w 3 rozmiarach, okna uchylne, dostawiana wiata z alurowymi ażurami. Wszystko konfigurowane krok po kroku.</p>
+          </div>
+          <div class="lp-feature">
+            <h3>Formularz z gotową specyfikacją</h3>
+            <p>Po konfiguracji klient wysyła zapytanie jednym kliknięciem. Dostajesz kompletne parametry + zrzut ekranu konfiguracji na maila.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo -->
+    <section class="lp-section" id="demo">
+      <div class="container">
+        <h2 class="lp-section__title">Przetestuj konfigurator garaży na żywo</h2>
+        <p class="lp-section__desc">Nie musisz mi wierzyć na słowo — przetestuj sam. Dokładnie takie narzędzie mogę postawić na Twojej stronie.</p>
+
+        <!-- Embedded live demo -->
+        <div class="lp-demo-embed">
+          <div class="lp-demo-embed__header">
+            <div class="lp-demo-embed__bar">
+              <span class="lp-demo__dot" style="background:#ef4444"></span>
+              <span class="lp-demo__dot" style="background:#eab308"></span>
+              <span class="lp-demo__dot" style="background:#22c55e"></span>
+              <span class="lp-demo__url">konfigli.pl/konfigurator-garazy-v2</span>
+            </div>
+            <a
+              href="https://konfigli.pl/konfigurator-garazy-v2-garazy-v2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="lp-demo-embed__fullscreen"
+            >
+              Pełny ekran
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </a>
+          </div>
+          <div class="lp-demo-embed__iframe">
+            <iframe
+              src="https://konfigli.pl/konfigurator-garazy-v2-garazy-v2/"
+              title="Konfigurator garaży blaszanych — demo na żywo"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="lp-section lp-section--alt">
+      <div class="container lp-faq-container">
+        <h2 class="lp-section__title">Najczęstsze pytania o konfigurator garaży</h2>
+        <div class="lp-faq">
+          <details class="lp-faq__item">
+            <summary>Ile kosztuje konfigurator garaży blaszanych?</summary>
+            <p>Wyceniam indywidualnie — cena zależy od liczby wariantów, kolorów i integracji z Twoją stroną. Napisz z opisem produktu, wycenę dostajesz w 24h gratis.</p>
+          </details>
+          <details class="lp-faq__item">
+            <summary>Jak długo trwa budowa konfiguratora garaży?</summary>
+            <p>Od 4 do 8 tygodni, zależnie od liczby opcji konfiguracji i złożoności modelu 3D. Termin ustalamy przed startem.</p>
+          </details>
+          <details class="lp-faq__item">
+            <summary>Czy mogę dodać własne kolory z palety RAL?</summary>
+            <p>Tak — konfigurator obsługuje dowolne kolory RAL. Buduję paletę na podstawie Twojego cennika i asortymentu.</p>
+          </details>
+          <details class="lp-faq__item">
+            <summary>Czy konfigurator działa na telefonach?</summary>
+            <p>Tak, w przeglądarce — bez instalacji. Interfejs jest projektowany mobile-first, model 3D renderuje się płynnie nawet na starszych smartfonach.</p>
+          </details>
+          <details class="lp-faq__item">
+            <summary>Czy mogę osadzić konfigurator na istniejącej stronie?</summary>
+            <p>Tak — konfigurator osadzam jako widget na dowolnej stronie (WordPress, własny CMS, landing page). Nie musisz budować strony od nowa.</p>
+          </details>
+          <details class="lp-faq__item">
+            <summary>Czy konfigurator może automatycznie wyceniać garaże?</summary>
+            <p>Tak. Mogę wbudować logikę cenową, która liczy wycenę na podstawie wymiarów, wariantów i dodatków w czasie rzeczywistym.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="lp-section lp-cta" id="kontakt">
+      <div class="container">
+        <h2 class="lp-section__title">Chcesz taki konfigurator dla swoich garaży?</h2>
+        <p class="lp-section__desc">Opisz swój produkt — odpowiem w 24h z bezpłatną wyceną i propozycją rozwiązania.</p>
+        <div class="lp-cta__buttons">
+          <a href="/#kontakt" class="lp-btn lp-btn--primary lp-btn--lg">Wyślij zapytanie</a>
+          <a href={`tel:${site.contact.phone.replace(/\s/g, '')}`} class="lp-btn lp-btn--secondary lp-btn--lg">Zadzwoń: {site.contact.phone}</a>
+        </div>
+        <p class="lp-cta__micro">Wycena gratis · Bez zobowiązań · Odpowiedź w 24h</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <FloatingCTA />
+</BaseLayout>
+
+<script>
+  import '@/scripts/theme';
+</script>

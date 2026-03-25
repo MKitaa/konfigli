@@ -12,84 +12,61 @@
 }
 
 /* ========================================
-   Card 3D hover
-   ======================================== */
-.card-3d {
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-
-  perspective: 1000px;
-  transform-style: preserve-3d;
-}
-
-.card-3d-inner {
-  transition: transform var(--duration-normal) var(--ease-out);
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-@media (hover: hover) {
-  .card-3d:hover .card-3d-inner {
-    transform:
-      rotateY(calc((var(--mouse-x) - 50%) * 0.1deg))
-      rotateX(calc((var(--mouse-y) - 50%) * -0.1deg));
-  }
-}
-
-/* ========================================
-   Gradient shine overlay
-   ======================================== */
-.shine-overlay {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  background: radial-gradient(
-    400px circle at var(--mouse-x) var(--mouse-y),
-    rgba(59, 130, 246, 0.1),
-    transparent 40%
-  );
-  transition: opacity var(--duration-normal) var(--ease-out);
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-@media (hover: hover) {
-  .card-3d:hover .shine-overlay {
-    opacity: 1;
-  }
-}
-
-/* ========================================
-   Shimmer placeholder
-   ======================================== */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--color-bg-card) 25%,
-    var(--color-bg-card-hover) 50%,
-    var(--color-bg-card) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s ease-in-out infinite;
-}
-
-/* ========================================
-   Gradient text
+   Accent text with animated shimmer
    ======================================== */
 .gradient-text {
-  background: var(--gradient-text);
+  background: linear-gradient(
+    135deg,
+    #f97316 0%,
+    #fb923c 40%,
+    #fbbf24 50%,
+    #fb923c 60%,
+    #f97316 100%
+  );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+}
+
+/* ========================================
+   Hero entrance stagger
+   ======================================== */
+.hero__eyebrow,
+.hero__title,
+.hero__subtitle,
+.hero__actions,
+.hero__metrics {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero--loaded .hero__eyebrow,
+.hero--loaded .hero__title,
+.hero--loaded .hero__subtitle,
+.hero--loaded .hero__actions,
+.hero--loaded .hero__metrics {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   Reveal animation variants
+   ======================================== */
+.reveal--scale {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.reveal--scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* ========================================
@@ -107,30 +84,6 @@
 }
 
 /* ========================================
-   Floating
-   ======================================== */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* ========================================
-   Pulse glow
-   ======================================== */
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
-  }
-}
-
-/* ========================================
    Timeline line grow
    ======================================== */
 .timeline-line {
@@ -140,4 +93,23 @@
 
 .timeline-line.is-growing {
   transform: scaleY(1);
+}
+
+/* ========================================
+   Shimmer placeholder
+   ======================================== */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-card) 25%,
+    var(--color-bg-elevated) 50%,
+    var(--color-bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s ease-in-out infinite;
 }

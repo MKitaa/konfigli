@@ -20,6 +20,11 @@
   padding-block: var(--space-section);
 }
 
+/* Alternating section background */
+.section--alt {
+  background: var(--color-bg-alt);
+}
+
 /* Flex utilities */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
@@ -32,9 +37,25 @@
 .gap-xl { gap: var(--space-xl); }
 .gap-2xl { gap: var(--space-2xl); }
 
+/* Elegant section divider */
+.section-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border), transparent);
+  margin: 0;
+}
+
 /* Text utilities */
 .text-center { text-align: center; }
 .text-muted { color: var(--color-text-muted); }
 .text-dim { color: var(--color-text-dim); }
 .font-heading { font-family: var(--font-heading); }
-.font-mono { font-family: var(--font-mono); }
+
+/* ========================================
+   Mobile overrides
+   ======================================== */
+@media (max-width: 640px) {
+  .section {
+    padding-block: var(--space-3xl);
+  }
+}

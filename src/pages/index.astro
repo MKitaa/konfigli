@@ -2,47 +2,55 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Nav from '@/components/ui/Nav.astro';
 import Hero from '@/components/sections/Hero.astro';
-import ForWhom from '@/components/sections/ForWhom.astro';
+import SocialProof from '@/components/sections/SocialProof.astro';
+import PainPoints from '@/components/sections/PainPoints.astro';
+import Configurator from '@/components/sections/Configurator.astro';
 import Services from '@/components/sections/Services.astro';
-import LiveDemo from '@/components/sections/LiveDemo.astro';
 import CaseStudies from '@/components/sections/CaseStudies.astro';
 import Testimonials from '@/components/sections/Testimonials.astro';
-import WhyMe from '@/components/sections/WhyMe.astro';
 import Process from '@/components/sections/Process.astro';
+import WhyMe from '@/components/sections/WhyMe.astro';
 import FAQ from '@/components/sections/FAQ.astro';
 import Contact from '@/components/sections/Contact.astro';
 import Footer from '@/components/sections/Footer.astro';
+import FloatingCTA from '@/components/ui/FloatingCTA.astro';
+import InlineCTA from '@/components/ui/InlineCTA.astro';
 ---
 
 <BaseLayout>
   <Nav />
   <main>
-    <!-- Hook — kto jestem, co robię, dla kogo -->
     <Hero />
-    <!-- Dla kogo — lista produktów, jasna nisza -->
-    <ForWhom />
-    <!-- Co oferuję — 4 usługi z korzyściami -->
+    <SocialProof />
+    <hr class="section-divider" />
+    <PainPoints />
+    <hr class="section-divider" />
+    <Configurator />
+    <InlineCTA text="Chcesz taki konfigurator?" linkText="Bezpłatna wycena w 24h →" />
+    <hr class="section-divider" />
     <Services />
-    <!-- WOW — konfigurator osadzony na stronie -->
-    <LiveDemo />
-    <!-- Dowód — realne realizacje z efektami -->
+    <hr class="section-divider" />
     <CaseStudies />
-    <!-- Głos klienta -->
+    <InlineCTA text="Chcesz takie rozwiązanie dla swojego produktu?" linkText="Porozmawiajmy →" />
+    <hr class="section-divider" />
     <Testimonials />
-    <!-- Zaufanie — dlaczego ja a nie ktoś inny -->
+    <hr class="section-divider" />
     <WhyMe />
-    <!-- Przejrzystość — jak wygląda współpraca -->
+    <hr class="section-divider" />
     <Process />
-    <!-- Odpowiedzi na wątpliwości -->
+    <hr class="section-divider" />
     <FAQ />
-    <!-- Konwersja — bezpłatna wycena -->
+    <hr class="section-divider" />
     <Contact />
   </main>
   <Footer />
+  <FloatingCTA />
 </BaseLayout>
 
 <script>
+  import '@/scripts/theme';
   import '@/scripts/smooth-scroll';
   import '@/scripts/scroll-animations';
   import '@/scripts/nav';
+  import '@/scripts/particles';
 </script>
