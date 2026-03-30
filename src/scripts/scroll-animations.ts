@@ -3,12 +3,29 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const prefersReducedMotion = window.matchMedia(
-  '(prefers-reduced-motion: reduce)'
-).matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile = window.innerWidth <= 900;
 
-if (!prefersReducedMotion) {
-  // Default reveal (fade + slide up)
+function showAllReveal() {
+  document.querySelectorAll<HTMLElement>('.reveal, .reveal--scale').forEach((el) => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    el.classList.add('is-visible');
+  });
+  document.querySelectorAll('[data-count-target]').forEach((el) => {
+    el.textContent = el.getAttribute('data-count-target') || '0';
+  });
+  const timelineLine = document.querySelector<HTMLElement>('.timeline-line');
+  if (timelineLine) timelineLine.style.transform = 'scaleY(1)';
+}
+
+// Mobile or reduced motion: show everything immediately, no animations
+if (isMobile || prefersReducedMotion) {
+  showAllReveal();
+} else {
+  // Desktop with animations
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+
   ScrollTrigger.batch('.reveal:not(.reveal--scale)', {
     onEnter: (elements) => {
       gsap.to(elements, {
@@ -17,16 +34,13 @@ if (!prefersReducedMotion) {
         duration: 0.8,
         ease: 'power3.out',
         stagger: 0.15,
-        onComplete: () => {
-          elements.forEach((el) => el.classList.add('is-visible'));
-        },
+        onComplete: () => elements.forEach((el) => el.classList.add('is-visible')),
       });
     },
-    start: 'top 85%',
+    start: 'top 88%',
     once: true,
   });
 
-  // Scale variant for testimonials
   ScrollTrigger.batch('.reveal--scale', {
     onEnter: (elements) => {
       gsap.to(elements, {
@@ -37,11 +51,10 @@ if (!prefersReducedMotion) {
         stagger: 0.2,
       });
     },
-    start: 'top 85%',
+    start: 'top 88%',
     once: true,
   });
 
-  // Timeline line grow
   const timelineLine = document.querySelector('.timeline-line');
   if (timelineLine) {
     gsap.to(timelineLine, {
@@ -56,11 +69,9 @@ if (!prefersReducedMotion) {
     });
   }
 
-  // CountUp animation for [data-count-target] elements
   document.querySelectorAll('[data-count-target]').forEach((el) => {
     const target = parseInt(el.getAttribute('data-count-target') || '0', 10);
     const obj = { value: 0 };
-
     ScrollTrigger.create({
       trigger: el.closest('.configurator__stats') || el,
       start: 'top 80%',
@@ -70,15 +81,12 @@ if (!prefersReducedMotion) {
           value: target,
           duration: 2,
           ease: 'power2.out',
-          onUpdate: () => {
-            el.textContent = Math.round(obj.value).toString();
-          },
+          onUpdate: () => { el.textContent = Math.round(obj.value).toString(); },
         });
       },
     });
   });
 
-  // Card 3D mouse tracking
   if (window.matchMedia('(hover: hover)').matches) {
     document.querySelectorAll('.card-3d').forEach((card) => {
       card.addEventListener('mousemove', (e) => {
@@ -91,21 +99,4 @@ if (!prefersReducedMotion) {
       });
     });
   }
-} else {
-  // Show all reveal elements immediately
-  document.querySelectorAll('.reveal, .reveal--scale').forEach((el) => {
-    (el as HTMLElement).style.opacity = '1';
-    (el as HTMLElement).style.transform = 'none';
-  });
-
-  const timelineLine = document.querySelector('.timeline-line') as HTMLElement;
-  if (timelineLine) {
-    timelineLine.style.transform = 'scaleY(1)';
-  }
-
-  // Set count targets to final value immediately
-  document.querySelectorAll('[data-count-target]').forEach((el) => {
-    const target = el.getAttribute('data-count-target') || '0';
-    el.textContent = target;
-  });
 }

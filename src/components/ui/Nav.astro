@@ -9,61 +9,81 @@ import { site } from '@/config/site';
       <img src="/images/logo-light.svg" alt={site.name} class="nav__logo-img nav__logo-img--light" width="220" height="52" />
     </a>
 
+    <ul class="nav__desktop-links" role="list">
+      {site.nav.map((item) => (
+        <li><a href={item.href} class="nav__link">{item.label}</a></li>
+      ))}
+      <li>
+        <a href="#kontakt" class="nav__cta">Bezpłatna konsultacja</a>
+      </li>
+    </ul>
+
     <div class="nav__right">
-      <button
-        class="nav__theme-toggle"
-        id="theme-toggle"
-        aria-label="Przełącz motyw"
-        title="Przełącz motyw"
-      >
+      <button class="nav__theme-toggle" id="theme-toggle" aria-label="Przełącz motyw" title="Przełącz motyw">
         <svg class="nav__theme-icon nav__theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5" />
-          <line x1="12" y1="1" x2="12" y2="3" />
-          <line x1="12" y1="21" x2="12" y2="23" />
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-          <line x1="1" y1="12" x2="3" y2="12" />
-          <line x1="21" y1="12" x2="23" y2="12" />
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
         </svg>
         <svg class="nav__theme-icon nav__theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
       </button>
 
-      <button
-        class="nav__toggle"
-        aria-label="Otwórz menu"
-        aria-expanded="false"
-        aria-controls="nav-menu"
-      >
+      <button class="nav__toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav-menu">
         <span class="nav__toggle-line"></span>
         <span class="nav__toggle-line"></span>
         <span class="nav__toggle-line"></span>
       </button>
     </div>
-
-    <ul class="nav__menu" id="nav-menu" role="list">
-      {site.nav.map((item) => (
-        <li>
-          <a href={item.href} class="nav__link">{item.label}</a>
-        </li>
-      ))}
-      <li class="nav__cta-item">
-        <a href="#kontakt" class="nav__cta">Bezpłatna konsultacja</a>
-      </li>
-    </ul>
   </nav>
 </header>
 
+<!-- Mobile menu — OUTSIDE <header> to avoid iOS Safari backdrop-filter positioning bug -->
+<div class="mobile-menu" id="nav-menu" aria-hidden="true">
+  <div class="mobile-menu__inner">
+    <nav class="mobile-menu__links" aria-label="Menu mobilne">
+      <ul role="list">
+        {site.nav.map((item) => (
+          <li>
+            <a href={item.href} class="mobile-menu__link nav__link">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="mobile-menu__bottom">
+      <a href="#kontakt" class="mobile-menu__cta">Bezpłatna konsultacja</a>
+      <div class="mobile-menu__contact">
+        <a href={`tel:${site.contact.phone.replace(/\s/g, '')}`} class="mobile-menu__contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          {site.contact.phone}
+        </a>
+        <a href={`mailto:${site.contact.email}`} class="mobile-menu__contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          {site.contact.email}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Blur overlay -->
+<div class="mobile-overlay" id="nav-overlay" aria-hidden="true"></div>
+
 <style>
+  /* ── Header ── */
   .nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
     height: var(--nav-height);
     background: var(--nav-bg);
     backdrop-filter: blur(12px);
@@ -86,31 +106,19 @@ import { site } from '@/config/site';
     height: 100%;
   }
 
-  .nav__logo {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  }
+  /* ── Logo ── */
+  .nav__logo { text-decoration: none; display: flex; align-items: center; }
 
-  .nav__logo-img {
-    height: 56px;
-    width: auto;
-  }
+  .nav__logo-img { height: 56px; width: auto; }
 
-  /* Dark theme: show dark logo (white text), hide light */
   .nav__logo-img--light { display: none; }
-  .nav__logo-img--dark { display: block; }
+  .nav__logo-img--dark  { display: block; }
 
   :global([data-theme="light"]) .nav__logo-img--light { display: block; }
-  :global([data-theme="light"]) .nav__logo-img--dark { display: none; }
+  :global([data-theme="light"]) .nav__logo-img--dark  { display: none; }
 
-  .nav__right {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-
-  .nav__menu {
+  /* ── Desktop links ── */
+  .nav__desktop-links {
     display: flex;
     align-items: center;
     gap: var(--space-xl);
@@ -127,23 +135,17 @@ import { site } from '@/config/site';
   .nav__link::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1.5px;
+    bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
     background: var(--gradient-accent);
     transition: width var(--duration-normal) var(--ease-out);
   }
 
   .nav__link:hover,
-  .nav__link.is-active {
-    color: var(--color-text);
-  }
+  .nav__link.is-active { color: var(--color-text); }
 
   .nav__link:hover::after,
-  .nav__link.is-active::after {
-    width: 100%;
-  }
+  .nav__link.is-active::after { width: 100%; }
 
   .nav__cta {
     display: inline-flex;
@@ -164,13 +166,14 @@ import { site } from '@/config/site';
     transform: translateY(-1px);
   }
 
-  /* Theme toggle */
+  /* ── Right controls ── */
+  .nav__right { display: flex; align-items: center; gap: var(--space-sm); }
+
   .nav__theme-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 36px; height: 36px;
     background: none;
     border: 1px solid var(--color-border);
     border-radius: 50%;
@@ -185,105 +188,254 @@ import { site } from '@/config/site';
     background: var(--color-accent-light);
   }
 
-  /* Show sun in dark, moon in light */
   .nav__theme-icon--moon { display: none; }
-  .nav__theme-icon--sun { display: block; }
+  .nav__theme-icon--sun  { display: block; }
 
-  [data-theme="light"] .nav__theme-icon--moon { display: block; }
-  [data-theme="light"] .nav__theme-icon--sun { display: none; }
+  :global([data-theme="light"]) .nav__theme-icon--moon { display: block; }
+  :global([data-theme="light"]) .nav__theme-icon--sun  { display: none; }
 
-  /* Hamburger */
+  /* ── Hamburger ── */
   .nav__toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
     padding: var(--space-sm);
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .nav__toggle-line {
     display: block;
-    width: 24px;
-    height: 2px;
+    width: 24px; height: 2px;
     background: var(--color-text);
     border-radius: 2px;
     transition: transform var(--duration-normal) var(--ease-out),
                 opacity var(--duration-normal) var(--ease-out);
   }
 
-  .nav__toggle.is-open .nav__toggle-line:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
+  .nav__toggle.is-open .nav__toggle-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav__toggle.is-open .nav__toggle-line:nth-child(2) { opacity: 0; }
+  .nav__toggle.is-open .nav__toggle-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Mobile (hidden by default) ── */
+  .mobile-menu,
+  .mobile-overlay {
+    display: none;
   }
 
-  .nav__toggle.is-open .nav__toggle-line:nth-child(2) {
-    opacity: 0;
-  }
-
-  .nav__toggle.is-open .nav__toggle-line:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
+  /* ── Mobile breakpoint ── */
   @media (max-width: 768px) {
-    .nav__toggle {
-      display: flex;
-    }
+    .nav__toggle        { display: flex; }
+    .nav__desktop-links { display: none; }
 
-    .nav__menu {
+    /* Blur overlay */
+    .mobile-overlay {
+      display: block;
       position: fixed;
-      top: var(--nav-height);
-      left: 0;
-      right: 0;
-      bottom: 0;
-      flex-direction: column;
-      justify-content: center;
-      gap: var(--space-2xl);
-      background: var(--nav-mobile-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      inset: 0;
+      z-index: 150;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--duration-normal) var(--ease-out),
-                  visibility var(--duration-normal);
+      pointer-events: none;
+      transition: opacity 0.35s ease;
     }
 
-    .nav__menu.is-open {
+    .mobile-overlay.is-open {
       opacity: 1;
-      visibility: visible;
+      pointer-events: auto;
     }
 
-    .nav__link {
-      font-size: var(--text-xl);
-    }
-
-    .nav__cta-item {
-      display: none;
-    }
-
-    .nav__menu.is-open .nav__cta-item {
+    /* Menu panel — slides in from right */
+    .mobile-menu {
       display: flex;
-      width: 100%;
-      justify-content: center;
-      margin-top: var(--space-md);
+      flex-direction: column;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: linear-gradient(160deg, #1c1c1c 0%, #141414 100%);
+      transform: translateX(105%);
+      opacity: 0;
+      transition: transform 0.42s var(--ease-out), opacity 0.35s ease;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    .nav__menu.is-open .nav__cta {
-      width: 80%;
-      text-align: center;
-      justify-content: center;
-      padding: 0.75rem 1.5rem;
-      font-size: var(--text-lg);
+    /* Subtle warm glow in top-right corner */
+    .mobile-menu::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -15%;
+      width: 55%;
+      height: 45%;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.07) 0%, transparent 70%);
+      pointer-events: none;
     }
+
+    :global([data-theme="light"]) .mobile-menu {
+      background: linear-gradient(160deg, #f8f8f3 0%, #efefea 100%);
+    }
+
+    :global([data-theme="light"]) .mobile-menu::before {
+      background: radial-gradient(circle, rgba(234, 88, 12, 0.06) 0%, transparent 70%);
+    }
+
+    .mobile-menu.is-open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* Inner layout */
+    .mobile-menu__inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      padding: calc(var(--nav-height) + var(--space-3xl)) var(--space-xl) var(--space-2xl);
+      position: relative;
+    }
+
+    /* Nav links with CSS counter */
+    .mobile-menu__links ul {
+      display: flex;
+      flex-direction: column;
+      counter-reset: nav-counter;
+    }
+
+    .mobile-menu__links li {
+      counter-increment: nav-counter;
+      position: relative;
+      border-bottom: 1px solid var(--color-border);
+      opacity: 0;
+      transform: translateX(28px);
+    }
+
+    /* Number badge */
+    .mobile-menu__links li::before {
+      content: "0" counter(nav-counter);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.65rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      color: var(--color-accent);
+      opacity: 0.55;
+    }
+
+    /* Staggered entrance */
+    .mobile-menu.is-open .mobile-menu__links li {
+      animation: slideInRight 0.5s var(--ease-out) forwards;
+    }
+
+    .mobile-menu.is-open .mobile-menu__links li:nth-child(1) { animation-delay: 0.06s; }
+    .mobile-menu.is-open .mobile-menu__links li:nth-child(2) { animation-delay: 0.12s; }
+    .mobile-menu.is-open .mobile-menu__links li:nth-child(3) { animation-delay: 0.18s; }
+    .mobile-menu.is-open .mobile-menu__links li:nth-child(4) { animation-delay: 0.24s; }
+    .mobile-menu.is-open .mobile-menu__links li:nth-child(5) { animation-delay: 0.30s; }
+    .mobile-menu.is-open .mobile-menu__links li:nth-child(6) { animation-delay: 0.36s; }
+
+    @keyframes slideInRight {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .mobile-menu__link {
+      display: block;
+      padding: 1.1rem 0 1.1rem 2rem;
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 5.5vw, 1.85rem);
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease, padding-left 0.25s var(--ease-out);
+    }
+
+    .mobile-menu__link::after { display: none; }
+
+    .mobile-menu__link:hover { color: var(--color-text); padding-left: 2.4rem; }
+
+    .mobile-menu__link.is-active {
+      color: var(--color-accent);
+    }
+
+    /* Bottom section */
+    .mobile-menu__bottom {
+      padding-top: var(--space-2xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .mobile-menu.is-open .mobile-menu__bottom {
+      animation: fadeUp 0.5s var(--ease-out) 0.42s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-menu__cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: white;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mobile-menu__cta:active {
+      transform: scale(0.98);
+    }
+
+    .mobile-menu__contact {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-xl);
+      padding-top: var(--space-sm);
+    }
+
+    .mobile-menu__contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--text-xs);
+      color: var(--color-text-dim);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .mobile-menu__contact-link:hover { color: var(--color-accent); }
+
+    .mobile-menu__contact-link svg { flex-shrink: 0; }
   }
 
-  @media (max-width: 380px) {
-    .nav__link {
-      font-size: var(--text-lg);
-    }
+  @media (max-width: 480px) {
+    .nav__logo-img { height: 44px; }
 
-    .nav__menu {
-      gap: var(--space-xl);
+    .mobile-menu__contact {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
     }
   }
 </style>

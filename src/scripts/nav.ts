@@ -1,71 +1,73 @@
-// Nav scroll behavior
 const nav = document.getElementById('nav');
-const navToggle = nav?.querySelector('.nav__toggle');
-const navMenu = nav?.querySelector('.nav__menu');
-const navLinks = nav?.querySelectorAll('.nav__link');
+const navToggle = document.getElementById('nav-toggle');
+const mobileMenu = document.getElementById('nav-menu');
+const overlay = document.getElementById('nav-overlay');
+const desktopLinks = document.querySelectorAll('.nav__desktop-links .nav__link');
+const mobileLinks = document.querySelectorAll('.mobile-menu__link');
 
 // Scrolled state
-let lastScroll = 0;
-
 function updateNavState() {
   if (!nav) return;
-  const scrollY = window.scrollY;
-
-  if (scrollY > 50) {
+  if (window.scrollY > 50) {
     nav.classList.add('is-scrolled');
   } else {
     nav.classList.remove('is-scrolled');
   }
-
-  lastScroll = scrollY;
 }
 
 window.addEventListener('scroll', updateNavState, { passive: true });
 updateNavState();
 
-// Mobile toggle
+// Open / close mobile menu
+function openMenu() {
+  mobileMenu?.classList.add('is-open');
+  overlay?.classList.add('is-open');
+  mobileMenu?.setAttribute('aria-hidden', 'false');
+  navToggle?.classList.add('is-open');
+  navToggle?.setAttribute('aria-expanded', 'true');
+  navToggle?.setAttribute('aria-label', 'Zamknij menu');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  mobileMenu?.classList.remove('is-open');
+  overlay?.classList.remove('is-open');
+  mobileMenu?.setAttribute('aria-hidden', 'true');
+  navToggle?.classList.remove('is-open');
+  navToggle?.setAttribute('aria-expanded', 'false');
+  navToggle?.setAttribute('aria-label', 'Otwórz menu');
+  document.body.style.overflow = '';
+}
+
 navToggle?.addEventListener('click', () => {
-  const isOpen = navToggle.classList.toggle('is-open');
-  navMenu?.classList.toggle('is-open', isOpen);
-  navToggle.setAttribute('aria-expanded', String(isOpen));
-  navToggle.setAttribute(
-    'aria-label',
-    isOpen ? 'Zamknij menu' : 'Otwórz menu'
-  );
-
-  // Prevent body scroll when menu is open
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  const isOpen = mobileMenu?.classList.contains('is-open');
+  isOpen ? closeMenu() : openMenu();
 });
 
-// Close mobile menu on link click
-navLinks?.forEach((link) => {
-  link.addEventListener('click', () => {
-    navToggle?.classList.remove('is-open');
-    navMenu?.classList.remove('is-open');
-    navToggle?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
+// Close on overlay click
+overlay?.addEventListener('click', closeMenu);
+
+// Close on mobile link click
+mobileLinks.forEach((link) => {
+  link.addEventListener('click', closeMenu);
 });
 
-// Active section highlighting
+// Active section highlighting (desktop + mobile links)
 const sections = document.querySelectorAll('section[id]');
+const allNavLinks = document.querySelectorAll('.nav__link');
 
 const sectionObserver = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
-        navLinks?.forEach((link) => {
-          const href = link.getAttribute('href');
-          link.classList.toggle('is-active', href === `#${id}`);
+        allNavLinks.forEach((link) => {
+          link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
         });
       }
     }
   },
-  {
-    rootMargin: '-20% 0px -60% 0px',
-    threshold: 0,
-  }
+  { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
 );
 
 sections.forEach((section) => sectionObserver.observe(section));
