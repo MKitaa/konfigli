@@ -11,6 +11,15 @@
   transform: translateY(0);
 }
 
+/* On mobile: skip opacity trick — show content immediately */
+@media (max-width: 768px) {
+  .reveal,
+  .reveal--scale {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ========================================
    Accent text with animated shimmer
    ======================================== */
@@ -45,6 +54,30 @@
 .hero__metrics {
   opacity: 0;
   transform: translateY(20px);
+}
+
+/* Fallback: no JS or scripting disabled — show hero content */
+@media (scripting: none) {
+  .hero__eyebrow,
+  .hero__title,
+  .hero__subtitle,
+  .hero__actions,
+  .hero__metrics {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile: skip stagger, show immediately (GSAP still animates but CSS ensures visibility) */
+@media (max-width: 900px) {
+  .hero__eyebrow,
+  .hero__title,
+  .hero__subtitle,
+  .hero__actions,
+  .hero__metrics {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hero--loaded .hero__eyebrow,
