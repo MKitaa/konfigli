@@ -30,7 +30,7 @@
 
   --nav-bg: rgba(22, 22, 22, 0.8);
   --nav-bg-scrolled: rgba(22, 22, 22, 0.95);
-  --nav-mobile-bg: rgba(22, 22, 22, 0.98);
+  --nav-mobile-bg: #161616;
 
   color-scheme: dark;
 }
@@ -65,7 +65,7 @@
 
   --nav-bg: rgba(245, 245, 240, 0.85);
   --nav-bg-scrolled: rgba(245, 245, 240, 0.95);
-  --nav-mobile-bg: rgba(245, 245, 240, 0.98);
+  --nav-mobile-bg: #f5f5f0;
 
   color-scheme: light;
 }
@@ -290,6 +290,7 @@ main, nav, footer {
     padding-bottom: 56px;
   }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   *,
