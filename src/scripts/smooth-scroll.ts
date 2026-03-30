@@ -9,7 +9,8 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }
     const target = document.querySelector(href);
     if (target) {
-      const navHeight = 64;
+      const navEl = document.getElementById('nav');
+    const navHeight = navEl ? navEl.offsetHeight : 72;
       const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
       window.scrollTo({ top, behavior: 'smooth' });
     }

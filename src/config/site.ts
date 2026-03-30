@@ -2,7 +2,7 @@ export const site = {
   name: 'Konfigli',
   tagline: 'Konfiguratory 3D dla producentów garaży, hal i konstrukcji stalowych',
   description:
-    'Konfiguratory produktów z podglądem 3D i automatycznymi rysunkami technicznymi. Twój klient sam dobiera wariant, widzi efekt na żywo i wysyła zapytanie z gotową specyfikacją. Bezpłatna wycena w 24h.',
+    'Konfiguratory 3D na zamówienie — klient sam dobiera wariant i wysyła zapytanie z gotową specyfikacją. Automatyczne rysunki techniczne. Bezpłatna wycena w 24h.',
   url: 'https://konfigli.pl',
   author: 'Mateusz Kita',
   locale: 'pl_PL',
@@ -14,8 +14,8 @@ export const site = {
   },
 
   nav: [
-    { label: 'Konfigurator', href: '#konfigurator' },
-    { label: 'Usługi', href: '#uslugi' },
+    { label: 'Demo', href: '#konfigurator' },
+    { label: 'Na zamówienie', href: '#uslugi' },
     { label: 'Realizacje', href: '#realizacje' },
     { label: 'Jak działam', href: '#proces' },
     { label: 'FAQ', href: '#faq' },
@@ -35,28 +35,28 @@ export const site = {
 
   services: [
     {
-      title: 'Konfigurator 3D na Twoją stronę',
-      badge: 'Główna specjalizacja',
+      title: 'Konfigurator 3D na zamówienie',
+      badge: 'Dowolny produkt',
       description:
-        'Klient wchodzi na stronę, sam dobiera wymiary, kolor i wariant — widzi gotowy produkt w 3D i wysyła zapytanie z kompletną specyfikacją. Ty dostajesz gotowe zapytanie do wyceny, nie kolejny telefon z pytaniem o kolory.',
+        'Hale, wiaty garażowe, carporty, ogrodzenia — zbuduję konfigurator dla każdego producenta. Model 3D, interfejs i automatyczna oferta z rysunkami technicznymi.',
       highlights: [
-        'Mniej telefonów — klient sam sprawdza warianty na stronie',
-        'Gotowa specyfikacja z rysunkami technicznymi na maila',
-        'Działa w przeglądarce na każdym urządzeniu, bez instalacji',
-        'SEO + dane strukturalne — widoczny w Google i czytany przez AI',
+        'Dowolna złożoność — od wyboru koloru po pełną konfigurację techniczną',
+        'Automatyczna oferta z rysunkami technicznymi generowana w sekundy',
+        'Działa na każdym urządzeniu, bez instalacji',
+        'Wdrożenie na Twojej stronie lub budowa nowej',
       ],
       icon: 'cube' as const,
-      cta: 'Chcę konfigurator dla mojego produktu',
+      cta: 'Powiedz mi co produkujesz',
     },
     {
-      title: 'Strona, która buduje zaufanie',
+      title: 'Strona internetowa',
       badge: null,
       description:
-        'Twoi klienci sprawdzają firmę w Google zanim zadzwonią. Strona, która wygląda profesjonalnie, ładuje się szybko i pokazuje Twoje realizacje — to Twoja wizytówka, która pracuje 24/7.',
+        'Strona dla producenta, który chce być widoczny w Google i budować zaufanie zanim klient zadzwoni.',
       highlights: [
-        'Gotowa w 1–2 tygodnie, bez ciągania miesiącami',
-        'Sam edytujesz teksty i zdjęcia, bez programisty',
-        'SEO, mapa strony, dane strukturalne — Google i AI Cię znajdą',
+        'Gotowa w 1–2 tygodnie',
+        'Sam edytujesz treści bez programisty',
+        'SEO, szybkość ładowania, dane strukturalne',
         'Formularz kontaktowy, galeria realizacji, mapa dojazdu',
       ],
       icon: 'globe' as const,
@@ -65,31 +65,34 @@ export const site = {
   ],
 
   configurator: {
-    title: 'Sprawdź sam, zanim zapytasz o wycenę',
-    subtitle: 'Demo na żywo',
-    description: 'To nie makieta — to działający konfigurator. Kliknij, obróć model, zmień kolor. Dokładnie takie narzędzie stawiam na stronach producentów.',
+    title: 'Gotowe konfiguratory — wypróbuj przed zakupem',
+    subtitle: 'Gotowe rozwiązania',
+    description:
+      'Trzy sprawdzone produkty gotowe do osadzenia na Twojej stronie. Szybciej i taniej niż budowa od zera.',
     stats: [
       { value: 60, suffix: 's', label: 'Do pierwszej konfiguracji' },
-      { value: 24, suffix: '/7', label: 'Dostępność oferty' },
       { value: 100, suffix: '%', label: 'Działa na każdym ekranie' },
-      { value: 15, suffix: '+', label: 'Kolorów do wyboru' },
+      { value: 3, suffix: '', label: 'Gotowe dema do wdrożenia' },
     ],
     demos: [
       {
-        title: 'Garaż blaszany v2',
-        description: 'Rozbudowany konfigurator z wyborem wymiarów, koloru ścian, bramy i typu dachu. Najnowsza wersja z ulepszonym interfejsem.',
+        title: 'Garaż blaszany',
+        description:
+          'Wymiary, kolor ścian, typ bramy i dachu. Model 3D na żywo, automatyczna oferta.',
         url: 'https://konfigli.pl/konfigurator-garazy-v2/',
         badge: 'Najnowszy',
       },
       {
-        title: 'Garaż blaszany v1',
-        description: 'Pierwsza wersja konfiguratora garaży — wybór wymiarów, kolorów i typu dachu z podglądem 3D w przeglądarce.',
+        title: 'Garaż blaszany (wersja podstawowa)',
+        description:
+          'Uproszczona wersja — wybór wymiarów, koloru i dachu. Dobra dla mniejszego asortymentu.',
         url: 'https://konfigli.pl/konfigurator-garazy-v1/',
-        badge: 'Poprzednia wersja',
+        badge: 'Wersja podstawowa',
       },
       {
-        title: 'Konfigurator wiat śmietnikowych',
-        description: 'Pierwszy na rynku — wymiary, kolory profili i narożników, pokrycie dachowe, ścianki działowe. Gotowa oferta z wizualizacjami i rysunkami technicznymi.',
+        title: 'Wiata śmietnikowa',
+        description:
+          'Liczba boksów, wymiary, kolory profili, pokrycie dachowe, ścianki. Oferta z rysunkami technicznymi.',
         url: 'https://konfigli.pl/wiaty-smietnikowe/',
         badge: 'Nowość na rynku',
       },
@@ -97,39 +100,25 @@ export const site = {
   },
 
   painPoints: {
-    title: 'Znasz to z codziennej pracy?',
+    title: 'Znasz to?',
     problems: [
       {
         icon: 'phone',
         title: '„Jaki macie kolor? A wymiary?"',
-        description: 'Te same pytania, dziesiątki razy dziennie. Handlowiec zamiast domykać sprzedaż — tłumaczy kolory z palety RAL przez telefon.',
+        description:
+          'Handlowiec tłumaczy kolory z palety RAL przez telefon, zamiast domykać sprzedaż.',
       },
       {
         icon: 'pdf',
         title: 'Cennik PDF, którego nikt nie czyta',
-        description: 'Wysyłasz 12-stronicowy katalog. Klient otwiera, scrolluje, gubi się w tabelkach — i pisze do konkurencji, która ma prostszą ofertę.',
+        description:
+          'Klient scrolluje 12 stron, gubi się w tabelkach — i trafia do konkurencji z prostszą ofertą.',
       },
       {
         icon: 'clock',
         title: 'Wieczorem ogląda, rano kupuje u innych',
-        description: 'O 21:00 klient szuka garażu. Nie może sprawdzić konfiguracji na Twojej stronie. Rano trafia na producenta, który ma konfigurator online.',
-      },
-    ],
-    solutions: [
-      {
-        icon: 'configurator',
-        title: 'Klient widzi produkt zanim zadzwoni',
-        description: 'Obraca model 3D, zmienia kolor, dobiera bramę. Wie czego chce — nie musisz tłumaczyć od zera.',
-      },
-      {
-        icon: 'form',
-        title: 'Zapytanie z gotową specyfikacją',
-        description: 'Zamiast „poproszę wycenę" dostajesz: wymiary 6x5x2.5m, dach dwuspadowy, blacha antracyt, brama segmentowa. Wyceniasz w minuty.',
-      },
-      {
-        icon: 'chart',
-        title: 'Zapytania spływają nawet o 3 w nocy',
-        description: 'Klient konfiguruje po pracy, w weekend, w święta. Ty rano otwierasz pocztę i masz gotowe zapytania do obsłużenia.',
+        description:
+          'O 21:00 nie może sprawdzić konfiguracji na Twojej stronie. Rano kupuje tam, gdzie jest konfigurator.',
       },
     ],
   },
@@ -137,14 +126,14 @@ export const site = {
   caseStudies: [
     {
       title: 'KaeMSTAL',
-      subtitle: 'Producent garaży blaszanych — przejście z 2D na 3D',
+      subtitle: 'Producent garaży blaszanych — przejście 2D → 3D',
       description:
-        'Przejście z konfiguratora 2D na 3D. Wcześniej klient wybierał opcje z list, ale nie widział efektu. Teraz obraca model, zmienia kolory i wymiary na żywo — i wysyła zapytanie z gotową specyfikacją. Oferta generuje się automatycznie z szablonu konfiguratora.',
+        'Klienci przestali dzwonić z pytaniami — zaczęli przysyłać gotową konfigurację. Oferta generuje się automatycznie z szablonu konfiguratora.',
       results: [
-        'Wzrost sprzedaży — klient widzi produkt w 3D i szybciej podejmuje decyzję',
-        'Profesjonalna oferta generowana automatycznie z szablonu konfiguratora',
-        'Mniej telefonów — klient sam sprawdza kolory, wymiary i warianty',
-        'Zapytania 24/7 — oferty spływają wieczorami, w weekendy i w święta',
+        'Konkretniejsze zapytania — klient przysyła pełną specyfikację',
+        'Oferta w minuty zamiast 30 minut ręcznie',
+        'Zapytania spływają wieczorami i w weekendy',
+        'Mniej telefonów o kolory i wymiary',
       ],
       url: 'https://kaemstal-konfigurator.pl/',
       image: '/images/portfolio/kaem-stal.png',
@@ -152,13 +141,13 @@ export const site = {
     },
     {
       title: 'Holz-Stal',
-      subtitle: 'Producent garaży drewnopodobnych — najbardziej zaawansowane wdrożenie',
+      subtitle: 'Producent garaży drewnopodobnych — pełna konfiguracja',
       description:
-        'Najbardziej rozbudowane wdrożenie w portfolio. Klient sam konfiguruje wszystko: wymiary, wysunięcie dachu, 3 typy bram (też z tyłu ściany), wnęki, okna, orynnowanie, zabudowę ażurem lub blachą, kolory obróbek i narożników. Na końcu pobiera ofertę z rysunkami technicznymi.',
+        'Klient konfiguruje wszystko sam: wymiary, bramy, okna, orynnowanie, kolory obróbek. Oferta z rysunkami technicznymi gotowa bez udziału handlowca.',
       results: [
-        'Klient konfiguruje garaż od A do Z — sam, bez pomocy handlowca',
-        'Rysunki techniczne i oferta generowane automatycznie — gotowe w minuty',
-        'Klient wybiera wariant świadomie — widzi dokładnie co dostanie',
+        'Klient konfiguruje od A do Z bez pomocy',
+        'Rysunki techniczne generowane automatycznie',
+        'Klient wie dokładnie co kupuje — mniej negocjacji',
       ],
       url: 'https://www.holz-stal.pl/konfigurator/',
       image: '/images/portfolio/holz-stal.png',
@@ -166,14 +155,13 @@ export const site = {
     },
     {
       title: 'Wiaty śmietnikowe',
-      subtitle: 'Pierwsza taka realizacja na rynku',
+      subtitle: 'Pierwszy taki konfigurator na rynku',
       description:
-        'Pierwsza taka realizacja na rynku. Klient sam konfiguruje liczbę boksów, wymiary, kolory profili i narożników, pokrycie dachowe i ścianki działowe. Pobiera ofertę z wizualizacjami i rysunkami technicznymi — gotową do wyceny lub prezentacji.',
+        'Klient sam konfiguruje liczbę boksów, wymiary i kolory — i pobiera ofertę z wizualizacjami. Nowy kanał sprzedaży przez Google.',
       results: [
-        'Klient konfiguruje i pobiera ofertę sam — zero angażowania handlowca',
-        'Wizualizacja z każdej strony — klient widzi co kupuje, decyduje szybciej',
-        'Rysunki techniczne w ofercie — gotowy dokument bez dodatkowej pracy',
-        'Nowy kanał sprzedaży — klienci trafiają na konfigurator przez Google',
+        'Klient pobiera ofertę samodzielnie — zero angażowania handlowca',
+        'Wizualizacja z każdej strony — decyzja bez wątpliwości',
+        'Nowy kanał sprzedaży przez Google',
       ],
       url: 'https://konfigli.pl/wiaty-smietnikowe/',
       image: '/images/portfolio/wiaty-smietnikowe.png',
@@ -184,12 +172,12 @@ export const site = {
       title: 'Twoja firma?',
       subtitle: 'Następna realizacja',
       description:
-        'Produkujesz garaże, hale, wiaty, carporty lub ogrodzenia? Zbuduję konfigurator dopasowany do Twojego asortymentu — od modelu 3D po automatyczną ofertę z rysunkami technicznymi.',
+        'Produkujesz garaże, hale, wiaty lub carporty? Zbuduję konfigurator dopasowany do Twojego asortymentu.',
       results: [
-        'Konfigurator 3D odwzorujący Twoje produkty',
-        'Osadzenie na Twojej stronie lub budowa nowej',
+        'Konfigurator 3D Twojego produktu',
         'Automatyczne oferty z rysunkami technicznymi',
-        'Opieka i rozwój po wdrożeniu',
+        'Wdrożenie na Twojej stronie',
+        'Wsparcie po starcie',
       ],
       url: '#kontakt',
       image: '',
@@ -201,12 +189,14 @@ export const site = {
 
   testimonials: [
     {
-      quote: 'Mieliśmy konfigurator 2D, ale klienci i tak dzwonili bo nie widzieli jak garaż wygląda. Po przejściu na 3D klient sam obraca model, zmienia kolory i od razu widzi efekt. Zapytania są konkretniejsze, a ofertę generujemy prosto z konfiguratora — szybciej i profesjonalniej niż kiedykolwiek.',
+      quote:
+        'Mieliśmy konfigurator 2D, ale klienci i tak dzwonili bo nie widzieli jak garaż wygląda. Po przejściu na 3D klient sam obraca model, zmienia kolory i od razu widzi efekt. Zapytania są konkretniejsze, a ofertę generujemy prosto z konfiguratora — szybciej i profesjonalniej niż kiedykolwiek.',
       author: 'KaeMSTAL',
       role: 'Producent garaży blaszanych',
     },
     {
-      quote: 'Klient sam składa praktycznie całą konfigurację — wymiary, bramy, okna, kolory obróbek, orynnowanie. Wcześniej ustalaliśmy to telefonicznie. Teraz dostajemy gotowe zapytanie z rysunkami technicznymi. Oferta robi się sama.',
+      quote:
+        'Klient sam składa praktycznie całą konfigurację — wymiary, bramy, okna, kolory obróbek, orynnowanie. Wcześniej ustalaliśmy to telefonicznie. Teraz dostajemy gotowe zapytanie z rysunkami technicznymi. Oferta robi się sama.',
       author: 'Holz-Stal',
       role: 'Producent garaży drewnopodobnych',
     },
@@ -215,80 +205,96 @@ export const site = {
   process: [
     {
       step: 1,
-      title: 'Rozmowa o Twoim produkcie',
-      description: 'Powiedz mi co sprzedajesz i jak teraz wygląda obsługa klienta. W 30 minut powiem Ci co mogę zbudować, ile to kosztuje i kiedy będzie gotowe. Zero zobowiązań.',
+      title: 'Rozmowa o produkcie',
+      description:
+        'Opisujesz co sprzedajesz. W 30 minut wiesz co zbuduję, za ile i kiedy. Zero zobowiązań.',
     },
     {
       step: 2,
-      title: 'Projekt i model 3D',
-      description: 'Buduję model 3D Twojego produktu i projektuję interfejs. Widzisz efekt zanim zacznę kodować — jeśli coś nie pasuje, zmieniamy bez dodatkowych kosztów.',
+      title: 'Model 3D i projekt',
+      description:
+        'Buduję model i projektuję interfejs. Widzisz efekt zanim zacznę kodować. Zmiany bez dopłat.',
     },
     {
       step: 3,
-      title: 'Budowa — widzisz postępy co tydzień',
-      description: 'Nie czekasz miesiąc na efekt. Co tydzień dostajesz link do działającej wersji. Masz uwagę? Reaguję od razu, bez czekania i kolejek.',
+      title: 'Budowa — raport co tydzień',
+      description:
+        'Nie czekasz miesiąc na efekt. Co tydzień dostajesz działającą wersję do sprawdzenia.',
     },
     {
       step: 4,
-      title: 'Start i opieka',
-      description: 'Osadzam konfigurator na Twojej stronie, testuję na każdym urządzeniu. Po starcie nie znikam — poprawki w gwarancji, wsparcie gdy coś trzeba zmienić.',
+      title: 'Wdrożenie i wsparcie',
+      description:
+        'Osadzam konfigurator na Twojej stronie, testuję na każdym urządzeniu. Poprawki w gwarancji.',
     },
   ],
 
   faq: [
     {
       question: 'Ile kosztuje konfigurator 3D?',
-      answer: 'Wyceniam indywidualnie — cena zależy od liczby opcji i złożoności modelu. Napisz z opisem produktu, bezpłatną wycenę dostaniesz w 24h.',
+      answer:
+        'Wyceniam indywidualnie — cena zależy od liczby opcji i złożoności modelu. Opisz produkt, bezpłatną wycenę dostaniesz w 24h.',
     },
     {
       question: 'Jak długo trwa realizacja?',
-      answer: 'Konfigurator 3D: 4–8 tygodni. Strona internetowa: 1–3 tygodnie. Termin ustalamy przed startem i go dotrzymuję.',
+      answer:
+        'Konfigurator 3D: 4–8 tygodni. Strona internetowa: 1–3 tygodnie. Termin ustalamy przed startem.',
     },
     {
       question: 'Nie mam plików 3D — to problem?',
-      answer: 'Nie. Buduję modele od zera na bazie Twoich rysunków, katalogów lub nawet zdjęć z telefonu. Wystarczy to, co masz pod ręką.',
+      answer:
+        'Nie. Buduję modele od zera na podstawie Twoich rysunków, katalogów lub zdjęć. Wystarczy to, co masz.',
     },
     {
       question: 'Czy to działa na telefonach?',
-      answer: 'Tak, w przeglądarce — bez instalacji. Projektuję mobile-first, więc konfigurator działa płynnie nawet na starszym smartfonie.',
+      answer:
+        'Tak, w przeglądarce — bez instalacji. Projektuję mobile-first, działa płynnie nawet na starszym smartfonie.',
     },
     {
       question: 'Mam już stronę — mogę dodać konfigurator?',
-      answer: 'Tak. Osadzam go jako widget na dowolnej stronie — WordPress, własny CMS, landing page. Nie trzeba budować niczego od zera.',
+      answer:
+        'Tak. Osadzam jako widget na dowolnej stronie — WordPress, własny CMS, landing page.',
     },
     {
       question: 'Czy konfigurator może od razu wyceniać?',
-      answer: 'Tak. Wbudowuję logikę cenową — klient widzi szacunkową cenę w czasie rzeczywistym, a Ty dostajesz zapytanie z rozbiciem na elementy.',
+      answer:
+        'Tak. Klient widzi szacunkową cenę w czasie rzeczywistym, a Ty dostajesz zapytanie z rozbiciem na elementy.',
     },
     {
       question: 'Co jeśli po starcie potrzebuję zmian?',
-      answer: 'Poprawki w okresie gwarancyjnym w cenie. Potem rozliczamy się za konkretne zlecenia. Bez abonamentu, bez wyłączności.',
+      answer:
+        'Poprawki w gwarancji w cenie. Potem rozliczamy za konkretne zlecenia. Bez abonamentu.',
     },
     {
       question: 'Czy konfigurator generuje rysunki techniczne?',
-      answer: 'Tak — oferta z wizualizacjami z każdej strony i rysunkami technicznymi generuje się automatycznie. Twój klient dostaje profesjonalny dokument, a Ty oszczędzasz czas na przygotowanie.',
+      answer:
+        'Tak — oferta z wizualizacjami i rysunkami generuje się automatycznie. Klient dostaje profesjonalny dokument, Ty oszczędzasz czas.',
     },
   ],
 
   whyMe: [
     {
-      title: 'Znam Twoją branżę',
-      description: 'Robię konfiguratory wyłącznie dla producentów konstrukcji stalowych. Wiem czym różni się brama uchylna od segmentowej i dlaczego klient pyta o kolor obróbek.',
+      title: 'Wyceny przez całą dobę',
+      description:
+        'Klient konfiguruje o każdej porze. Ty rano odbierasz gotowe zlecenia — bez telefonu, bez tłumaczenia.',
       icon: 'target',
     },
     {
-      title: 'Buduję narzędzia, nie gadżety',
-      description: 'Konfigurator ma generować zapytania i odciążać handlowca. Mierzę skuteczność: liczbę ofert, czas wyceny, jakość zapytań.',
+      title: 'Mniej błędów w zamówieniach',
+      description:
+        'Klient sam dobiera opcje, system pilnuje logiki. Koniec z pomyłkami w wymiarach i kolorach.',
       icon: 'trending',
     },
     {
-      title: 'Piszesz — odpowiadam',
-      description: 'Zero pośredników, zero kolejek. Jedna osoba od początku do końca. Decyzje na bieżąco, nie za tydzień.',
+      title: 'Szybsza decyzja zakupowa',
+      description:
+        'Klient widzący swój produkt w 3D decyduje szybciej. Mniej „zastanowię się", więcej zamkniętych sprzedaży.',
       icon: 'zap',
     },
     {
-      title: 'Gotowe na Google i AI',
-      description: 'Każdy projekt ma SEO, dane strukturalne i pliki dla robotów. Twoja oferta jest widoczna w wyszukiwarce i zrozumiała dla asystentów AI — tam, gdzie klienci dziś szukają.',
+      title: 'Oferta bez ręcznej roboty',
+      description:
+        'Rysunki techniczne i wycena generują się automatycznie. Handlowiec zamyka sprzedaż, nie przepisuje tabelek.',
       icon: 'support',
     },
   ],

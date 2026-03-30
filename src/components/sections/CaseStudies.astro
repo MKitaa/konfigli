@@ -2,6 +2,8 @@
 import Button from '@/components/ui/Button.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { site } from '@/config/site';
+
+const testimonialByAuthor = new Map(site.testimonials.map((t) => [t.author, t]));
 ---
 
 <section class="section" id="realizacje">
@@ -72,6 +74,12 @@ import { site } from '@/config/site';
             <h3 class="case-study__title">{study.title}</h3>
             <p class="case-study__subtitle-text">{study.subtitle}</p>
             <p class="case-study__description">{study.description}</p>
+            {testimonialByAuthor.has(study.title) && (
+              <blockquote class="case-study__quote">
+                <p class="case-study__quote-text">„{testimonialByAuthor.get(study.title)!.quote}"</p>
+                <cite class="case-study__quote-cite">— {testimonialByAuthor.get(study.title)!.role}</cite>
+              </blockquote>
+            )}
             <h4 class="case-study__results-heading">
               {'isPlaceholder' in study && study.isPlaceholder ? 'Co dostajesz:' : 'Efekty:'}
             </h4>
@@ -285,6 +293,30 @@ import { site } from '@/config/site';
   .case-study__description {
     margin-bottom: var(--space-xl);
     line-height: 1.7;
+  }
+
+  .case-study__quote {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg) var(--space-xl);
+    background: var(--color-bg-elevated);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .case-study__quote-text {
+    font-size: var(--text-sm);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-xs);
+  }
+
+  .case-study__quote-cite {
+    font-size: var(--text-xs);
+    color: var(--color-accent);
+    font-style: normal;
+    font-weight: 600;
+    font-family: var(--font-body);
   }
 
   .case-study__results-heading {

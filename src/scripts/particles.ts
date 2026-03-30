@@ -1,6 +1,7 @@
 // Global floating particles — subtle background animation
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (!prefersReducedMotion) {
+const isMobileDevice = window.innerWidth <= 768;
+if (!prefersReducedMotion && !isMobileDevice) {
   const canvas = document.createElement('canvas');
   canvas.id = 'global-particles';
   canvas.style.cssText =
