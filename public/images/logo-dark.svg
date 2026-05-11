@@ -1,10 +1,29 @@
-<svg width="220" height="52" viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0" y="6" width="38" height="38" rx="10" fill="#f97316"/>
-  <rect x="6" y="12" width="7" height="5.5" rx="1.5" fill="#ffffff"/>
-  <rect x="6" y="21" width="7" height="5.5" rx="1.5" fill="#fed7aa"/>
-  <rect x="6" y="30" width="7" height="5.5" rx="1.5" fill="#ffedd5"/>
-  <path d="M16.5 14.5 L31 14.5 L31 18.5 L16.5 18.5" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-  <path d="M16.5 23.5 L27 23.5 L27 27.5 L16.5 27.5" stroke="#fed7aa" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-  <path d="M16.5 32.5 L22 32.5 L22 36.5 L16.5 36.5" stroke="#ffedd5" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-  <text x="48" y="37" font-family="'Syne', sans-serif" font-size="26" font-weight="800" fill="#ffffff" letter-spacing="-1.5">konfig<tspan fill="#f97316">li</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 130" width="580" height="130">
+  <defs>
+    <style>
+      .txt { font-family: 'Arial Black', 'Helvetica Neue', sans-serif; font-weight: 900; font-size: 80px; }
+    </style>
+  </defs>
+
+  <!-- czarne tło -->
+  <rect width="580" height="130" fill="transparent"/>
+
+  <!-- ikona wiata - scale zwiększony z 0.88 do 1.35, wyśrodkowana pionowo -->
+  <g transform="translate(2, 3) scale(1.35)">
+    <polygon points="10,60 50,48 90,60 90,82 50,70 10,82" fill="#C45208"/>
+    <polygon points="10,60 50,48 50,28 10,40" fill="#F5882A"/>
+    <polygon points="50,48 90,60 90,40 50,28" fill="#E8650A"/>
+    <polygon points="10,40 50,28 90,40 50,52" fill="#FBAB5A"/>
+  </g>
+
+  <!-- cień -->
+  <text x="135" y="102" class="txt" opacity="0.4" dx="3" dy="3">
+    <tspan fill="#000000">Konfig</tspan><tspan fill="#000000">li</tspan>
+  </text>
+
+  <!-- tekst główny -->
+  <text x="135" y="102" class="txt">
+    <tspan fill="#F5F5F5">Konfig</tspan><tspan fill="#E8650A">li</tspan>
+  </text>
+
 </svg>
