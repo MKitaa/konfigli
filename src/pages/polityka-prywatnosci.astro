@@ -7,22 +7,29 @@ import { site } from '@/config/site';
 
 <BaseLayout
   title="Polityka prywatności"
-  description="Polityka prywatności serwisu konfigli.pl — informacje o przetwarzaniu danych osobowych."
+  description="Polityka prywatności serwisu konfigli.pl. Informacje o przetwarzaniu danych osobowych, plikach cookies i prawach użytkownika."
+  showHomeSchemas={false}
 >
   <Nav />
   <main>
     <section class="pp">
       <div class="container pp__container">
-        <a href="/" class="pp__back">← Wróć na stronę główną</a>
+        <a href="/" class="pp__back">&larr; Wróć na stronę główną</a>
         <h1>Polityka prywatności</h1>
-        <p class="pp__updated">Ostatnia aktualizacja: 25 marca 2026</p>
+        <p class="pp__updated">Ostatnia aktualizacja: 10 maja 2026</p>
 
         <h2>1. Administrator danych osobowych</h2>
         <p>Administratorem Twoich danych osobowych jest:</p>
-        <p><strong>Mateusz Kita</strong>, prowadzący działalność pod marką {site.name}<br />
-        Adres e-mail: {site.contact.email}<br />
-        Telefon: {site.contact.phone}<br />
-        Adres strony: {site.url}</p>
+        <p>
+          <strong>{site.business.fullName}</strong><br />
+          Adres: {site.business.address}<br />
+          NIP: {site.business.nip}<br />
+          REGON: {site.business.regon}<br />
+          E-mail: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a><br />
+          Telefon: <a href={`tel:${site.contact.phone.replace(/\s/g, '')}`}>{site.contact.phone}</a><br />
+          Strona: <a href={site.url}>{site.url}</a>
+        </p>
+        <p>Administrator nie wyznaczył Inspektora Ochrony Danych. We wszystkich sprawach dotyczących przetwarzania danych osobowych można kontaktować się bezpośrednio z administratorem pod adresem e-mail wskazanym powyżej.</p>
 
         <h2>2. Jakie dane zbieramy i w jakim celu</h2>
         <p>Zbieramy wyłącznie dane podane dobrowolnie przez formularze na stronie:</p>
@@ -31,7 +38,7 @@ import { site } from '@/config/site';
         <ul>
           <li>Numer telefonu</li>
         </ul>
-        <p>Cel: oddzwonienie i rozmowa o potencjalnej współpracy.</p>
+        <p><strong>Cel:</strong> oddzwonienie i rozmowa o potencjalnej współpracy.</p>
 
         <h3>b) Formularz kontaktowy</h3>
         <ul>
@@ -39,85 +46,112 @@ import { site } from '@/config/site';
           <li>Adres e-mail lub numer telefonu</li>
           <li>Treść wiadomości (opcjonalnie)</li>
         </ul>
-        <p>Cel: odpowiedź na zapytanie ofertowe, przygotowanie wyceny, ewentualne nawiązanie współpracy.</p>
+        <p><strong>Cel:</strong> odpowiedź na zapytanie ofertowe, przygotowanie wyceny, ewentualne nawiązanie współpracy.</p>
+
+        <h3>c) Dane zbierane automatycznie</h3>
+        <ul>
+          <li>Adres IP</li>
+          <li>Data i czas żądania</li>
+          <li>Adres URL żądanej strony</li>
+          <li>Typ i wersja przeglądarki</li>
+        </ul>
+        <p><strong>Cel:</strong> zapewnienie bezpieczeństwa serwisu, diagnostyka techniczna, ochrona przed nadużyciami.</p>
 
         <h2>3. Podstawa prawna przetwarzania</h2>
-        <p>Dane przetwarzamy na podstawie:</p>
+        <p>Dane przetwarzamy na podstawie Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO):</p>
         <ul>
-          <li><strong>Art. 6 ust. 1 lit. a) RODO</strong> — zgoda wyrażona przez zaznaczenie checkboxa w formularzu</li>
-          <li><strong>Art. 6 ust. 1 lit. b) RODO</strong> — podjęcie działań przed zawarciem umowy (przygotowanie wyceny, odpowiedź na zapytanie)</li>
-          <li><strong>Art. 6 ust. 1 lit. f) RODO</strong> — prawnie uzasadniony interes administratora (obsługa korespondencji, dochodzenie roszczeń)</li>
+          <li><strong>Art. 6 ust. 1 lit. a) RODO</strong> — zgoda wyrażona przez zaznaczenie checkboxa w formularzu kontaktowym</li>
+          <li><strong>Art. 6 ust. 1 lit. b) RODO</strong> — podjęcie działań przed zawarciem umowy na żądanie osoby, której dane dotyczą (odpowiedź na zapytanie ofertowe, przygotowanie wyceny)</li>
+          <li><strong>Art. 6 ust. 1 lit. f) RODO</strong> — prawnie uzasadniony interes administratora, którym jest:
+            <ul>
+              <li>obsługa korespondencji i zapytań</li>
+              <li>zapewnienie bezpieczeństwa serwisu (logi serwera)</li>
+              <li>ewentualne dochodzenie lub obrona przed roszczeniami</li>
+            </ul>
+          </li>
         </ul>
 
         <h2>4. Okres przechowywania danych</h2>
         <ul>
-          <li>Dane z formularzy kontaktowych — do 2 lat od ostatniego kontaktu, chyba że wcześniej poprosisz o ich usunięcie</li>
-          <li>Dane niezbędne do realizacji umowy — przez okres trwania umowy oraz do 5 lat po jej zakończeniu (okres przedawnienia roszczeń)</li>
-          <li>Dane przetwarzane na podstawie zgody — do momentu jej cofnięcia</li>
+          <li><strong>Dane z formularzy kontaktowych</strong> — do 2 lat od ostatniego kontaktu, chyba że wcześniej poprosisz o ich usunięcie</li>
+          <li><strong>Dane niezbędne do realizacji umowy</strong> — przez okres trwania umowy oraz do 6 lat po jej zakończeniu (okres przedawnienia roszczeń zgodnie z art. 118 Kodeksu cywilnego)</li>
+          <li><strong>Dane przetwarzane na podstawie zgody</strong> — do momentu jej cofnięcia</li>
+          <li><strong>Logi serwera</strong> — do 90 dni, po czym są automatycznie usuwane</li>
         </ul>
 
         <h2>5. Odbiorcy danych</h2>
-        <p>Twoje dane mogą być przekazywane następującym kategoriom odbiorców:</p>
+        <p>Twoje dane mogą być przekazywane następującym kategoriom odbiorców, wyłącznie w zakresie niezbędnym do realizacji celów przetwarzania:</p>
         <ul>
-          <li><strong>Dostawca usług e-mail</strong> — w celu przesłania wiadomości z formularza kontaktowego</li>
-          <li><strong>Dostawca hostingu</strong> — na serwerze którego przechowywane są dane strony</li>
-          <li><strong>Google Fonts</strong> — strona ładuje czcionki z serwerów Google, co wiąże się z przekazaniem adresu IP użytkownika do Google LLC</li>
+          <li><strong>Dostawca usług e-mail</strong> — w celu przesłania wiadomości z formularza kontaktowego (serwer poczty obsługujący domenę konfigli.pl)</li>
+          <li><strong>Dostawca hostingu</strong> — na serwerze którego przechowywane są dane strony i logi serwera</li>
+          <li><strong>Google LLC</strong> — strona ładuje czcionki z usługi Google Fonts, co wiąże się z przekazaniem adresu IP użytkownika do serwerów Google</li>
         </ul>
         <p>Nie sprzedajemy ani nie udostępniamy danych osobowych podmiotom trzecim w celach marketingowych.</p>
 
-        <h2>6. Przekazywanie danych poza EOG</h2>
-        <p>W związku z korzystaniem z usług Google Fonts dane (adres IP) mogą być przekazywane do serwerów Google LLC w Stanach Zjednoczonych. Google stosuje standardowe klauzule umowne zatwierdzone przez Komisję Europejską jako gwarancję ochrony danych.</p>
+        <h2>6. Przekazywanie danych poza Europejski Obszar Gospodarczy</h2>
+        <p>W związku z korzystaniem z usługi Google Fonts dane (adres IP) mogą być przekazywane do serwerów Google LLC w Stanach Zjednoczonych.</p>
+        <p>Google LLC jest uczestnikiem programu <strong>EU-U.S. Data Privacy Framework</strong> (Ramy Ochrony Danych UE-USA), w odniesieniu do którego Komisja Europejska wydała decyzję o adekwatności z dnia 10 lipca 2023 r. (decyzja wykonawcza C(2023) 4745). Oznacza to, że Komisja Europejska uznała, iż Stany Zjednoczone zapewniają odpowiedni poziom ochrony danych osobowych przekazywanych z UE do certyfikowanych organizacji w USA.</p>
 
         <h2>7. Prawa użytkownika</h2>
         <p>Na podstawie RODO przysługują Ci następujące prawa:</p>
         <ul>
-          <li><strong>Prawo dostępu</strong> — możesz zapytać jakie dane przetwarzamy i uzyskać ich kopię</li>
-          <li><strong>Prawo do sprostowania</strong> — jeśli dane są nieprawidłowe lub niekompletne</li>
-          <li><strong>Prawo do usunięcia</strong> — tzw. „prawo do bycia zapomnianym"</li>
-          <li><strong>Prawo do ograniczenia przetwarzania</strong> — możesz zażądać ograniczenia przetwarzania w określonych sytuacjach</li>
-          <li><strong>Prawo do przenoszenia danych</strong> — możesz otrzymać dane w ustrukturyzowanym formacie</li>
-          <li><strong>Prawo do sprzeciwu</strong> — wobec przetwarzania opartego na prawnie uzasadnionym interesie</li>
-          <li><strong>Prawo do cofnięcia zgody</strong> — w dowolnym momencie, bez wpływu na zgodność z prawem przetwarzania dokonanego przed cofnięciem</li>
+          <li><strong>Prawo dostępu do danych</strong> (art. 15 RODO) — możesz uzyskać informację o przetwarzanych danych oraz ich kopię</li>
+          <li><strong>Prawo do sprostowania</strong> (art. 16 RODO) — jeśli dane są nieprawidłowe lub niekompletne</li>
+          <li><strong>Prawo do usunięcia danych</strong> (art. 17 RODO) — tzw. &bdquo;prawo do bycia zapomnianym&rdquo;</li>
+          <li><strong>Prawo do ograniczenia przetwarzania</strong> (art. 18 RODO) — możesz zażądać ograniczenia przetwarzania w określonych sytuacjach</li>
+          <li><strong>Prawo do przenoszenia danych</strong> (art. 20 RODO) — możesz otrzymać dane w ustrukturyzowanym, powszechnie używanym formacie nadającym się do odczytu maszynowego</li>
+          <li><strong>Prawo do sprzeciwu</strong> (art. 21 RODO) — wobec przetwarzania opartego na prawnie uzasadnionym interesie administratora</li>
+          <li><strong>Prawo do cofnięcia zgody</strong> (art. 7 ust. 3 RODO) — w dowolnym momencie, bez wpływu na zgodność z prawem przetwarzania dokonanego przed cofnięciem zgody</li>
         </ul>
-        <p>Aby skorzystać z tych praw, napisz na adres: <strong>{site.contact.email}</strong>. Odpowiem w ciągu 30 dni.</p>
+        <p>Aby skorzystać z powyższych praw, napisz na adres: <strong><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></strong>. Odpowiem bez zbędnej zwłoki, nie później niż w ciągu 30 dni od otrzymania żądania. W przypadku skomplikowanych lub licznych żądań termin może zostać przedłużony o kolejne 2 miesiące, o czym zostaniesz poinformowany.</p>
 
         <h2>8. Prawo do skargi</h2>
-        <p>Jeśli uważasz, że przetwarzanie Twoich danych narusza przepisy RODO, masz prawo złożyć skargę do organu nadzorczego:</p>
-        <p><strong>Prezes Urzędu Ochrony Danych Osobowych (UODO)</strong><br />
-        ul. Stawki 2, 00-193 Warszawa<br />
-        <a href="https://uodo.gov.pl" target="_blank" rel="noopener noreferrer">uodo.gov.pl</a></p>
+        <p>Jeśli uważasz, że przetwarzanie Twoich danych osobowych narusza przepisy RODO, masz prawo złożyć skargę do organu nadzorczego:</p>
+        <p>
+          <strong>Prezes Urzędu Ochrony Danych Osobowych (UODO)</strong><br />
+          ul. Stawki 2, 00-193 Warszawa<br />
+          Telefon: 22 531 03 00<br />
+          <a href="https://uodo.gov.pl" target="_blank" rel="noopener noreferrer">uodo.gov.pl</a>
+        </p>
 
-        <h2>9. Pliki cookies i local storage</h2>
-        <p>Strona korzysta z następujących mechanizmów przechowywania danych w przeglądarce:</p>
+        <h2>9. Pliki cookies i technologie przechowywania danych</h2>
+        <p>Strona nie stosuje plików cookies.</p>
+        <p>Korzystamy z mechanizmu <strong>local storage</strong> przeglądarki w następującym zakresie:</p>
         <ul>
-          <li><strong>Local storage</strong> — zapamiętanie wybranego motywu (jasny/ciemny) pod kluczem <code>konfigli-theme</code>. Nie zawiera danych osobowych.</li>
+          <li><strong>Klucz <code>konfigli-theme</code></strong> — zapamiętanie wybranego motywu kolorystycznego (jasny/ciemny). Wartość jest zapisywana wyłącznie po świadomym działaniu użytkownika (kliknięcie przełącznika motywu). Nie zawiera danych osobowych.</li>
         </ul>
+        <p>Powyższy mechanizm jest funkcjonalnie niezbędny do świadczenia usługi żądanej przez użytkownika (personalizacja wyglądu strony) w rozumieniu art. 390 ust. 3 ustawy z dnia 12 lipca 2024 r. — Prawo komunikacji elektronicznej (Dz.U. z 2024 r. poz. 1221).</p>
         <p>Nie stosujemy cookies analitycznych, reklamowych ani śledzących. Nie korzystamy z Google Analytics, Facebook Pixel ani podobnych narzędzi.</p>
 
         <h2>10. Logi serwera</h2>
-        <p>Serwer hostingowy automatycznie zapisuje logi zawierające adres IP, datę i czas żądania, adres URL oraz typ przeglądarki. Dane te służą wyłącznie do zapewnienia bezpieczeństwa i diagnostyki technicznej. Nie łączymy ich z danymi z formularzy kontaktowych.</p>
+        <p>Serwer hostingowy automatycznie zapisuje logi zawierające adres IP, datę i czas żądania, adres URL żądanej strony oraz typ przeglądarki. Dane te przetwarzane są na podstawie <strong>art. 6 ust. 1 lit. f) RODO</strong> (prawnie uzasadniony interes administratora polegający na zapewnieniu bezpieczeństwa i diagnostyce technicznej serwisu). Logi przechowywane są przez okres do 90 dni. Nie łączymy ich z danymi podawanymi w formularzach kontaktowych.</p>
 
         <h2>11. Zautomatyzowane podejmowanie decyzji</h2>
-        <p>Nie stosujemy profilowania ani zautomatyzowanego podejmowania decyzji, które miałoby wpływ prawny na użytkownika.</p>
+        <p>Nie stosujemy profilowania ani zautomatyzowanego podejmowania decyzji, które miałoby wpływ prawny lub w podobny sposób istotnie wpływało na użytkownika.</p>
 
         <h2>12. Dobrowolność podania danych</h2>
-        <p>Podanie danych w formularzach jest dobrowolne, ale niezbędne do udzielenia odpowiedzi na zapytanie lub przygotowania wyceny. Bez podania numeru telefonu lub adresu e-mail nie będziemy mogli się z Tobą skontaktować.</p>
+        <p>Podanie danych osobowych w formularzach kontaktowych jest dobrowolne, lecz niezbędne do udzielenia odpowiedzi na zapytanie lub przygotowania wyceny. Podanie danych nie jest wymogiem ustawowym ani umownym. Bez podania numeru telefonu lub adresu e-mail nie będziemy mogli się z Tobą skontaktować.</p>
 
-        <h2>13. Bezpieczeństwo</h2>
+        <h2>13. Zabezpieczenia techniczne i organizacyjne</h2>
+        <p>Stosujemy odpowiednie środki techniczne i organizacyjne zapewniające ochronę przetwarzanych danych osobowych:</p>
         <ul>
-          <li>Połączenie z serwisem jest szyfrowane protokołem SSL/TLS</li>
-          <li>Dane z formularzy przesyłane są przez szyfrowane połączenie HTTPS</li>
-          <li>Formularze zawierają zabezpieczenie antyspamowe (honeypot)</li>
-          <li>Dostęp do danych ma wyłącznie administrator</li>
+          <li>Połączenie z serwisem jest szyfrowane protokołem SSL/TLS (HTTPS)</li>
+          <li>Dane z formularzy przesyłane są wyłącznie przez szyfrowane połączenie</li>
+          <li>Formularze zawierają zabezpieczenie antyspamowe (honeypot) chroniące przed automatycznym wypełnianiem przez boty</li>
+          <li>Dostęp do danych osobowych ma wyłącznie administrator</li>
         </ul>
 
         <h2>14. Zmiany w polityce prywatności</h2>
-        <p>Zastrzegamy sobie prawo do zmiany niniejszej polityki prywatności. O istotnych zmianach poinformujemy poprzez aktualizację daty na górze dokumentu. Zalecamy okresowe sprawdzanie tej strony.</p>
+        <p>Administrator zastrzega sobie prawo do zmiany niniejszej polityki prywatności. O istotnych zmianach poinformujemy poprzez aktualizację daty na górze dokumentu. Zalecamy okresowe sprawdzanie tej strony. Korzystanie z serwisu po wprowadzeniu zmian oznacza ich akceptację.</p>
 
         <h2>15. Kontakt</h2>
         <p>W sprawach dotyczących ochrony danych osobowych:</p>
-        <p>E-mail: <strong>{site.contact.email}</strong><br />
-        Telefon: <strong>{site.contact.phone}</strong></p>
+        <p>
+          <strong>{site.business.fullName}</strong><br />
+          {site.business.address}<br />
+          E-mail: <strong><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></strong><br />
+          Telefon: <strong><a href={`tel:${site.contact.phone.replace(/\s/g, '')}`}>{site.contact.phone}</a></strong>
+        </p>
       </div>
     </section>
   </main>
@@ -186,8 +220,23 @@ import { site } from '@/config/site';
     padding-left: var(--space-xl);
   }
 
+  ul ul {
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-xs);
+  }
+
   li {
     margin-bottom: var(--space-xs);
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--duration-fast);
+  }
+
+  a:hover {
+    color: var(--color-text);
   }
 </style>
 

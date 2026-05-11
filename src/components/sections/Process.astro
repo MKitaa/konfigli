@@ -5,12 +5,12 @@ import { site } from '@/config/site';
 
 <section class="section" id="proces">
   <div class="container">
-    <SectionHeading title="Od rozmowy do działającego konfiguratora" subtitle="Jak pracuję" />
+    <SectionHeading title="Jak wygląda wdrożenie?" subtitle="Proces" />
     <div class="process">
       {site.process.map((item, i) => (
         <>
           <div class="process__step reveal">
-            <span class="process__number">{item.step}</span>
+            <span class="process__number">{i + 1}</span>
             <h3 class="process__title">{item.title}</h3>
             <p class="process__desc">{item.description}</p>
           </div>
@@ -31,7 +31,7 @@ import { site } from '@/config/site';
 <style>
   .process {
     display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
     gap: var(--space-lg);
     align-items: start;
     margin-top: var(--space-2xl);
