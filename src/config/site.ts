@@ -114,7 +114,7 @@ export const site = {
         title: 'Garaż blaszany',
         description:
           'Wymiary, kolor ścian, typ bramy i dachu. Model 3D na żywo, automatyczna oferta.',
-        url: 'https://konfigli.pl/konfigurator-garazy-v2/',
+        url: 'https://konfigli.pl/konfigurator-garazy-premium/',
         badge: 'Najnowszy',
         pricingUrl: '/konfigurator-garazy/#cennik',
       },
@@ -122,7 +122,7 @@ export const site = {
         title: 'Garaż blaszany (wersja podstawowa)',
         description:
           'Uproszczona wersja: wybór wymiarów, koloru i dachu. Dobra dla mniejszego asortymentu.',
-        url: 'https://konfigli.pl/konfigurator-garazy-v1/',
+        url: 'https://konfigli.pl/konfigurator-garazy-start/',
         badge: 'Wersja podstawowa',
         pricingUrl: '/konfigurator-garazy/#cennik',
       },
