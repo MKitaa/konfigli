@@ -1,9 +1,10 @@
-<svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0" y="0" width="52" height="52" rx="13" fill="#f97316"/>
-  <rect x="7" y="9" width="10" height="8" rx="2.5" fill="#ffffff"/>
-  <rect x="7" y="21" width="10" height="8" rx="2.5" fill="#fed7aa"/>
-  <rect x="7" y="33" width="10" height="8" rx="2.5" fill="#ffedd5"/>
-  <path d="M21 13 L43 13 L43 18 L21 18" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-  <path d="M21 25 L36 25 L36 30 L21 30" stroke="#fed7aa" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-  <path d="M21 37 L29 37 L29 42 L21 42" stroke="#ffedd5" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200">
+  <!-- podstawa -->
+  <polygon points="10,60 50,48 90,60 90,82 50,70 10,82" fill="#C45208"/>
+  <!-- dach lewa -->
+  <polygon points="10,60 50,48 50,28 10,40" fill="#F5882A"/>
+  <!-- dach prawa -->
+  <polygon points="50,48 90,60 90,40 50,28" fill="#E8650A"/>
+  <!-- szczyt -->
+  <polygon points="10,40 50,28 90,40 50,52" fill="#FBAB5A"/>
 </svg>

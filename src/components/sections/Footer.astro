@@ -38,9 +38,17 @@ import { site } from '@/config/site';
       </a>
     </div>
 
+    <nav class="footer__extra-links" aria-label="Konfiguratory">
+      <a href="/konfigurator-garazy/" class="footer__link">Konfigurator garaży blaszanych</a>
+      <a href="/konfigurator-wiat-smietnikowych/" class="footer__link">Konfigurator wiat śmietnikowych</a>
+      <a href="/na-zamowienie/" class="footer__link">Konfigurator na zamówienie</a>
+    </nav>
+
     <div class="footer__bottom">
       <p class="footer__copy">
-        &copy; {new Date().getFullYear()} {site.name} &middot; Mateusz Kita
+        &copy; {new Date().getFullYear()} {site.name} &middot; {site.business.fullName}
+        &middot; NIP: {site.business.nip}
+        &middot; <a href="/polityka-prywatnosci/" class="footer__copy-link">Polityka prywatności</a>
       </p>
     </div>
   </div>
@@ -175,9 +183,26 @@ import { site } from '@/config/site';
     background: linear-gradient(to right, transparent, var(--color-border), transparent);
   }
 
+  .footer__extra-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+  }
+
   .footer__copy {
     font-size: var(--text-xs);
     color: var(--color-text-dim);
+  }
+
+  .footer__copy-link {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
+  .footer__copy-link:hover {
+    color: var(--color-accent);
   }
 
   @media (max-width: 640px) {

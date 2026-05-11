@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfigli — Oferta: Konfigurator Wiat Śmietnikowych 3D</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:wght@400;500;600;700&family=Syne:wght@800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+        --accent:          #ea580c;
+        --accent-light:    rgba(234, 88, 12, 0.08);
+        --accent-gradient: linear-gradient(135deg, #ea580c, #f97316);
+
+        --header-bg:    #161616;
+        --header-border:#292524;
+
+        --bg:           #ffffff;
+        --bg-alt:       #f7f5f0;
+        --bg-elevated:  #faf9f7;
+
+        --text:         #1c1917;
+        --text-muted:   #44403c;
+        --text-dim:     #a8a29e;
+        --border:       #e7e5e4;
+
+        --success:      #16a34a;
+
+        --font-heading: 'Lora', Georgia, serif;
+        --font-body:    'Inter', -apple-system, sans-serif;
+
+        --r-sm:   6px;
+        --r-md:  10px;
+        --r-lg:  14px;
+        --r-full:9999px;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    body {
+        font-family: var(--font-body);
+        color: var(--text);
+        line-height: 1.6;
+        background: #ece9e3;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 24px auto;
+        background: var(--bg);
+        box-shadow: 0 8px 40px rgba(0,0,0,.14);
+        overflow: hidden;
+        page-break-after: always;
+    }
+
+    @media print {
+        body { background: white; }
+        .page { margin: 0; box-shadow: none; width: 100%; }
+        .no-print { display: none; }
+    }
+
+    /* ── HEADER ── */
+    .header {
+        background: var(--header-bg);
+        color: white;
+        padding: 36px 48px 30px;
+        position: relative;
+        overflow: hidden;
+    }
+    .header::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: var(--accent-gradient);
+    }
+    .header::after {
+        content: '';
+        position: absolute;
+        bottom: -90px; right: -70px;
+        width: 260px; height: 260px;
+        border-radius: 50%;
+        background: rgba(234,88,12,.07);
+        pointer-events: none;
+    }
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 28px;
+        position: relative; z-index: 1;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+        width: 44px; height: 44px;
+        background: var(--accent-gradient);
+        border-radius: var(--r-md);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 20px; font-weight: 800;
+        color: white;
+        box-shadow: 0 4px 16px rgba(234,88,12,.35);
+        flex-shrink: 0;
+    }
+    .logo-name  { font-size: 24px; font-weight: 700; color: white; letter-spacing: -.3px; }
+    .logo-sub   { font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: 2px; text-transform: uppercase; }
+    .header-contact { text-align: right; font-size: 12.5px; color: rgba(255,255,255,.6); line-height: 1.9; }
+    .header-contact strong { color: rgba(255,255,255,.9); font-weight: 500; }
+
+    .header-body { position: relative; z-index: 1; }
+    .header-label {
+        font-size: 10px; font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 3px; text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+    .header-title {
+        font-family: var(--font-heading);
+        font-size: 30px; font-weight: 600;
+        color: white; letter-spacing: -.3px; line-height: 1.2;
+    }
+    .header-subtitle {
+        font-size: 13.5px;
+        color: rgba(255,255,255,.5);
+        margin-top: 6px;
+    }
+
+    /* ── CONTENT ── */
+    .content { padding: 30px 48px; }
+
+    /* ── TYPOGRAPHY ── */
+    h2 {
+        font-family: var(--font-heading);
+        font-size: 17px; font-weight: 600;
+        color: var(--text);
+        margin-bottom: 14px;
+        padding-bottom: 9px;
+        border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; gap: 8px;
+    }
+    h2::before {
+        content: '';
+        display: inline-block;
+        width: 3px; height: 17px;
+        background: var(--accent-gradient);
+        border-radius: 2px;
+        flex-shrink: 0;
+    }
+    h3   { font-size: 13.5px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+    p    { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+
+    /* ── PROBLEM BOX ── */
+    .problem-box {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 16px 18px;
+        margin-bottom: 22px;
+    }
+    .problem-box__label {
+        font-size: 10px; font-weight: 600;
+        color: var(--text-dim);
+        text-transform: uppercase; letter-spacing: 1.5px;
+        margin-bottom: 10px;
+    }
+    .problem-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .problem-list li {
+        font-size: 12.5px; color: var(--text-muted);
+        display: flex; align-items: flex-start; gap: 7px;
+        padding: 7px 10px;
+        background: white; border-radius: var(--r-sm);
+        border: 1px solid var(--border);
+        line-height: 1.4;
+    }
+    .problem-list li::before { content: '—'; color: var(--text-dim); flex-shrink: 0; margin-top: 1px; }
+
+    /* ── FEATURES ── */
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 22px; }
+    .feature-item {
+        display: flex; align-items: flex-start; gap: 9px;
+        font-size: 12.5px; padding: 9px 11px;
+        background: var(--bg-elevated);
+        border-radius: var(--r-sm);
+        border: 1px solid var(--border);
+    }
+    .feature-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+    .feature-item strong { font-weight: 600; color: var(--text); }
+    .feature-item span   { color: var(--text-muted); }
+
+    /* ── BENEFITS ── */
+    .benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+    .benefit {
+        padding: 13px 15px;
+        background: var(--accent-light);
+        border-radius: var(--r-md);
+        border: 1px solid rgba(234,88,12,.14);
+        font-size: 12.5px;
+    }
+    .benefit strong { display: block; color: var(--accent); font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+    .benefit span   { color: var(--text-muted); }
+
+    /* ── FOR WHOM ── */
+    .audience-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+    .audience-item {
+        padding: 14px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+        font-size: 12px;
+    }
+    .audience-item strong { display: block; color: var(--text); font-weight: 600; font-size: 12.5px; margin-bottom: 4px; }
+    .audience-item span   { color: var(--text-muted); line-height: 1.5; }
+
+    /* ── STATS ── */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .stat {
+        text-align: center; padding: 15px 10px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+    }
+    .stat-value {
+        font-family: var(--font-heading);
+        font-size: 26px; font-weight: 600;
+        color: var(--accent);
+        display: block; margin-bottom: 4px; line-height: 1.1;
+    }
+    .stat-label { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+
+    /* ── COMPACT HEADER (page 2) ── */
+    .page-header-compact {
+        background: var(--header-bg);
+        padding: 16px 48px;
+        display: flex; justify-content: space-between; align-items: center;
+        border-bottom: 1px solid var(--header-border);
+        position: relative;
+    }
+    .page-header-compact::before {
+        content: '';
+        position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: var(--accent-gradient);
+    }
+    .page-section-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.45); letter-spacing: 1px; }
+
+    /* ── SCOPE TABLE ── */
+    .scope-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 12.5px; }
+    .scope-table thead tr { border-bottom: 2px solid var(--border); }
+    .scope-table th {
+        padding: 8px 13px; text-align: left;
+        font-weight: 600; font-size: 10px;
+        text-transform: uppercase; letter-spacing: .5px;
+        color: var(--text-dim);
+    }
+    .scope-table th:last-child { text-align: center; }
+    .scope-table td { padding: 8px 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .scope-table td:last-child { text-align: center; }
+    .scope-table tr:nth-child(even) td { background: var(--bg-elevated); }
+    .scope-name { font-weight: 600; color: var(--text); }
+    .scope-desc { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .check { color: var(--success); font-weight: 700; font-size: 13px; }
+    .dash  { color: var(--text-dim); font-size: 13px; }
+    .col-header {
+        text-align: center; font-size: 11px; font-weight: 700;
+        color: var(--text);
+    }
+    .col-header.featured { color: var(--accent); }
+
+    /* ── PRICING NOTE ── */
+    .pricing-note {
+        background: var(--accent-light);
+        border: 1.5px solid rgba(234,88,12,.2);
+        border-radius: var(--r-lg);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        display: flex; align-items: flex-start; gap: 14px;
+    }
+    .pricing-note__icon { font-size: 26px; flex-shrink: 0; }
+    .pricing-note__title { font-family: var(--font-heading); font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+    .pricing-note__text  { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+    .pricing-note__text strong { color: var(--text); }
+
+    /* ── MODULES TABLE ── */
+    .modules-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 12.5px; }
+    .modules-table thead tr { border-bottom: 2px solid var(--border); }
+    .modules-table th {
+        padding: 8px 13px; text-align: left;
+        font-weight: 600; font-size: 10px;
+        text-transform: uppercase; letter-spacing: .5px;
+        color: var(--text-dim);
+    }
+    .modules-table th:last-child { text-align: right; }
+    .modules-table td { padding: 8px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .modules-table td:last-child { text-align: right; font-weight: 600; color: var(--accent); white-space: nowrap; font-size: 13px; }
+    .modules-table tr:nth-child(even) td { background: var(--bg-elevated); }
+    .module-name { font-weight: 600; color: var(--text); }
+    .module-desc { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+    /* ── IMPLEMENTATION ── */
+    .impl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+    .impl-steps { list-style: none; counter-reset: step; }
+    .impl-steps li {
+        counter-increment: step;
+        padding: 7px 0 7px 32px;
+        font-size: 12.5px; position: relative;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-muted);
+    }
+    .impl-steps li:last-child { border-bottom: none; }
+    .impl-steps li::before {
+        content: counter(step);
+        position: absolute; left: 0;
+        width: 21px; height: 21px; border-radius: 50%;
+        background: var(--accent-gradient); color: white;
+        font-size: 10px; font-weight: 700;
+        display: flex; align-items: center; justify-content: center;
+        margin-top: 1px;
+    }
+    .impl-steps li span { font-weight: 600; color: var(--text); }
+
+    .tech-box {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+        padding: 15px;
+        font-size: 12.5px;
+    }
+    .tech-list { list-style: none; }
+    .tech-list li {
+        padding: 4px 0;
+        display: flex; gap: 7px;
+        font-size: 12px; color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+    }
+    .tech-list li:last-child { border-bottom: none; }
+    .tech-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+    /* ── CROSS-SELL BOX ── */
+    .crosssell {
+        background: var(--header-bg);
+        border-radius: var(--r-lg);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        display: flex; align-items: flex-start; gap: 14px;
+    }
+    .crosssell__body { flex: 1; }
+    .crosssell__label { font-size: 9.5px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; }
+    .crosssell__title { font-family: var(--font-heading); font-size: 14px; color: white; margin-bottom: 5px; }
+    .crosssell__text  { font-size: 12px; color: rgba(255,255,255,.55); line-height: 1.5; }
+    .crosssell__badge {
+        align-self: center;
+        padding: 6px 14px;
+        background: rgba(234,88,12,.2);
+        border: 1px solid rgba(234,88,12,.35);
+        border-radius: var(--r-full);
+        font-size: 11px; font-weight: 600;
+        color: white; white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* ── NEXT STEPS ── */
+    .next-steps {
+        background: var(--header-bg);
+        border-radius: var(--r-lg);
+        padding: 18px 22px;
+        color: white;
+    }
+    .next-steps h3 { font-family: var(--font-heading); color: white; font-size: 15px; margin-bottom: 12px; }
+    .next-steps-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 14px; }
+    .next-steps-list li {
+        font-size: 12px; color: rgba(255,255,255,.65);
+        display: flex; align-items: center; gap: 8px;
+        padding: 8px 11px;
+        background: rgba(255,255,255,.05);
+        border-radius: var(--r-sm);
+        border: 1px solid rgba(255,255,255,.08);
+    }
+    .step-num {
+        width: 20px; height: 20px; border-radius: 50%;
+        background: var(--accent-gradient);
+        color: white; font-size: 10px; font-weight: 700;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .cta-row { display: flex; gap: 10px; }
+    .cta-item {
+        display: flex; align-items: center; gap: 9px;
+        padding: 10px 14px;
+        background: rgba(234,88,12,.15);
+        border: 1px solid rgba(234,88,12,.28);
+        border-radius: var(--r-md);
+        flex: 1;
+    }
+    .cta-icon  { font-size: 16px; flex-shrink: 0; }
+    .cta-label { font-size: 9.5px; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: 1px; }
+    .cta-value { font-size: 13px; font-weight: 600; color: white; }
+
+    /* ── FOOTER ── */
+    .footer {
+        background: var(--bg-elevated);
+        padding: 16px 48px;
+        border-top: 1px solid var(--border);
+        display: flex; justify-content: space-between; align-items: center;
+        font-size: 11px; color: var(--text-dim);
+    }
+    .footer-brand { font-weight: 600; color: var(--text); }
+    .footer-brand em { color: var(--accent); font-style: normal; }
+
+    /* ── PRINT BUTTON ── */
+    .print-bar { text-align: center; padding: 20px; }
+    .print-btn {
+        background: var(--accent-gradient); color: white; border: none;
+        padding: 11px 28px; font-size: 14px; font-weight: 600;
+        border-radius: var(--r-full); cursor: pointer;
+        font-family: var(--font-body);
+        box-shadow: 0 4px 16px rgba(234,88,12,.3);
+        transition: opacity .15s, transform .15s;
+    }
+    .print-btn:hover { opacity: .9; transform: translateY(-1px); }
+</style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+    <button class="print-btn" onclick="window.print()">Pobierz jako PDF</button>
+</div>
+
+<!-- ═══════════════════ STRONA 1 ═══════════════════ -->
+<div class="page">
+    <div class="header">
+        <div class="header-top">
+            <div class="logo">
+                <svg width="148" height="35" viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0" y="6" width="38" height="38" rx="10" fill="#f97316"/>
+                  <rect x="6" y="12" width="7" height="5.5" rx="1.5" fill="#ffffff"/>
+                  <rect x="6" y="21" width="7" height="5.5" rx="1.5" fill="#fed7aa"/>
+                  <rect x="6" y="30" width="7" height="5.5" rx="1.5" fill="#ffedd5"/>
+                  <path d="M16.5 14.5 L31 14.5 L31 18.5 L16.5 18.5" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                  <path d="M16.5 23.5 L27 23.5 L27 27.5 L16.5 27.5" stroke="#fed7aa" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                  <path d="M16.5 32.5 L22 32.5 L22 36.5 L16.5 36.5" stroke="#ffedd5" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                  <text x="48" y="37" font-family="'Syne', sans-serif" font-size="26" font-weight="800" fill="#ffffff" letter-spacing="-1.5">konfig<tspan fill="#f97316">li</tspan></text>
+                </svg>
+            </div>
+            <div class="header-contact">
+                <strong>Mateusz Kita</strong><br>
+                tel. 512 020 894<br>
+                biuro@konfigli.pl
+            </div>
+        </div>
+        <div class="header-body">
+            <div class="header-label">Oferta handlowa</div>
+            <div class="header-title">Konfigurator Wiat Śmietnikowych 3D</div>
+            <div class="header-subtitle">Narzędzie sprzedażowe dla producentów wiat stalowych — zbieraj zapytania z gotową specyfikacją</div>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <h2>Wyzwania, które rozwiązujemy</h2>
+
+        <div class="problem-box">
+            <div class="problem-box__label">Typowe problemy producentów wiat śmietnikowych</div>
+            <ul class="problem-list">
+                <li>Klient pyta „ile boksów zmieści się w wiacie?" — tłumaczysz od nowa każdemu</li>
+                <li>Zarządca potrzebuje wizualizacji na zebranie wspólnoty — czekasz tygodniami na decyzję</li>
+                <li>Każde zamówienie jest niestandardowe — każda wycena to ręczna praca</li>
+                <li>Brak przewagi nad konkurencją oferującą tylko cennik PDF</li>
+            </ul>
+        </div>
+
+        <h2>Funkcje konfiguratora</h2>
+
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Liczba boksów</strong> <span>— od 1 do 8, wiata rośnie na modelu 3D w czasie rzeczywistym</span></div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Kolorystyka RAL</strong> <span>— paleta dopasowana do asortymentu, podgląd na żywo</span></div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Wymiary</strong> <span>— szerokość, głębokość, wysokość w konfigurowalnym zakresie</span></div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Typ dachu</strong> <span>— jednospadowy lub dwuspadowy do wyboru</span></div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Podgląd 3D</strong> <span>— obracanie, przybliżanie, widok z każdej strony w przeglądarce</span></div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Zrzut ekranu</strong> <span>— klient pobiera wizualizację i pokazuje ją na zebraniu wspólnoty</span></div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Formularz z konfiguracją</strong> <span>— wysyłka e-mail z pełną specyfikacją i zrzutem 3D</span></div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div><strong>Responsywny</strong> <span>— działa na telefonie, tablecie i komputerze bez instalacji</span></div>
+            </div>
+        </div>
+
+        <h2>Korzyści biznesowe</h2>
+
+        <div class="benefits">
+            <div class="benefit">
+                <strong>Szybsze decyzje zarządców</strong>
+                <span>Zarządca pobiera zrzut 3D i pokazuje go na zebraniu. Decyzja zapada szybciej — bo wszyscy widzą efekt.</span>
+            </div>
+            <div class="benefit">
+                <strong>Gotowe zapytania ofertowe</strong>
+                <span>Zamiast rozmów "ile to kosztuje i jak to wygląda?" — dostajesz e-mail z dokładną specyfikacją.</span>
+            </div>
+            <div class="benefit">
+                <strong>Mniej ręcznej pracy</strong>
+                <span>Klient sam konfiguruje wymiary, liczbę boksów i kolor — czas Twojego handlowca zostaje na domykanie, nie na wyceny wstępne.</span>
+            </div>
+            <div class="benefit">
+                <strong>W pełni pod Twoją markę</strong>
+                <span>Logo, paleta kolorów, dostępne warianty i zakres wymiarów — wszystko konfigurowane pod Twój asortyment.</span>
+            </div>
+        </div>
+
+        <h2>Dla kogo?</h2>
+
+        <div class="audience-grid">
+            <div class="audience-item">
+                <strong>Producenci wiat stalowych</strong>
+                <span>Wiaty w ofercie, ale każde zapytanie to ręczna wycena? Konfigurator automatyzuje cały proces.</span>
+            </div>
+            <div class="audience-item">
+                <strong>Producenci ogrodzeń i małych form</strong>
+                <span>Sprzedajesz ogrodzenia i wiaty w pakiecie? Dodatkowe narzędzie sprzedażowe na Twojej stronie.</span>
+            </div>
+            <div class="audience-item">
+                <strong>Dystrybutorzy i handlowcy</strong>
+                <span>Konfigurator z Twoim brandingiem i Twoimi cenami — na Twojej domenie.</span>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat">
+                <span class="stat-value">3D</span>
+                <span class="stat-label">Silnik Three.js — obracanie i zoom na mobile i desktop</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">3–5 tyg.</span>
+                <span class="stat-label">Czas realizacji od podpisania umowy do uruchomienia</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">1 dzień</span>
+                <span class="stat-label">Wdrożenie kolejnej wersji językowej lub wariantu produktu</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <span><span class="footer-brand">Konfi<em>gli</em></span> — Mateusz Kita</span>
+        <span>tel. 512 020 894 | biuro@konfigli.pl</span>
+    </div>
+</div>
+
+<!-- ═══════════════════ STRONA 2 ═══════════════════ -->
+<div class="page">
+    <div class="page-header-compact">
+        <div class="logo">
+            <svg width="110" height="26" viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="6" width="38" height="38" rx="10" fill="#f97316"/>
+              <rect x="6" y="12" width="7" height="5.5" rx="1.5" fill="#ffffff"/>
+              <rect x="6" y="21" width="7" height="5.5" rx="1.5" fill="#fed7aa"/>
+              <rect x="6" y="30" width="7" height="5.5" rx="1.5" fill="#ffedd5"/>
+              <path d="M16.5 14.5 L31 14.5 L31 18.5 L16.5 18.5" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <path d="M16.5 23.5 L27 23.5 L27 27.5 L16.5 27.5" stroke="#fed7aa" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <path d="M16.5 32.5 L22 32.5 L22 36.5 L16.5 36.5" stroke="#ffedd5" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <text x="48" y="37" font-family="'Syne', sans-serif" font-size="26" font-weight="800" fill="#ffffff" letter-spacing="-1.5">konfig<tspan fill="#f97316">li</tspan></text>
+            </svg>
+        </div>
+        <div class="page-section-label">Zakres i wycena</div>
+    </div>
+
+    <div class="content">
+
+        <h2>Zakres funkcji</h2>
+
+        <table class="scope-table">
+            <thead>
+                <tr>
+                    <th>Funkcja</th>
+                    <th class="col-header">Podstawowy</th>
+                    <th class="col-header featured">Rozszerzony</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="scope-name">Konfiguracja liczby boksów (1–8)</div>
+                    </td>
+                    <td><span class="check">✓</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Kolorystyka RAL</div>
+                        <div class="scope-desc">Paleta dopasowana do Twojego asortymentu</div>
+                    </td>
+                    <td><span class="check">✓</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Wymiary z konfigurowalnym zakresem</div>
+                    </td>
+                    <td><span class="check">✓</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Typ dachu — jednospadowy / dwuspadowy</div>
+                    </td>
+                    <td><span class="check">✓</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Formularz z konfiguracją + zrzut 3D</div>
+                    </td>
+                    <td><span class="check">✓</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Responsywny (PC / tablet / telefon)</div>
+                    </td>
+                    <td><span class="check">✓</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Logo, kolory, wdrożenie + SSL</div>
+                    </td>
+                    <td><span class="check">✓</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Kalkulator cen online</div>
+                        <div class="scope-desc">Szacunkowa cena widoczna podczas konfiguracji</div>
+                    </td>
+                    <td><span class="dash">—</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Konfiguracja dostępnych wariantów i zakresów</div>
+                        <div class="scope-desc">Samodzielna edycja przez panel administracyjny</div>
+                    </td>
+                    <td><span class="dash">—</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="scope-name">Dodatkowy język interfejsu</div>
+                        <div class="scope-desc">Angielski, niemiecki lub czeski</div>
+                    </td>
+                    <td><span class="dash">—</span></td>
+                    <td><span class="check">✓</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pricing-note">
+            <div class="pricing-note__icon">💬</div>
+            <div>
+                <div class="pricing-note__title">Wycena indywidualna — odpowiedź w 24h</div>
+                <div class="pricing-note__text">
+                    Wiaty śmietnikowe to prostszy produkt niż garaże — konfigurator jest odpowiednio
+                    <strong>tańszy i szybszy do wdrożenia</strong>. Napisz lub zadzwoń — w ciągu 24h
+                    otrzymasz bezpłatną wycenę dopasowaną do Twojego asortymentu i zakresu funkcji.
+                </div>
+            </div>
+        </div>
+
+        <h2>Moduły dodatkowe</h2>
+
+        <table class="modules-table">
+            <thead>
+                <tr><th>Moduł</th><th>Wycena</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="module-name">Kalkulator cen online</div>
+                        <div class="module-desc">Automatyczna wycena widoczna podczas konfiguracji — na podstawie liczby boksów, wymiarów i koloru</div>
+                    </td>
+                    <td>indywidualna</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="module-name">Dodatkowy język</div>
+                        <div class="module-desc">Angielski, niemiecki lub czeski — pełne tłumaczenie interfejsu</div>
+                    </td>
+                    <td>1 000 PLN</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="module-name">Hosting na VPS Konfigli</div>
+                        <div class="module-desc">Utrzymanie serwera, aktualizacje, monitoring, certyfikat SSL</div>
+                    </td>
+                    <td>200 PLN/msc</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="module-name">Rozszerzony support</div>
+                        <div class="module-desc">Wsparcie techniczne po zakończeniu okresu gwarancyjnego</div>
+                    </td>
+                    <td>500 PLN/msc</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="module-name">Integracja z CRM</div>
+                        <div class="module-desc">Połączenie z systemem CRM przez API — w przygotowaniu</div>
+                    </td>
+                    <td style="font-size:11px;color:var(--text-dim);font-weight:400;">wkrótce</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Wdrożenie</h2>
+
+        <div class="impl-grid">
+            <div>
+                <h3>Etapy realizacji</h3>
+                <ol class="impl-steps">
+                    <li><span>Konfiguracja</span> — logo, kolory i stopka formularza</li>
+                    <li><span>Parametryzacja</span> — boksy, kolory, wymiary, typy dachu</li>
+                    <li><span>Formularz</span> — konfiguracja odbiorców e-mail</li>
+                    <li><span>Instalacja</span> — VPS, domena i certyfikat SSL</li>
+                    <li><span>Testy</span> — funkcjonalne na wszystkich urządzeniach</li>
+                    <li><span>Odbiór</span> — demo na żywo z klientem</li>
+                </ol>
+                <p style="margin-top:12px;font-size:12.5px;">
+                    <strong style="color:var(--text);">Czas realizacji:</strong> 3–5 tygodni od podpisania umowy.
+                </p>
+            </div>
+            <div>
+                <div class="tech-box">
+                    <h3>Wymagania techniczne</h3>
+                    <ul class="tech-list">
+                        <li>Serwer VPS (min. 1 GB RAM, Ubuntu/Debian)</li>
+                        <li>Domena z certyfikatem SSL</li>
+                        <li>Przeglądarka z WebGL 2.0</li>
+                        <li>Chrome, Firefox, Safari lub Edge</li>
+                    </ul>
+                    <div style="margin-top:13px;padding-top:12px;border-top:1px solid var(--border);">
+                        <h3>Gwarancja jakości</h3>
+                        <ul class="tech-list">
+                            <li>Testy automatyczne</li>
+                            <li>Testy E2E w przeglądarce</li>
+                            <li>Audyt bezpieczeństwa (CSP, HTTPS)</li>
+                            <li>Optymalizacja wydajności 3D</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="crosssell">
+            <div class="crosssell__body">
+                <div class="crosssell__label">Masz też garaże w ofercie?</div>
+                <div class="crosssell__title">Konfigurator Garaży 3D — pełna oferta dostępna osobno</div>
+                <div class="crosssell__text">Ten sam system, znacznie więcej opcji. Przy zamówieniu obu konfiguratorów — rabat pakietowy. Zapytaj o szczegóły.</div>
+            </div>
+            <div class="crosssell__badge">konfigli.com</div>
+        </div>
+
+        <div class="next-steps">
+            <h3>Kolejne kroki</h3>
+            <ul class="next-steps-list">
+                <li><span class="step-num">1</span> Kontakt — opisz swój produkt i asortyment</li>
+                <li><span class="step-num">2</span> Wycena — bezpłatna w ciągu 24 godzin</li>
+                <li><span class="step-num">3</span> Umowa i zaliczka — ruszamy z realizacją</li>
+                <li><span class="step-num">4</span> Odbiór — konfigurator na Twojej stronie</li>
+            </ul>
+            <div class="cta-row">
+                <div class="cta-item">
+                    <div class="cta-icon">📞</div>
+                    <div>
+                        <div class="cta-label">Telefon</div>
+                        <div class="cta-value">512 020 894</div>
+                    </div>
+                </div>
+                <div class="cta-item">
+                    <div class="cta-icon">✉️</div>
+                    <div>
+                        <div class="cta-label">E-mail</div>
+                        <div class="cta-value">biuro@konfigli.pl</div>
+                    </div>
+                </div>
+                <div class="cta-item">
+                    <div class="cta-icon">🌐</div>
+                    <div>
+                        <div class="cta-label">Demo online</div>
+                        <div class="cta-value">konfigli.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <span><span class="footer-brand">Konfi<em>gli</em></span> — Mateusz Kita | tel. 512 020 894 | biuro@konfigli.pl</span>
+        <span>Oferta ważna 30 dni od daty wystawienia</span>
+    </div>
+</div>
+
+</body>
+</html>

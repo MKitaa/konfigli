@@ -7,6 +7,7 @@ import Configurator from '@/components/sections/Configurator.astro';
 import Services from '@/components/sections/Services.astro';
 import CaseStudies from '@/components/sections/CaseStudies.astro';
 import Process from '@/components/sections/Process.astro';
+import WhyMe from '@/components/sections/WhyMe.astro';
 import FAQ from '@/components/sections/FAQ.astro';
 import Contact from '@/components/sections/Contact.astro';
 import Footer from '@/components/sections/Footer.astro';
@@ -18,21 +19,14 @@ import InlineCTA from '@/components/ui/InlineCTA.astro';
   <Nav />
   <main>
     <Hero />
-    <hr class="section-divider" aria-hidden="true" />
     <PainPoints />
-    <hr class="section-divider" aria-hidden="true" />
-    <Configurator />
-    <InlineCTA text="Chcesz taki konfigurator?" linkText="Sprawdź wycenę →" />
-    <hr class="section-divider" aria-hidden="true" />
     <Services />
-    <hr class="section-divider" aria-hidden="true" />
+    <Configurator />
+    <InlineCTA text="Produkujesz coś innego?" linkText="Konfigurator na zamówienie →" href="/na-zamowienie/" />
     <CaseStudies />
-    <InlineCTA text="Chcesz takie rozwiązanie dla swojego produktu?" linkText="Porozmawiajmy →" />
-    <hr class="section-divider" aria-hidden="true" />
+    <WhyMe />
     <Process />
-    <hr class="section-divider" aria-hidden="true" />
     <FAQ />
-    <hr class="section-divider" aria-hidden="true" />
     <Contact />
   </main>
   <Footer />

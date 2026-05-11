@@ -24,7 +24,20 @@ if (isMobile || prefersReducedMotion) {
   showAllReveal();
 } else {
   // Desktop with animations
-  window.addEventListener('load', () => ScrollTrigger.refresh());
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          const navEl = document.getElementById('nav');
+          const navHeight = navEl ? navEl.offsetHeight : 72;
+          const top = (target as HTMLElement).getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }, 150);
+    }
+  });
 
   ScrollTrigger.batch('.reveal:not(.reveal--scale)', {
     onEnter: (elements) => {

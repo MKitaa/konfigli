@@ -4,15 +4,20 @@ import { site } from '@/config/site';
 
 const featured = site.configurator.demos[0];
 const otherDemos = site.configurator.demos.slice(1);
+
+const enhancedDescriptions: Record<string, string> = {
+  'Garaż blaszany (wersja podstawowa)': 'Kalkulator garaży blaszanych: wybór wymiarów, koloru i dachu z wizualizacją 3D. Dobra dla mniejszego asortymentu.',
+  'Wiata śmietnikowa': 'Wizualizacja 3D wiaty śmietnikowej: liczba boksów, wymiary, kolory profili, pokrycie dachowe. Kalkulator cen z rysunkami technicznymi.',
+};
 ---
 
 <section class="section configurator" id="konfigurator">
   <div class="container">
     <SectionHeading
-      title={site.configurator.title}
+      title="Konfigurator 3D online. Wypróbuj na żywo"
       subtitle={site.configurator.subtitle}
     />
-    <p class="configurator__description reveal">{site.configurator.description}</p>
+    <p class="configurator__description reveal">Trzy sprawdzone konfiguratory 3D gotowe do osadzenia na Twojej stronie. Klient projektuje, widzi efekt w 3D i wysyła gotowe zapytanie. Szybciej i taniej niż budowa od zera.</p>
 
     <div class="configurator__stats reveal">
       {site.configurator.stats.map((stat) => (
@@ -31,19 +36,24 @@ const otherDemos = site.configurator.demos.slice(1);
         <div class="configurator__featured-info">
           {featured.badge && <span class="configurator__badge">{featured.badge}</span>}
           <h3 class="configurator__featured-title">{featured.title}</h3>
-          <p class="configurator__featured-desc">{featured.description}</p>
+          <p class="configurator__featured-desc">Wizualizacja 3D garażu na żywo: wymiary, kolor ścian, typ bramy i dachu. Klient projektuje i wysyła gotowe zapytanie.</p>
         </div>
-        <a
-          href={featured.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="configurator__featured-btn"
-        >
-          Otwórz na pełnym ekranie
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17L17 7M17 7H7M17 7v10" />
-          </svg>
-        </a>
+        <div class="configurator__featured-actions">
+          <a
+            href={featured.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="configurator__featured-btn"
+          >
+            Otwórz na pełnym ekranie
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </a>
+          <a href={featured.pricingUrl} class="configurator__pricing-link">
+            Cennik i pakiety &rarr;
+          </a>
+        </div>
       </div>
       <div class="configurator__iframe-wrap">
         <iframe
@@ -68,21 +78,26 @@ const otherDemos = site.configurator.demos.slice(1);
           </div>
           <div class="configurator__other-content">
             <h4 class="configurator__other-title">{demo.title}</h4>
-            <p class="configurator__other-desc">{demo.description}</p>
+            <p class="configurator__other-desc">{enhancedDescriptions[demo.title] || demo.description}</p>
           </div>
-          <a
-            href={demo.url}
-            target={demo.url !== '#' ? '_blank' : undefined}
-            rel={demo.url !== '#' ? 'noopener noreferrer' : undefined}
-            class:list={['configurator__other-btn', { 'configurator__other-btn--disabled': demo.url === '#' }]}
-          >
-            {demo.url !== '#' ? 'Otwórz demo' : 'Wkrótce'}
-            {demo.url !== '#' && (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
-              </svg>
-            )}
-          </a>
+          <div class="configurator__other-actions">
+            <a
+              href={demo.url}
+              target={demo.url !== '#' ? '_blank' : undefined}
+              rel={demo.url !== '#' ? 'noopener noreferrer' : undefined}
+              class:list={['configurator__other-btn', { 'configurator__other-btn--disabled': demo.url === '#' }]}
+            >
+              {demo.url !== '#' ? 'Otwórz demo' : 'Wkrótce'}
+              {demo.url !== '#' && (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              )}
+            </a>
+            <a href={demo.pricingUrl} class="configurator__pricing-link">
+              Cennik i pakiety &rarr;
+            </a>
+          </div>
         </div>
       ))}
     </div>
@@ -207,6 +222,34 @@ const otherDemos = site.configurator.demos.slice(1);
   .configurator__featured-btn:hover {
     transform: translateY(-1px) scale(1.01);
     box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);
+  }
+
+  .configurator__featured-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .configurator__other-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .configurator__pricing-link {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--color-text-dim);
+    text-decoration: none;
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
+  .configurator__pricing-link:hover {
+    color: var(--color-accent);
   }
 
   .configurator__iframe-wrap {
@@ -338,11 +381,21 @@ const otherDemos = site.configurator.demos.slice(1);
       font-size: var(--text-base);
     }
 
+    .configurator__featured-actions {
+      align-items: stretch;
+      width: 100%;
+    }
+
     .configurator__featured-btn {
       width: 100%;
       justify-content: center;
       padding: 0.75rem 1.25rem;
       font-size: var(--text-base);
+    }
+
+    .configurator__other-actions {
+      align-items: flex-start;
+      width: 100%;
     }
 
     .configurator__iframe-wrap {

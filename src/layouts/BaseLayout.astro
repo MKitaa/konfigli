@@ -7,15 +7,25 @@ import '@/styles/utilities.css';
 interface Props {
   title?: string;
   description?: string;
+  robots?: string;
+  showHomeSchemas?: boolean;
+  keywords?: string[];
+  ogImage?: string;
 }
 
 const {
   title = site.name,
   description = site.description,
+  robots = 'index, follow',
+  showHomeSchemas = true,
+  keywords = site.seo.keywords,
+  ogImage = `${site.url}/images/og-image.png`,
 } = Astro.props;
 
+const canonicalURL = new URL(Astro.url.pathname, site.url).href;
+
 const pageTitle = title === site.name
-  ? `Konfiguratory 3D dla producentów garaży, hal i konstrukcji stalowych | ${site.name}`
+  ? `Konfiguratory 3D na zamówienie dla producentów | ${site.name}`
   : `${title} | ${site.name}`;
 
 // JSON-LD: LocalBusiness
@@ -39,23 +49,30 @@ const localBusinessSchema = {
   serviceType: [
     'Konfigurator produktów 3D',
     'Konfigurator garaży blaszanych',
+    'Konfigurator wiat śmietnikowych',
     'Konfigurator hal stalowych',
+    'Konfigurator ogrodzeń panelowych',
+    'Konfigurator carportów',
     'Wizualizacja 3D produktów',
-    'Tworzenie stron internetowych',
+    'Automatyzacja ofertowania dla producenta',
+    'Strony internetowe dla producentów',
+    'Automatyczne rysunki techniczne',
   ],
   knowsAbout: [
     'Konfiguratory 3D',
     'Konfigurator garaży blaszanych',
-    'Konfigurator hal stalowych',
-    'Konfigurator wiat garażowych',
     'Konfigurator wiat śmietnikowych',
+    'Konfigurator hal stalowych',
     'Konfigurator ogrodzeń panelowych',
     'Konfigurator carportów',
-    'Wizualizacja produktów 3D',
-    'Strony internetowe dla firm produkcyjnych',
-    'Konstrukcje stalowe',
-    'WebGL',
+    'Wizualizacja 3D produktów',
+    'Automatyzacja ofertowania',
+    'Automatyczne rysunki techniczne',
+    'Kalkulator garaży blaszanych',
+    'Dedykowany konfigurator produktu',
+    'Strony internetowe dla producentów',
     'Three.js',
+    'WebGL',
   ],
 };
 
@@ -73,17 +90,17 @@ const faqSchema = {
   })),
 };
 
-// JSON-LD: Service offerings
+// JSON-LD: Product offerings
 const servicesSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  itemListElement: site.services.map((service, i) => ({
+  itemListElement: site.products.map((product, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     item: {
       '@type': 'Service',
-      name: service.title,
-      description: service.description,
+      name: product.title,
+      description: product.description,
       provider: {
         '@type': 'ProfessionalService',
         name: site.name,
@@ -112,12 +129,76 @@ const reviewSchema = site.testimonials.length > 0 ? {
   '@type': 'Product',
   name: 'Konfigurator 3D produktów',
   brand: { '@type': 'Brand', name: site.name },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: 5,
+    reviewCount: site.testimonials.length,
+    bestRating: 5,
+  },
   review: site.testimonials.map((t) => ({
     '@type': 'Review',
     reviewBody: t.quote,
     author: { '@type': 'Organization', name: t.author },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: 5,
+      bestRating: 5,
+    },
   })),
 } : null;
+
+// JSON-LD: Product with subscription offers
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Konfigurator 3D dla producenta',
+  description: 'Konfigurator 3D na zamówienie — garaże blaszane, wiaty śmietnikowe, hale stalowe. Abonament od 399 PLN/msc.',
+  brand: { '@type': 'Brand', name: site.name },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Konfigurator garaży — Start',
+      price: '499',
+      priceCurrency: 'PLN',
+      unitCode: 'MON',
+      url: 'https://konfigli.pl/konfigurator-garazy/#cennik',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Konfigurator garaży — Pro',
+      price: '799',
+      priceCurrency: 'PLN',
+      unitCode: 'MON',
+      url: 'https://konfigli.pl/konfigurator-garazy/#cennik',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Konfigurator garaży — Premium',
+      price: '1199',
+      priceCurrency: 'PLN',
+      unitCode: 'MON',
+      url: 'https://konfigli.pl/konfigurator-garazy/#cennik',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Konfigurator wiat śmietnikowych',
+      price: '399',
+      priceCurrency: 'PLN',
+      unitCode: 'MON',
+      url: 'https://konfigli.pl/konfigurator-wiat-smietnikowych/#cennik',
+      availability: 'https://schema.org/InStock',
+    },
+  ],
+  aggregateRating: site.testimonials.length > 0 ? {
+    '@type': 'AggregateRating',
+    ratingValue: 5,
+    reviewCount: site.testimonials.length,
+    bestRating: 5,
+  } : undefined,
+};
 
 // JSON-LD: WebSite for sitelinks search
 const websiteSchema = {
@@ -127,6 +208,26 @@ const websiteSchema = {
   url: site.url,
   description: site.description,
   inLanguage: 'pl-PL',
+};
+
+// JSON-LD: SoftwareApplication
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Konfigli — Konfigurator produktów 3D na zamówienie',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Budowa konfiguratora 3D na zamówienie dla producenta garaży, hal, wiat i konstrukcji stalowych. Model 3D, automatyczna wycena i rysunki techniczne.',
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'PLN',
+    lowPrice: '0',
+    description: 'Wycena indywidualna. Bezpłatna wycena projektu w 24h.',
+  },
+  creator: {
+    '@type': 'Person',
+    name: site.author,
+  },
 };
 ---
 
@@ -144,19 +245,19 @@ const websiteSchema = {
     <!-- SEO -->
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content={site.seo.keywords.join(', ')} />
+    <meta name="keywords" content={keywords.join(', ')} />
     <meta name="author" content={site.author} />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={site.url} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={site.url} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content={site.locale} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:image" content={`${site.url}/images/og-image.png`} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={site.tagline} />
@@ -165,7 +266,7 @@ const websiteSchema = {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${site.url}/images/og-image.png`} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -182,11 +283,18 @@ const websiteSchema = {
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
-    {reviewSchema && <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />}
+    {showHomeSchemas && (
+      <>
+        <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+        {reviewSchema && <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />}
+        <script type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+      </>
+    )}
+    <slot name="head" />
   </head>
   <body>
     <slot />
